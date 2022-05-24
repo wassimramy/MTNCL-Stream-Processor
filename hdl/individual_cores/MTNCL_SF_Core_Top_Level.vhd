@@ -249,6 +249,7 @@ begin
   	port map(
     input => input_sf_core(bitwidth-1 downto 0),
     ki => ko_pixels_a,
+    --ki => ki,
     sleep => sleepout_data_loader,
     rst => reset,
     ko => ko_sf_core_w_reg_a,
@@ -261,6 +262,7 @@ begin
   	port map(
     input => input_sf_core(2*bitwidth-1 downto bitwidth),
     ki => ko_pixels_a,
+    --ki => ki,
     sleep => sleepout_data_loader,
     rst => reset,
     ko => ko_sf_core_w_reg_b,
@@ -276,7 +278,7 @@ begin
 				pixel => pixel,
 				reset => reset,
 				ki => ki,
-				sleep_in => sleep_out_c,
+				sleep_in => sleep_out_a,
 				ko => ko_pixels_a,
 				sleep_out => sleep_out,
 				z => output

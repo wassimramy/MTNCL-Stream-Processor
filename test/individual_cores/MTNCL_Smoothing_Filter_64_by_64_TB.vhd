@@ -147,7 +147,7 @@ variable v_inval : std_logic_vector(bitwidth-1 downto 0);
 		end loop;
 	end loop;
 
-	for i in 1 to 40000 loop
+	for i in 1 to 400000 loop
 			wait on ko_signal until ko_signal = '1';
 			reset_signal <= '0';
 			sleepin_signal <= '0';

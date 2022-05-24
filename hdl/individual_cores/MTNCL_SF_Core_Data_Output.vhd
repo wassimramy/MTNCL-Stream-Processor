@@ -87,7 +87,20 @@ architecture arch_MTNCL_SF_Core_Data_Output of MTNCL_SF_Core_Data_Output is
 			 z: out std_logic); 
 	end component; 
 
-signal ki_a, ki_b, sleep_out_a, sleep_out_b, sleep_out_c, sleep_in_b: std_logic;
+	component regs_gen_null_res_w_compm is
+		generic(width: in integer := bitwidth);
+		port(
+				d: in dual_rail_logic_vector(width-1 downto 0);
+				reset: in std_logic;
+				sleep_in: in std_logic;
+				ki: in std_logic;
+				sleep_out: out std_logic;
+				ko: out std_logic;
+				q: out dual_rail_logic_vector(width-1 downto 0)
+			);
+	end component;
+
+signal ki_a, ki_b, sleep_out_a, sleep_out_b, sleep_out_c, sleep_out_d, sleep_in_b: std_logic;
 signal data0, data1 : dual_rail_logic;
 signal image_loaded_a, image_loaded_b, image_stored_a, image_stored_b : std_logic;
 signal read_address : dual_rail_logic_vector(addresswidth-1 downto 0);
@@ -97,7 +110,8 @@ signal const_4096 : dual_rail_logic_vector(addresswidth downto 0);
 signal count : dual_rail_logic_vector(addresswidth downto 0);
 signal accRes, write_en: dual_rail_logic;
 signal counters_ko: std_logic_vector (2 downto 0);
-
+signal pixel_reg : dual_rail_logic_vector(2*bitwidth-1 downto 0);
+signal pixel_a : dual_rail_logic_vector(2*bitwidth-1 downto 0);
 begin 
 
 	--Setting up the data0 & data1
@@ -119,7 +133,20 @@ begin
 	end generate;
 	const_4096(addresswidth) <= data1;
 
-	ko <= counters_ko(1);
+	--ko <= counters_ko(1);
+
+	--pixel_a <= pixel (bitwidth-1 downto 0) & pixel (bitwidth-1 downto 0);
+	input_register: regs_gen_null_res_w_compm
+		generic map(width => 2*bitwidth)
+		port map(
+			d => pixel,
+			reset => reset,
+			sleep_in => sleep_in,
+			ki => counters_ko(1),
+			sleep_out => sleep_out_d,
+			ko => ko,
+			q => pixel_reg
+			);
 
 	write_en.rail0 <= image_stored_a;
 	generate_write_en : inv_a
@@ -146,7 +173,8 @@ begin
 					mem_delay => mem_delay)
 
 		port map(
-				mem_data => pixel(bitwidth-1 downto 0),
+				--mem_data => pixel(bitwidth-1 downto 0),
+				mem_data => pixel_reg(bitwidth-1 downto 0),
 				read_address => read_address (addresswidth-2 downto 0),
 				write_en => write_en,
 				standard_read_en => data1,
@@ -154,7 +182,8 @@ begin
 				reset => reset,
 				ki => ki_a,
 				ko => counters_ko(1),
-				sleep_in => sleep_in,
+				--sleep_in => sleep_in,
+				sleep_in => sleep_out_d,
 				sleep_out => sleep_out_a,
 				image_loaded => image_loaded_a,
 				image_stored => image_stored_a,
@@ -169,7 +198,8 @@ begin
 					mem_delay => mem_delay)
 
 		port map(
-				mem_data => pixel(2*bitwidth-1 downto bitwidth),
+				--mem_data => pixel(2*bitwidth-1 downto bitwidth),
+				mem_data => pixel_reg(2*bitwidth-1 downto bitwidth),
 				read_address => read_address (addresswidth-2 downto 0),
 				write_en => write_en,
 				standard_read_en => data1,
@@ -177,7 +207,8 @@ begin
 				reset => reset,
 				ki => ki_b,
 				ko => counters_ko(2),
-				sleep_in => sleep_in,
+				--sleep_in => sleep_in,
+				sleep_in => sleep_out_d,
 				sleep_out => sleep_out_b,
 				image_loaded => image_loaded_b,
 				image_stored => image_stored_b,

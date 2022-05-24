@@ -127,8 +127,9 @@ begin
 	--Generate global_ko
 	global_ko : MUX21_A 
 		port map(
+			--A => ko_image_store,
+			A => ko_SRAM,
 			B => ko_SRAM,
-			A => ko_image_store,
 			S => write_en.RAIL0,
 			Z => ko);
 
@@ -143,6 +144,7 @@ begin
 				parallelism_en => parallelism_en,
 				reset => reset,
 				ki => ko_SRAM,
+				--ki => ko_SRAM,
 				ko => ko_image_store,
 				sleep_in => sleep_in,
 				sleep_out => sleepout_image_store,

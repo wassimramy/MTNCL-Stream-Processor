@@ -100,7 +100,7 @@ architecture arch_MTNCL_SF_Core_Data_Output of MTNCL_SF_Core_Data_Output is
 			);
 	end component;
 
-signal ki_a, ki_b, sleep_out_a, sleep_out_b, sleep_out_c, sleep_out_d, sleep_in_b, sleep_in_image_store_load: std_logic;
+signal ki_a, ki_b, sleep_out_a, sleep_out_b, sleep_out_c, sleep_out_d, ko_d, sleep_in_b, sleep_in_image_store_load, ki_input_register: std_logic;
 signal data0, data1 : dual_rail_logic;
 signal image_loaded_a, image_loaded_b, image_stored_a, image_stored_b : std_logic;
 signal read_address : dual_rail_logic_vector(addresswidth-1 downto 0);
@@ -142,11 +142,20 @@ begin
 			d => pixel,
 			reset => reset,
 			sleep_in => sleep_in,
+			--ki => ki_input_register,
 			ki => counters_ko(1),
 			sleep_out => sleep_out_d,
-			ko => ko,
+			ko => ko_d,
 			q => pixel_reg
 			);
+
+		
+		input_register_ki : MUX21_A 
+		port map(
+			A => ko_d, 
+			B => '1',
+			S => image_stored_a,
+			Z => ko);
 
 	write_en.rail0 <= image_stored_a;
 	generate_write_en : inv_a

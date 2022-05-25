@@ -87,6 +87,11 @@ architecture arch_MTNCL_SF_Core_Data_Output of MTNCL_SF_Core_Data_Output is
 			 z: out std_logic); 
 	end component; 
 
+	component or2_a is
+		port(a, b : in  std_logic;
+			 z : out std_logic);
+	end component;
+
 	component regs_gen_null_res_w_compm is
 		generic(width: in integer := bitwidth);
 		port(
@@ -134,7 +139,12 @@ begin
 	const_4096(addresswidth) <= data1;
 
 	generate_pixel_reg : for i in 0 to 2*bitwidth-1 generate
-		pixel_reg(i).rail0 <= pixel_a(i).rail0 or image_stored_a;
+		--pixel_reg(i).rail0 <= pixel_a(i).rail0 or image_stored_a;
+		generate_pixel_reg_rail0 : or2_a
+			port map(
+				a => pixel_a(i).rail0,
+				b => image_stored_a,
+				z => pixel_reg(i).rail0);
 		pixel_reg(i).rail1 <= pixel_a(i).rail1;
 	end generate;
 

@@ -145,17 +145,18 @@ begin
 			--ki => ki_input_register,
 			ki => counters_ko(1),
 			sleep_out => sleep_out_d,
-			ko => ko_d,
+			--ko => ko_d,
+			ko => ko,
 			q => pixel_reg
 			);
 
 		
-		input_register_ki : MUX21_A 
-		port map(
-			A => ko_d, 
-			B => '1',
-			S => image_stored_a,
-			Z => ko);
+		--input_register_ki : MUX21_A 
+		--port map(
+		--	A => ko_d, 
+		--	B => '1',
+		--	S => image_stored_a,
+		--	Z => ko);
 
 	write_en.rail0 <= image_stored_a;
 	generate_write_en : inv_a

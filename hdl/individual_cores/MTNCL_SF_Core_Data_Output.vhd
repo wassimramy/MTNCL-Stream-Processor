@@ -100,7 +100,7 @@ architecture arch_MTNCL_SF_Core_Data_Output of MTNCL_SF_Core_Data_Output is
 			);
 	end component;
 
-signal ki_a, ki_b, sleep_out_a, sleep_out_b, sleep_out_c, sleep_out_d, sleep_in_b: std_logic;
+signal ki_a, ki_b, sleep_out_a, sleep_out_b, sleep_out_c, sleep_out_d, sleep_in_b, sleep_in_image_store_load: std_logic;
 signal data0, data1 : dual_rail_logic;
 signal image_loaded_a, image_loaded_b, image_stored_a, image_stored_b : std_logic;
 signal read_address : dual_rail_logic_vector(addresswidth-1 downto 0);
@@ -183,7 +183,7 @@ begin
 				ki => ki_a,
 				ko => counters_ko(1),
 				--sleep_in => sleep_in,
-				sleep_in => sleep_out_d,
+				sleep_in => sleep_in_image_store_load,
 				sleep_out => sleep_out_a,
 				image_loaded => image_loaded_a,
 				image_stored => image_stored_a,
@@ -208,7 +208,7 @@ begin
 				ki => ki_b,
 				ko => counters_ko(2),
 				--sleep_in => sleep_in,
-				sleep_in => sleep_out_d,
+				sleep_in => sleep_in_image_store_load,
 				sleep_out => sleep_out_b,
 				image_loaded => image_loaded_b,
 				image_stored => image_stored_b,
@@ -216,6 +216,12 @@ begin
 		);
 
 		ki_sleep_out_control_vector(0 downto 0) <= count (addresswidth-1 downto addresswidth-1);
+		image_store_load_instance_a_sleep_in : MUX21_A 
+		port map(
+			A => sleep_out_d, 
+			B => sleep_in,
+			S => image_stored_a,
+			Z => sleep_in_image_store_load);
 
 		image_store_load_instance_a_ki : MUX21_A 
 		port map(

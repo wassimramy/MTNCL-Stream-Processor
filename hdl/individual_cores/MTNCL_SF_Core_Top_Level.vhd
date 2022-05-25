@@ -278,7 +278,8 @@ begin
 				pixel => pixel,
 				reset => reset,
 				ki => ki,
-				sleep_in => sleep_out_a,
+				--sleep_in => sleep_out_a,
+				sleep_in => '0',
 				ko => ko_pixels_a,
 				sleep_out => sleep_out,
 				z => output

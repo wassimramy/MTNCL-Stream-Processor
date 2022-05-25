@@ -107,7 +107,7 @@ architecture arch_sf_address_generator of sf_address_generator is
 			 z: out std_logic); 
 	end component; 
 
-signal const_2109 : dual_rail_logic_vector(addresswidth downto 0);
+signal const_2109, const_2110 : dual_rail_logic_vector(addresswidth downto 0);
 signal data0, data1: dual_rail_logic;
 
 signal accRes, counter_0_AccRes: dual_rail_logic;
@@ -159,6 +159,7 @@ begin
 	--reset count is set to 4221
 	--const_4221 <= data1 & data0 & data0 & data0 & data0 & data0 & data1 & data1 & data1 & data1 & data1 & data0 & data1;
 	const_2109 <= data0 & data1 & data0 & data0 & data0 & data0 & data0 & data1 & data1 & data1 & data1 & data0 & data1;
+	const_2110 <= data0 & data1 & data0 & data0 & data0 & data0 & data0 & data1 & data1 & data1 & data1 & data1 & data0;
 
 	sf_address_generator_done <= sf_address_generator_done_temp;
 	generate_sf_address_generator_done : th12nm_a
@@ -171,7 +172,8 @@ begin
 	counter_0 : counter_selfReset
 	generic map(width => addresswidth+1)
 		port map(
-			reset_count => const_2109,
+			--reset_count => const_2109,
+			reset_count => const_2110,
 			sleep_in => sleep_in,
 		 	reset => reset,
 		 	ki => ki_mux_select(0),

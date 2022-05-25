@@ -2,4 +2,4 @@ simulation/work/
 *.qdb
 *.qpg
 *.qtl
-simulation/**
+simulation/

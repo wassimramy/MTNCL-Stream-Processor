@@ -120,16 +120,16 @@ begin
 		end loop;
 	end loop;
 
+
+
+	for i in 0 to 0 loop
+			wait on ko_sig until ko_sig = '1';
+			reset <= '0';
+			sleep_in <= '0';
 			for k in 0 to 2*bitwidth-1 loop
 				pixel(k).rail0 <= '0';
 				pixel(k).rail1 <= '0';
 			end loop;
-
-	for i in 0 to 1 loop
-			wait on ko_sig until ko_sig = '1';
-			reset <= '0';
-			sleep_in <= '0';
-			
 			write_en <= to_DR('0');
 			wait on ko_sig until ko_sig = '0';
 			sleep_in <= '1';

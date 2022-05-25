@@ -133,6 +133,11 @@ begin
 	end generate;
 	const_4096(addresswidth) <= data1;
 
+	generate_pixel_reg : for i in 0 to 2*bitwidth-1 generate
+		pixel_reg(i).rail0 <= pixel_a(i).rail0 or image_stored_a;
+		pixel_reg(i).rail1 <= pixel_a(i).rail1;
+	end generate;
+
 	--ko <= counters_ko(1);
 
 	--pixel_a <= pixel (bitwidth-1 downto 0) & pixel (bitwidth-1 downto 0);
@@ -145,18 +150,18 @@ begin
 			--ki => ki_input_register,
 			ki => counters_ko(1),
 			sleep_out => sleep_out_d,
-			--ko => ko_d,
-			ko => ko,
-			q => pixel_reg
+			ko => ko_d,
+			--ko => ko,
+			q => pixel_a
 			);
 
 		
-		--input_register_ki : MUX21_A 
-		--port map(
-		--	A => ko_d, 
-		--	B => '1',
-		--	S => image_stored_a,
-		--	Z => ko);
+		input_register_ki : MUX21_A 
+		port map(
+			A => ko_d, 
+			B => counters_ko(1),
+			S => image_stored_a,
+			Z => ko);
 
 	write_en.rail0 <= image_stored_a;
 	generate_write_en : inv_a

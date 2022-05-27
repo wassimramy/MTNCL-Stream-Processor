@@ -126,7 +126,7 @@ begin
 	data0.rail0 <= '1';
 	data0.rail1 <= '0';
 
-	--This block generates the read_address
+	--This block generates the read_address hello
 	generate_read_address : for i in 0 to addresswidth-1 generate
 		read_address(i) <= data0; 
 	end generate;

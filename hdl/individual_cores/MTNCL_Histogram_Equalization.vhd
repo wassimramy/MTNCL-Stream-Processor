@@ -305,7 +305,8 @@ begin
 	generic map(bitwidth => bitwidth, numberOfShades => numberOfShades)
 	port map( input => newShadeValues(numberOfShades*bitwidth-1 downto 0), 
 	pixel => roundedPixelRegister, 
-	ki => ki_image_reconstructor, 
+	--ki => ki_image_reconstructor, 
+	ki => ki,
 	sleep => sleeps(0), 
 	rst => rst, 
 	sleepOut => sleepOut, 

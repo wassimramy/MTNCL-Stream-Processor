@@ -49,7 +49,7 @@ architecture tb_arch of  MTNCL_Control_Unit_sf_heq_64_by_64_TB is
   signal sleepout_signal: std_logic;
   signal S_signal: dual_rail_logic_vector(bitwidth-1 downto 0);
 
-  signal  temp_1, temp_2, temp_3, temp_4, temp_5, temp_6 , temp_7, temp_8, temp_9 : std_logic_vector(bitwidth-1 downto 0);	
+  signal  temp_5 : std_logic_vector(bitwidth-1 downto 0);	
   signal CORRECT: std_logic;
 
   signal checker : std_logic_vector(bitwidth-1 downto 0):= (others => 'U');		
@@ -138,142 +138,18 @@ variable v_inval : std_logic_vector(bitwidth-1 downto 0);
 	for i in 1 to size loop
 		for j in 1 to size loop
 
-			temp_1 <= memData(((i-1)*(size+2))+(j-1));
-			temp_2 <= memData(((i-1)*(size+2))+j);
-			temp_3 <= memData(((i-1)*(size+2))+(j+1));
-			temp_4 <= memData((i*(size+2))+(j-1));
 			temp_5 <= memData((i*(size+2))+j);
-			temp_6 <= memData((i*(size+2))+(j+1));
-			temp_7 <= memData(((i+1)*(size+2))+(j-1));
-			temp_8 <= memData(((i+1)*(size+2))+(j));
-			temp_9 <= memData(((i+1)*(size+2))+(j+1));
 
 			wait on ko_signal until ko_signal = '1';
 			reset_signal <= '0';
 			sleepin_signal <= '0';
-
-			for k in 0 to bitwidth-1 loop
-				input_signal(k).rail0 <= not temp_1(k);
-				input_signal(k).rail1 <= temp_1(k);
-			end loop;
-
-			wait on ko_signal until ko_signal = '0';
-			wait for 5 ns;
-			sleepin_signal <= '1';
-			input_signal <= null_a;
-
-			wait on ko_signal until ko_signal = '1';
-			wait for 5 ns;
-			sleepin_signal <= '0';
-			
-			for k in 0 to bitwidth-1 loop
-				input_signal(k).rail0 <= not temp_2(k);
-				input_signal(k).rail1 <= temp_2(k);
-			end loop;
-
-			wait on ko_signal until ko_signal = '0';
-			wait for 5 ns;
-			sleepin_signal <= '1';
-			input_signal <= null_a;
-
-			wait on ko_signal until ko_signal = '1';
-			wait for 5 ns;
-			sleepin_signal <= '0';
-			
-			for k in 0 to bitwidth-1 loop
-				input_signal(k).rail0 <= not temp_3(k);
-				input_signal(k).rail1 <= temp_3(k);
-			end loop;
-
-			wait on ko_signal until ko_signal = '0';
-			wait for 5 ns;
-			sleepin_signal <= '1';
-			input_signal <= null_a;
-
-			wait on ko_signal until ko_signal = '1';
-			wait for 5 ns;
-			sleepin_signal <= '0';
-			
-			for k in 0 to bitwidth-1 loop
-				input_signal(k).rail0 <= not temp_4(k);
-				input_signal(k).rail1 <= temp_4(k);
-			end loop;
-
-			wait on ko_signal until ko_signal = '0';
-			wait for 5 ns;
-			sleepin_signal <= '1';
-			input_signal <= null_a;
-
-			wait on ko_signal until ko_signal = '1';
-			wait for 5 ns;
-			sleepin_signal <= '0';
-			
 			for k in 0 to bitwidth-1 loop
 				input_signal(k).rail0 <= not temp_5(k);
 				input_signal(k).rail1 <= temp_5(k);
 			end loop;
-
-			wait on ko_signal until ko_signal = '0';
-			wait for 5 ns;
-			sleepin_signal <= '1';
-			input_signal <= null_a;
-
-			wait on ko_signal until ko_signal = '1';
-			wait for 5 ns;
-			sleepin_signal <= '0';
 			
-			for k in 0 to bitwidth-1 loop
-				input_signal(k).rail0 <= not temp_6(k);
-				input_signal(k).rail1 <= temp_6(k);
-			end loop;
-
 			wait on ko_signal until ko_signal = '0';
-			wait for 5 ns;
 			sleepin_signal <= '1';
-			input_signal <= null_a;
-
-			wait on ko_signal until ko_signal = '1';
-			wait for 5 ns;
-			sleepin_signal <= '0';
-			
-			for k in 0 to bitwidth-1 loop
-				input_signal(k).rail0 <= not temp_7(k);
-				input_signal(k).rail1 <= temp_7(k);
-			end loop;
-
-			wait on ko_signal until ko_signal = '0';
-			wait for 5 ns;
-			sleepin_signal <= '1';
-			input_signal <= null_a;
-
-			wait on ko_signal until ko_signal = '1';
-			wait for 5 ns;
-			sleepin_signal <= '0';
-			
-			for k in 0 to bitwidth-1 loop
-				input_signal(k).rail0 <= not temp_8(k);
-				input_signal(k).rail1 <= temp_8(k);
-			end loop;
-
-			wait on ko_signal until ko_signal = '0';
-			wait for 5 ns;
-			sleepin_signal <= '1';
-			input_signal <= null_a;
-
-			wait on ko_signal until ko_signal = '1';
-			wait for 5 ns;
-			sleepin_signal <= '0';
-			
-			for k in 0 to bitwidth-1 loop
-				input_signal(k).rail0 <= not temp_9(k);
-				input_signal(k).rail1 <= temp_9(k);
-			end loop;
-
-			wait on ko_signal until ko_signal = '0';
-			wait for 5 ns;
-			sleepin_signal <= '1';
-
-
 		end loop;
 	end loop;
 			

@@ -68,7 +68,6 @@ begin
 				pixel => pixel,
 				reset => reset,
 				ki => ki_sig,
-				--write_en => write_en,
 				sleep_in => sleep_in,
 				ko => ko_sig,
 				sleep_out => sleep_out,
@@ -197,14 +196,6 @@ begin
 			readline(image_64_by_64_check, row_check);
 			read(row_check, row_check_inval);
 		end if;
-
-			--if row_check_inval = checker then
-			--	report "correct";
-			--	CORRECT <= '1';
-			--else
-			--	report "incorrect";
-			--	CORRECT <= '0';
-			--end if;
 
 	end process;
 

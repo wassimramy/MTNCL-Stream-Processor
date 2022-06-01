@@ -41,15 +41,15 @@ architecture arch of MTNCL_Control_Unit is
 	  end component;
 
 	  component MTNCL_SF_Core_Top_Level is
-	    generic(bitwidth: in integer := 4; numberOfShades: in integer := 256; shadeBitwidth: in integer := 12; numberOfPixels: in integer := 4096);
+	    generic(bitwidth: in integer := 4; addresswidth : in integer := 12; clock_delay : in integer := 16; mem_delay : integer := 48);
 	    port(
-			input    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
-			ki	 	: in std_logic;
-			sleep 		: in  std_logic;
-			rst  		: in std_logic;
-			sleepOut 	: out std_logic;
-			ko 	     	: out std_logic;
-			output   	: out dual_rail_logic_vector((bitwidth-1) downto 0)
+				input : in dual_rail_logic_vector(bitwidth-1 downto 0);
+				reset : in std_logic;
+				ki : in std_logic;
+				ko : out std_logic;
+				sleep_in : in std_logic;
+				sleep_out : out std_logic;
+				output : out dual_rail_logic_vector(bitwidth-1 downto 0)
 	      );
 	  end component;
 
@@ -104,24 +104,24 @@ begin
 	reset_count_plus_one(shadeBitwidth) <= data_1 ;
 
 
-	mtncl_sf_node_instance: MTNCL_SF_Core_Top_Level
- 		generic map(bitwidth => bitwidth, numberOfShades => numberOfShades,  shadeBitwidth =>shadeBitwidth , numberOfPixels => numberOfPixels)
+	mtncl_sf_core_instance: MTNCL_SF_Core_Top_Level
+ 		generic map(bitwidth => bitwidth, addresswidth => 12,  clock_delay => 16 , mem_delay => 48)
   		port map(
 				input => inputSF,
 				ki => ki_SF,
-				sleep => sleep_SF,
-				rst => rst,
+				sleep_in => sleep_SF,
+				reset => rst,
 				ko => ko_SF,
 				output => outputSF,
-				sleepOut => sleepOut_SF
+				sleep_out => sleepOut_SF
     		);
 
-	mtncl_heq_instance: MTNCL_Histogram_Equalization
+	mtncl_heq_core_instance: MTNCL_Histogram_Equalization
  		generic map(bitwidth => bitwidth, numberOfShades => numberOfShades,  shadeBitwidth =>shadeBitwidth , numberOfPixels => numberOfPixels)
   		port map(
     				input => inputHEQ,
-				ki => ki_HEQ,
-				sleep => sleep_HEQ,
+					ki => ki_HEQ,
+					sleep => sleep_HEQ,
     				rst => rst,
     				ko => ko_HEQ,
     				output => outputHEQ,

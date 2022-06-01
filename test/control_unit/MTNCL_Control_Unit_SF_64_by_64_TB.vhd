@@ -153,12 +153,12 @@ variable v_inval : std_logic_vector(bitwidth-1 downto 0);
 		end loop;
 	end loop;
 
-	for i in 1 to size loop
-		for j in 1 to size loop
-			wait on sleepout_signal until sleepout_signal = '0';
-			Icheck <= matlab_memData((i*(size+2))+j);
-		end loop;
-	end loop;
+	--for i in 1 to size loop
+	--	for j in 1 to size loop
+	--		wait on sleepout_signal until sleepout_signal = '0';
+	--		Icheck <= matlab_memData((i*(size+2))+j);
+	--	end loop;
+	--end loop;
 
 	wait;
       end process;
@@ -187,25 +187,25 @@ variable v_inval : std_logic_vector(bitwidth-1 downto 0);
         end process;
         
 	--final process to assign output comparison
-	process( checker)
-	begin
-		slowIcheck <= Icheck;
-	end process;
+	--process( checker)
+	--begin
+	--	slowIcheck <= Icheck;
+	--end process;
 
-	process(sleepout_signal)
-	variable row          : line;
-	begin
+	--process(sleepout_signal)
+	--variable row          : line;
+	--begin
+--
+	--	if checker(0) <= 'U' then
+--
+	--	elsif (ko_signal = '1' and sleepout_signal = '1') then
+		--	report "writing to o/p file";
+			--write(row, conv_integer(checker), right, 0);
+			--writeline(output_smoothed_image_64_by_64,row);
+			--write(row, checker, right, 0);
+			--writeline(output_smoothed_image_64_by_64_binary,row);
+		--end if;
 
-		if checker(0) <= 'U' then
-
-		elsif (ko_signal = '1' and sleepout_signal = '1') then
-			report "writing to o/p file";
-			write(row, conv_integer(checker), right, 0);
-			writeline(output_smoothed_image_64_by_64,row);
-			write(row, checker, right, 0);
-			writeline(output_smoothed_image_64_by_64_binary,row);
-		end if;
-
-	end process;
+	--end process;
 
 end;

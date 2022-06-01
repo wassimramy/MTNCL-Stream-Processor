@@ -40,25 +40,25 @@ architecture tb_arch of MTNCL_Smoothing_Filter_TB is
   end component;
 
   --Updated the file names
-	file image_64_by_64, equalized_image_64_by_64 : text;
+	file image_64_by_64, smoothed_image_64_by_64, image_64_by_64_check : text;
 	type memoryData is array(0 to (size+2)*(size+2)) of std_logic_vector(bitwidth-1 downto 0);
 	signal memData : memoryData;
 	type matlab_memoryData is array(0 to (size+2)*(size+2)) of std_logic_vector(bitwidth-1 downto 0);
 	signal matlab_memData : matlab_memoryData;
 
-	file output_equalized_image_64_by_64_binary      : text open write_mode is "../test/output_files/output_equalized_image_64_by_64_binary.txt";
-	file output_equalized_image_64_by_64      : text open write_mode is "../test/output_files/output_equalized_image_64_by_64.txt";
+	file output_smoothed_image_64_by_64_binary      : text open write_mode is "../test/output_files/output_smoothed_image_64_by_64_binary.txt";
+	file output_smoothed_image_64_by_64      : text open write_mode is "../test/output_files/output_smoothed_image_64_by_64.txt";
 
 
-  signal input_signal: dual_rail_logic_vector(bitwidth-1 downto 0);
-  signal reset_signal: std_logic;
-  signal ko_signal: std_logic;
-  signal ki_signal: std_logic;
-  signal sleepin_signal: std_logic;
-  signal sleepout_signal: std_logic;
-  signal S_signal: dual_rail_logic_vector(bitwidth-1 downto 0);
+  signal pixel: dual_rail_logic_vector(bitwidth-1 downto 0);
+  signal reset: std_logic;
+  signal ko_sig: std_logic;
+  signal ki_sig: std_logic;
+  signal sleep_in: std_logic;
+  signal sleep_out: std_logic;
+  signal z: dual_rail_logic_vector(bitwidth-1 downto 0);
 
-  signal  temp_5 : std_logic_vector(bitwidth-1 downto 0);	
+  signal  temp : std_logic_vector(bitwidth-1 downto 0);	
   signal CORRECT: std_logic;
 
   signal checker : std_logic_vector(bitwidth-1 downto 0):= (others => 'U');		
@@ -73,13 +73,13 @@ architecture tb_arch of MTNCL_Smoothing_Filter_TB is
  							clock_delay => clock_delay, 
  							mem_delay => mem_delay)
   port map(
-					    input => input_signal,
-					    reset => reset_signal,
-					    ki => ki_signal,
-					    ko => ko_signal,
-					    sleep_in => sleepin_signal,
-					    sleep_out => sleepout_signal,
-					    output => S_signal
+					    input => pixel,
+					    reset => reset,
+					    ki => ki_sig,
+					    ko => ko_sig,
+					    sleep_in => sleep_in,
+					    sleep_out => sleep_out,
+					    output => z
     );
     
  
@@ -93,7 +93,7 @@ variable v_inval : std_logic_vector(bitwidth-1 downto 0);
 
 	-- Get the image(s)
 	file_open(image_64_by_64,		 "../test/input_files/image_test_64_by_64_clean_binary",				 read_mode); -- Input image
-	file_open(equalized_image_64_by_64,	 "../test/input_files/equalized_image_test_64_by_64_clean_binary",			 read_mode); -- Input image
+	file_open(smoothed_image_64_by_64,	 "../test/input_files/smoothed_image_test_64_by_64_clean_binary",			 read_mode); -- Input image
 
   	-- Store the input image in an array
 	for i in 1 to size loop
@@ -107,7 +107,7 @@ variable v_inval : std_logic_vector(bitwidth-1 downto 0);
 	-- Store the MatLab output image in an array
 	for i in 1 to size loop
 		for j in 1 to size loop
-			readline(equalized_image_64_by_64, v_ILINE);
+			readline(smoothed_image_64_by_64, v_ILINE);
 			read(v_ILINE, v_inval);
 			matlab_memData((i*(size+2))+j) <= v_inval;
 		end loop;
@@ -126,86 +126,96 @@ variable v_inval : std_logic_vector(bitwidth-1 downto 0);
 		memData((size+2)*(size+1)+i) <= "00000000";
 	end loop;
 
-	wait for 10 ns;
-        reset_signal <= '1';
-	sleepin_signal <= '1';
+				wait for 10 ns;
+        reset <= '1';
+				sleep_in <= '1';
 
-	for i in 1 to size loop
-		for j in 1 to size loop
+	for i in 1 to (size) loop
+		for j in 1 to (size) loop
 
-			temp_5 <= memData((i*(size+2))+j);
+			temp(bitwidth-1 downto 0) <= memData((i*(size))+j);
 
-			wait on ko_signal until ko_signal = '1';
-			reset_signal <= '0';
-			sleepin_signal <= '0';
+			wait on ko_sig until ko_sig = '1';
+			reset <= '0';
+			sleep_in <= '0';
 			for k in 0 to bitwidth-1 loop
-				input_signal(k).rail0 <= not temp_5(k);
-				input_signal(k).rail1 <= temp_5(k);
+				pixel(k).rail0 <= not temp(k);
+				pixel(k).rail1 <= temp(k);
 			end loop;
-			wait on ko_signal until ko_signal = '0';
-			sleepin_signal <= '1';
+			wait on ko_sig until ko_sig = '0';
+			sleep_in <= '1';
 		end loop;
 	end loop;
 
-	for i in 1 to 400000 loop
-			wait on ko_signal until ko_signal = '1';
-			reset_signal <= '0';
-			sleepin_signal <= '0';
-
-			wait on ko_signal until ko_signal = '0';
-			sleepin_signal <= '1';
+	for i in 0 to 0 loop
+			wait on ko_sig until ko_sig = '1';
+			reset <= '0';
+			sleep_in <= '0';
+			for k in 0 to bitwidth-1 loop
+				pixel(k).rail0 <= '0';
+				pixel(k).rail1 <= '0';
+			end loop;
+			wait on ko_sig until ko_sig = '0';
+			sleep_in <= '1';
 	end loop;
 
 	for i in 1 to size loop
 		for j in 1 to size loop
-			wait on sleepout_signal until sleepout_signal = '0';
-			Icheck <= matlab_memData((i*(size+2))+j);
+			wait on ko_sig until ko_sig = '1';
+			reset <= '0';
+			sleep_in <= '0';
+			Icheck <= memData((i*(size))+j);
+			wait on ko_sig until ko_sig = '0';
+			sleep_in <= '1';
 		end loop;
 	end loop;
 
-	wait;
+				wait;
       end process;
 
         
-        process(S_signal)
+        process(z)
           begin
-            if is_null(S_signal) then
-              ki_signal <= '1';
-            elsif is_data(S_signal) then
-              ki_signal <= '0';
+            if is_null(z) then
+              ki_sig <= '1';
+            elsif is_data(z) then
+              ki_sig <= '0';
             end if;
 
-	if is_data(S_signal) then
-		for i in 0 to bitwidth-1 loop			
-			checker(i) <= S_signal(i).rail1;
-		end loop;
-		if checker = slowIcheck then
-			report "correct";
-			CORRECT <= '1';
-		else
-			report "incorrect";
-			CORRECT <= '0';
-		end if;
-	end if;
+						if is_data(z) then
+							for i in 0 to bitwidth-1 loop			
+								checker(i) <= z(i).rail1;
+							end loop;
+						end if;
         end process;
-        
-	--final process to assign output comparison
+
 	process( checker)
 	begin
-		slowIcheck <= Icheck;
+			if checker = Icheck then
+				report "correct";
+				CORRECT <= '1';
+			else
+				report "incorrect";
+				CORRECT <= '0';
+			end if;
 	end process;
 
-	process(sleepout_signal)
+process(ki_sig)
 	variable row          : line;
+	variable row_check          : line;
+	variable row_check_inval : std_logic_vector(bitwidth-1 downto 0);
+
 	begin
 
 		if checker(0) <= 'U' then
 
-		elsif (ko_signal = '1' and sleepout_signal = '1') then
+		elsif (ki_sig = '0') then
 			write(row, conv_integer(checker), right, 0);
-			writeline(output_equalized_image_64_by_64,row);
+			writeline(output_smoothed_image_64_by_64,row);
 			write(row, checker, right, 0);
-			writeline(output_equalized_image_64_by_64_binary,row);
+			writeline(output_smoothed_image_64_by_64_binary,row);
+			--readline(image_64_by_64_check, row_check);
+			--read(row_check, row_check_inval);
 		end if;
 
 	end process;

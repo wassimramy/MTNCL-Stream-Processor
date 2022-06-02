@@ -19,7 +19,8 @@ generic(
 					mem_delay: in integer := 12; 
 					numberOfShades: in integer := 256; 
 					shadeBitwidth: in integer := 12; 
-					numberOfPixels: in integer := 4096);
+					numberOfPixels: in integer := 4096
+				);
 	port(
 		input    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
 		ki	 	: in std_logic;
@@ -315,9 +316,12 @@ begin
 
 	global_ko : MUX21_A 
 		port map(
-			A => kos(0),
-			B => ko_trial, 
-			S => sleeps(1),
+			--A => kos(0),
+			--B => ko_trial, 
+			B => '1',
+			A => ko_trial, 
+			--S => sleeps(1),
+			S => image_stored,
 			Z => ko);
 
 	global_ki : MUX21_A 

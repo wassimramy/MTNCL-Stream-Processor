@@ -12,44 +12,67 @@ use work.ncl_signals.all;
 use ieee.math_real.all;
 
 entity MTNCL_Control_Unit is
-generic(bitwidth: in integer := 4; numberOfShades: in integer := 256; shadeBitwidth: in integer := 12; numberOfPixels: in integer := 4096; opCodeBitwidth: in integer := 2);
+	generic(
+				bitwidth 		: in integer := 8; 
+				addresswidth	: in integer := 12; 
+				clock_delay 	: in integer := 16; 
+				mem_delay		: in integer := 48; 
+				numberOfShades	: in integer := 256; 
+				shadeBitwidth 	: in integer := 12; 
+				numberOfPixels	: in integer := 4096; 
+				opCodeBitwidth 	: in integer := 2
+
+			);
 	port(
-		opCode		: in  dual_rail_logic_vector(opCodeBitwidth-1 downto 0);
-		input    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
-		ki	 	: in std_logic;
-		sleep 		: in  std_logic;
-		rst  		: in std_logic;
-		sleepOut 	: out std_logic;
-		ko 	     	: out std_logic;
-		output   	: out dual_rail_logic_vector(bitwidth-1 downto 0)
+				opCode		: in  dual_rail_logic_vector(opCodeBitwidth-1 downto 0);
+				input    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
+				ki	 	: in std_logic;
+				sleep 		: in  std_logic;
+				rst  		: in std_logic;
+				sleepOut 	: out std_logic;
+				ko 	     	: out std_logic;
+				output   	: out dual_rail_logic_vector(bitwidth-1 downto 0)
 	);
 end;
 
 architecture arch of MTNCL_Control_Unit is
 
 	  component MTNCL_Histogram_Equalization is
-	    generic(bitwidth: in integer := 4; numberOfShades: in integer := 256; shadeBitwidth: in integer := 12; numberOfPixels: in integer := 4096);
+	    generic(
+					bitwidth: in integer := 4; 
+					addresswidth: in integer := 12; 
+					clock_delay: in integer := 12; 
+					mem_delay: in integer := 12; 
+					numberOfShades: in integer := 256; 
+					shadeBitwidth: in integer := 12; 
+					numberOfPixels: in integer := 4096
+	    		);
 	    port(
-			input    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
-			ki	 	: in std_logic;
-			sleep 		: in  std_logic;
-			rst  		: in std_logic;
-			sleepOut 	: out std_logic;
-			ko 	     	: out std_logic;
-			output   	: out dual_rail_logic_vector((bitwidth)-1 downto 0)
+					input    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
+					ki	 	: in std_logic;
+					sleep 		: in  std_logic;
+					rst  		: in std_logic;
+					sleepOut 	: out std_logic;
+					ko 	     	: out std_logic;
+					output   	: out dual_rail_logic_vector((bitwidth)-1 downto 0)
 	      );
 	  end component;
 
 	  component MTNCL_SF_Core_Top_Level is
-	    generic(bitwidth: in integer := 4; addresswidth : in integer := 12; clock_delay : in integer := 16; mem_delay : integer := 48);
+	    generic(
+	    			bitwidth: in integer := 4; 
+	    			addresswidth : in integer := 12; 
+	    			clock_delay : in integer := 16; 
+	    			mem_delay : integer := 48
+	    		);
 	    port(
-				input : in dual_rail_logic_vector(bitwidth-1 downto 0);
-				reset : in std_logic;
-				ki : in std_logic;
-				ko : out std_logic;
-				sleep_in : in std_logic;
-				sleep_out : out std_logic;
-				output : out dual_rail_logic_vector(bitwidth-1 downto 0)
+					input : in dual_rail_logic_vector(bitwidth-1 downto 0);
+					reset : in std_logic;
+					ki : in std_logic;
+					ko : out std_logic;
+					sleep_in : in std_logic;
+					sleep_out : out std_logic;
+					output : out dual_rail_logic_vector(bitwidth-1 downto 0)
 	      );
 	  end component;
 
@@ -84,7 +107,8 @@ architecture arch of MTNCL_Control_Unit is
 	signal ki_SF, ki_HEQ, ko_HEQ, ko_SF: std_logic;
 	signal sleep_global_00, sleep_global_01: std_logic;
 	signal ko_global_00, ko_global_01: std_logic;
-	
+	signal ki_xor: std_logic;
+
 begin
 
 	--set data_0 & data_1 for padding
@@ -105,7 +129,12 @@ begin
 
 
 	mtncl_sf_core_instance: MTNCL_SF_Core_Top_Level
- 		generic map(bitwidth => bitwidth, addresswidth => 12,  clock_delay => 16 , mem_delay => 48)
+ 		generic map(
+ 						bitwidth => bitwidth, 
+ 						addresswidth => addresswidth,  
+ 						clock_delay => clock_delay, 
+ 						mem_delay => mem_delay
+ 					)
   		port map(
 				input => inputSF,
 				ki => ki_SF,
@@ -117,7 +146,15 @@ begin
     		);
 
 	mtncl_heq_core_instance: MTNCL_Histogram_Equalization
- 		generic map(bitwidth => bitwidth, numberOfShades => numberOfShades,  shadeBitwidth =>shadeBitwidth , numberOfPixels => numberOfPixels)
+ 		generic map(
+	 					bitwidth => bitwidth, 
+	 					addresswidth => addresswidth, 
+						clock_delay => clock_delay, 
+						mem_delay => mem_delay, 
+	 					numberOfShades => numberOfShades,  
+	 					shadeBitwidth =>shadeBitwidth, 
+	 					numberOfPixels => numberOfPixels
+ 					)
   		port map(
     				input => inputHEQ,
 					ki => ki_HEQ,
@@ -158,12 +195,21 @@ begin
 			S => opCode(0).RAIL1,
 			Z => sleep_SF);
 
+	--Generate ki_xor
+	generate_ki_xor : MUX21_A 
+		port map(
+			A => opCode(0).RAIL1, 
+			B => opCode(0).RAIL0,
+			S => opCode(1).RAIL1,
+			Z => ki_xor);
+
 	--Generate ki_SF
 	SF_ki : MUX21_A 
 		port map(
 			A => ki, 
 			B => ko_HEQ,
-			S => opCode(1).RAIL1,
+			--S => opCode(1).RAIL1,
+			S => ki_xor,
 			Z => ki_SF);
 
 	--Generate sleep_HEQ

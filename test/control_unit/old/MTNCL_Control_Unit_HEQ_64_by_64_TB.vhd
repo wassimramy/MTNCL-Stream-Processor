@@ -10,49 +10,29 @@ use IEEE.std_logic_unsigned.all;
 use ieee.math_real.all;
 use ieee.numeric_std.all;
 
-entity tb_MTNCL_CU_HEQ_64_by_64_image_store_load is
+entity MTNCL_Control_Unit_HEQ_64_by_64_TB is
 generic(
 		bitwidth: in integer := 8; 
-		addresswidth: in integer := 12; 
-		clock_delay: in integer := 12; 
-		mem_delay: in integer := 12; 
 		numberOfShades: in integer := 256; 
 		shadeBitwidth: in integer := 12; 
 		numberOfPixels: in integer := 4096; 
 		size: in integer := 64; 
 		opCodeBitwidth: in integer := 2);
+end  MTNCL_Control_Unit_HEQ_64_by_64_TB;
 
-end  tb_MTNCL_CU_HEQ_64_by_64_image_store_load;
+architecture tb_arch of  MTNCL_Control_Unit_HEQ_64_by_64_TB is
 
-architecture tb_arch of  tb_MTNCL_CU_HEQ_64_by_64_image_store_load is
-
-  component MTNCL_CU_W_image_store_load is
-    generic(			
-			bitwidth: in integer := 4; 
-			addresswidth: in integer := 12; 
-			clock_delay: in integer := 12; 
-			mem_delay: in integer := 12; 
-			numberOfShades: in integer := 256; 
-			shadeBitwidth: in integer := 12; 
-			numberOfPixels: in integer := 4096; 
-			opCodeBitwidth: in integer := 2);
+  component MTNCL_Control_Unit is
+    generic(bitwidth: in integer := 4; numberOfShades: in integer := 256; shadeBitwidth: in integer := 12; numberOfPixels: in integer := 4096; opCodeBitwidth: in integer := 2);
     port(
-		--Input for the control unit
-		opCode		: in  dual_rail_logic_vector(opCodeBitwidth-1 downto 0);
-
-		--Inputs for the image_load_store
-		mem_data : in dual_rail_logic_vector(bitwidth-1 downto 0);
-		read_address : in dual_rail_logic_vector(addresswidth-1 downto 0);
-		write_en : in dual_rail_logic;
-		standard_read_en: in dual_rail_logic;
-		parallelism_en : in dual_rail_logic;
-
+		opCode    	: in  dual_rail_logic_vector(opCodeBitwidth-1 downto 0);
+		input    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
 		ki	 	: in std_logic;
 		sleep 		: in  std_logic;
 		rst  		: in std_logic;
 		sleepOut 	: out std_logic;
 		ko 	     	: out std_logic;
-		output   	: out dual_rail_logic_vector(bitwidth-1 downto 0)
+		output   	: out dual_rail_logic_vector((bitwidth)-1 downto 0)
       );
   end component;
 
@@ -63,16 +43,11 @@ architecture tb_arch of  tb_MTNCL_CU_HEQ_64_by_64_image_store_load is
 	type matlab_memoryData is array(0 to (size+2)*(size+2)) of std_logic_vector(bitwidth-1 downto 0);
 	signal matlab_memData : matlab_memoryData;
 
-	file output_equalized_image_64_by_64_binary      	: text open write_mode is "../test/output_files/output_equalized_image_64_by_64_binary.txt";
-	file output_equalized_image_64_by_64      				: text open write_mode is "../test/output_files/output_equalized_image_64_by_64.txt";
-
-  signal mem_data: dual_rail_logic_vector(bitwidth-1 downto 0);
-  signal read_address: dual_rail_logic_vector(addresswidth-1 downto 0);
-  signal write_en: dual_rail_logic;
-  signal standard_read_en: dual_rail_logic;
-  signal parallelism_en: dual_rail_logic;
+	file output_equalized_image_64_by_64_binary      : text open write_mode is "../test/output_files/output_equalized_image_64_by_64_binary.txt";
+	file output_equalized_image_64_by_64      : text open write_mode is "../test/output_files/output_equalized_image_64_by_64.txt";
 
   signal opCode_signal: dual_rail_logic_vector(opCodeBitwidth-1 downto 0);
+  signal input_signal: dual_rail_logic_vector(bitwidth-1 downto 0);
   signal reset_signal: std_logic;
   signal ko_signal: std_logic;
   signal ki_signal: std_logic;
@@ -90,27 +65,11 @@ architecture tb_arch of  tb_MTNCL_CU_HEQ_64_by_64_image_store_load is
 
   begin
     
-  uut: MTNCL_CU_W_image_store_load
- generic map(
-		bitwidth => bitwidth, 
-		addresswidth => addresswidth, 
-		clock_delay => clock_delay, 
-		mem_delay => mem_delay, 
-		numberOfShades => numberOfShades,  
-		shadeBitwidth =>shadeBitwidth, 
-		numberOfPixels => numberOfPixels, 
-		opCodeBitwidth => opCodeBitwidth)
-
+  uut: MTNCL_Control_Unit
+ generic map(bitwidth => bitwidth, numberOfShades => numberOfShades,  shadeBitwidth =>shadeBitwidth , numberOfPixels => numberOfPixels, opCodeBitwidth => opCodeBitwidth)
   port map(
-
-    mem_data => mem_data,
-    read_address => read_address,
-    write_en => write_en,
-    standard_read_en => standard_read_en,
-    parallelism_en => parallelism_en,
-
     opCode => opCode_signal,
-
+    input => input_signal,
     ki => ki_signal,
     sleep => sleepin_signal,
     rst => reset_signal,
@@ -175,8 +134,6 @@ variable v_inval : std_logic_vector(bitwidth-1 downto 0);
 	opCode_signal <= data_0 & data_1;
         reset_signal <= '1';
 	sleepin_signal <= '1';
-	parallelism_en <= to_DR('0');	
-	standard_read_en <= to_DR('1');	
 
 	for i in 1 to size loop
 		for j in 1 to size loop
@@ -187,24 +144,13 @@ variable v_inval : std_logic_vector(bitwidth-1 downto 0);
 			reset_signal <= '0';
 			sleepin_signal <= '0';
 			for k in 0 to bitwidth-1 loop
-				mem_data(k).rail0 <= not temp_5(k);
-				mem_data(k).rail1 <= temp_5(k);
+				input_signal(k).rail0 <= not temp_5(k);
+				input_signal(k).rail1 <= temp_5(k);
 			end loop;
-			write_en <= to_DR('1');	
+			
 			wait on ko_signal until ko_signal = '0';
 			sleepin_signal <= '1';
 		end loop;
-	end loop;
-
-	for i in 0 to numberOfPixels-1 loop
-
-		wait on ko_signal until ko_signal = '1';
-		reset_signal <= '0';
-		sleepin_signal <= '0';
-		write_en <= to_DR('0');
-		wait on ko_signal until ko_signal = '0';
-		sleepin_signal <= '1';
-
 	end loop;
 
 	for i in 1 to size loop

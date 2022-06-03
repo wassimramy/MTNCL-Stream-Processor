@@ -20,18 +20,18 @@ entity MTNCL_Control_Unit is
 				numberOfShades	: in integer := 256; 
 				shadeBitwidth 	: in integer := 12; 
 				numberOfPixels	: in integer := 4096; 
-				opCodeBitwidth 	: in integer := 2
+				opCodeBitwidth 	: in integer := 3
 
 			);
 	port(
-				opCode		: in  dual_rail_logic_vector(opCodeBitwidth-1 downto 0);
-				input    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
-				ki	 	: in std_logic;
-				sleep 		: in  std_logic;
-				rst  		: in std_logic;
-				sleepOut 	: out std_logic;
-				ko 	     	: out std_logic;
-				output   	: out dual_rail_logic_vector(bitwidth-1 downto 0)
+				opCode			: in  dual_rail_logic_vector(opCodeBitwidth-1 downto 0);
+				input    		: in  dual_rail_logic_vector(bitwidth-1 downto 0);
+				ki	 			: in std_logic;
+				sleep 			: in  std_logic;
+				rst  			: in std_logic;
+				sleepOut 		: out std_logic;
+				ko 	     		: out std_logic;
+				output   		: out dual_rail_logic_vector(bitwidth-1 downto 0)
 	);
 end;
 
@@ -69,6 +69,8 @@ architecture arch of MTNCL_Control_Unit is
 					input : in dual_rail_logic_vector(bitwidth-1 downto 0);
 					reset : in std_logic;
 					ki : in std_logic;
+					id : in dual_rail_logic;
+					parallelism_en : in dual_rail_logic;
 					ko : out std_logic;
 					sleep_in : in std_logic;
 					sleep_out : out std_logic;
@@ -88,17 +90,15 @@ architecture arch of MTNCL_Control_Unit is
 	generic(bitwidth: integer := 4;
 		numInputs : integer := 4);
     		port(
-			a: in dual_rail_logic_vector((numInputs*bitwidth)-1 downto 0);
-			sel: in dual_rail_logic_vector(integer(ceil(log2(real(numInputs))))-1 downto 0);
-			sleep: in std_logic;
-			z: out dual_rail_logic_vector(bitwidth-1 downto 0));
+			a 		: in dual_rail_logic_vector((numInputs*bitwidth)-1 downto 0);
+			sel 	: in dual_rail_logic_vector(integer(ceil(log2(real(numInputs))))-1 downto 0);
+			sleep 	: in std_logic;
+			z 		: out dual_rail_logic_vector(bitwidth-1 downto 0));
 	end component;
 
 
 
 	signal data_0,data_1		: dual_rail_logic;
-	signal reset_count, roundedPixelRegister	: dual_rail_logic_vector(bitwidth-1 downto 0);
-	signal reset_count_plus_one	: dual_rail_logic_vector(shadeBitwidth downto 0);
 
 	signal inputHEQMUX, inputSFMUX: dual_rail_logic_vector(2*bitwidth-1 downto 0);
 	signal globalOutput: dual_rail_logic_vector(4*bitwidth-1 downto 0);
@@ -118,15 +118,6 @@ begin
 	data_1.RAIL0 <= '0';
 	data_1.RAIL1 <= '1';
 
-	setting_reset_count : for i in 0 to bitwidth-1 generate
-		reset_count(i) <= data_1 ;
-	end generate;
-
-	setting_reset_count_plus_one : for i in 0 to shadeBitwidth-1 generate
-		reset_count_plus_one(i) <= data_0 ;
-	end generate;
-	reset_count_plus_one(shadeBitwidth) <= data_1 ;
-
 
 	mtncl_sf_core_instance: MTNCL_SF_Core_Top_Level
  		generic map(
@@ -136,13 +127,15 @@ begin
  						mem_delay => mem_delay
  					)
   		port map(
-				input => inputSF,
-				ki => ki_SF,
-				sleep_in => sleep_SF,
-				reset => rst,
-				ko => ko_SF,
-				output => outputSF,
-				sleep_out => sleepOut_SF
+				input 			=> inputSF,
+				ki 				=> ki_SF,
+				sleep_in 		=> sleep_SF,
+				reset 			=> rst,
+				id 				=> data_0,
+				parallelism_en 	=> opCode(2),
+				ko 				=> ko_SF,
+				output 			=> outputSF,
+				sleep_out 		=> sleepOut_SF
     		);
 
 	mtncl_heq_core_instance: MTNCL_Histogram_Equalization

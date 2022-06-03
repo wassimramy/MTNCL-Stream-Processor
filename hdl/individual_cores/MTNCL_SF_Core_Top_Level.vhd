@@ -16,6 +16,8 @@ entity MTNCL_SF_Core_Top_Level is
 		input : in dual_rail_logic_vector(bitwidth-1 downto 0);
 		reset : in std_logic;
 		ki : in std_logic;
+		id 	: in dual_rail_logic;
+		parallelism_en 	: in dual_rail_logic;
 		ko : out std_logic;
 		sleep_in : in std_logic;
 		sleep_out : out std_logic;
@@ -25,43 +27,22 @@ end MTNCL_SF_Core_Top_Level;
 
 architecture arch_MTNCL_SF_Core_Top_Level of MTNCL_SF_Core_Top_Level is 
 
-	component image_store_load is
-		generic(
-			bitwidth : integer := bitwidth;
-			addresswidth : integer := addresswidth;
-			clock_delay : integer := 16;		--ADD DELAY FOR INCREASED SETUP TIMES
-			mem_delay : integer := 48);		--ADD DELAY FOR INCREASED MEMORY DELAY
-		port(
-
-			mem_data : in dual_rail_logic_vector(bitwidth-1 downto 0);
-			read_address : in dual_rail_logic_vector(addresswidth-1 downto 0);
-			write_en : in dual_rail_logic;
-			standard_read_en : in dual_rail_logic;
-			parallelism_en : in dual_rail_logic;
-			reset : in std_logic;
-			ki : in std_logic;
-			ko : out std_logic;
-			sleep_in : in std_logic;
-			sleep_out : out std_logic;
-			image_loaded : out std_logic;
-			image_stored : out std_logic;
-			z : out dual_rail_logic_vector(bitwidth-1 downto 0)
-			);
-	end component;
 
 	component MTNCL_SF_Core_Data_Loader is
 		generic(
-			bitwidth : integer := bitwidth;
-			addresswidth : integer := addresswidth);
+			bitwidth 		: integer := bitwidth;
+			addresswidth 	: integer := addresswidth);
 		port(
 
-			pixel : in dual_rail_logic_vector(bitwidth-1 downto 0);
-			reset : in std_logic;
-			ki : in std_logic;
-			ko : out std_logic;
-			sleep_in : in std_logic;
-			sleep_out : out std_logic;
-			z : out dual_rail_logic_vector(2*bitwidth-1 downto 0)
+			pixel 			: in dual_rail_logic_vector(bitwidth-1 downto 0);
+			reset 			: in std_logic;
+			ki 				: in std_logic;
+			id 				: in dual_rail_logic;
+			parallelism_en 	: in dual_rail_logic;
+			ko 				: out std_logic;
+			sleep_in 		: in std_logic;
+			sleep_out 		: out std_logic;
+			z 				: out dual_rail_logic_vector(2*bitwidth-1 downto 0)
 			);
 	end component;
 
@@ -76,6 +57,7 @@ architecture arch_MTNCL_SF_Core_Top_Level of MTNCL_SF_Core_Top_Level is
 				pixel : in dual_rail_logic_vector(2*bitwidth-1 downto 0);
 				reset : in std_logic;
 				ki : in std_logic;
+				parallelism_en 	: in dual_rail_logic;
 				ko : out std_logic;
 				sleep_in : in std_logic;
 				sleep_out : out std_logic;
@@ -128,34 +110,6 @@ architecture arch_MTNCL_SF_Core_Top_Level of MTNCL_SF_Core_Top_Level is
 			);
 	end component;
 
-	component OAAT_in_all_out is
-		generic( bitwidth : integer := 16; numInputs : integer := 64; counterWidth : integer := 6; delay_amount : integer := 6);
-	    port(
-			a : in dual_rail_logic_vector(bitwidth-1 downto 0);
-			reset_count : in dual_rail_logic_vector(counterWidth-1 downto 0);
-			sleep_in: in std_logic;
-			reset: in std_logic;
-			ki: in std_logic;
-			ko: out std_logic;
-			sleep_out: out std_logic;
-			z: out dual_rail_logic_vector(numInputs*bitwidth-1 downto 0)
-	      );
-	  end component;
-
-	  component OAAT_out_all_in is
-		generic(bitwidth: integer := 8; numInputs : integer := 256);
-		port(a : in dual_rail_logic_vector(numInputs*bitwidth-1 downto 0);
-		reset_count : in dual_rail_logic_vector(integer(ceil(log2(real(numInputs))))-1 downto 0); --CHANGE COUNTER WIDTH
-		sleep_in: in std_logic;
-		reset: in std_logic;
-		ki: in std_logic;
-		ko: out std_logic;
-		sleep_out: out std_logic;
-		accumulate_reset: out dual_rail_logic;
-		count: out dual_rail_logic_vector(integer(ceil(log2(real(numInputs))))-1 downto 0);
-		z: out dual_rail_logic_vector(bitwidth-1 downto 0));
-	end component;	
-
 
 signal pixel : dual_rail_logic_vector(2*bitwidth-1 downto 0);
 signal ko_data_loader, sleepout_data_loader, sleep_out_a, sleep_out_b, sleep_out_c, ko_sf_core_w_reg, ko_sf_core_w_reg_a, ko_sf_core_w_reg_b : std_logic;
@@ -178,6 +132,8 @@ begin
 			pixel => input,
 			reset => reset,
 			ki => ko_sf_core_w_reg,
+			id => id,
+			parallelism_en => parallelism_en,
 			ko => ko_data_loader,
 			sleep_in => sleep_in,
 			sleep_out => sleepout_data_loader,
@@ -224,6 +180,7 @@ begin
 				pixel => pixel,
 				reset => reset,
 				ki => ki,
+				parallelism_en 	=> parallelism_en,
 				sleep_in => '0',
 				ko => ko_pixels_a,
 				sleep_out => sleep_out,

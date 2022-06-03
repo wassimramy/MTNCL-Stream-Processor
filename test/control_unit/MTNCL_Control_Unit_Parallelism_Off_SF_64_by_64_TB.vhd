@@ -10,7 +10,7 @@ use IEEE.std_logic_unsigned.all;
 use ieee.math_real.all;
 use ieee.numeric_std.all;
 
-entity MTNCL_Control_Unit_sf_64_by_64_TB is
+entity MTNCL_Control_Unit_parallelism_off_sf_64_by_64_TB is
 generic(
 					bitwidth 				: in integer := 8; 
 					addresswidth		: in integer := 12; 
@@ -20,11 +20,11 @@ generic(
 					shadeBitwidth 	: in integer := 12; 
 					numberOfPixels	: in integer := 4096;
 					size 						: in integer := 64; 
-					opCodeBitwidth 	: in integer := 2
+					opCodeBitwidth 	: in integer := 3
 );
-end  MTNCL_Control_Unit_sf_64_by_64_TB;
+end  MTNCL_Control_Unit_parallelism_off_sf_64_by_64_TB;
 
-architecture tb_arch of  MTNCL_Control_Unit_sf_64_by_64_TB is
+architecture tb_arch of  MTNCL_Control_Unit_parallelism_off_sf_64_by_64_TB is
 
   component MTNCL_Control_Unit is
     generic(
@@ -35,7 +35,7 @@ architecture tb_arch of  MTNCL_Control_Unit_sf_64_by_64_TB is
 					numberOfShades	: in integer := 256; 
 					shadeBitwidth 	: in integer := 12; 
 					numberOfPixels	: in integer := 4096; 
-					opCodeBitwidth 	: in integer := 2
+					opCodeBitwidth 	: in integer := 3
     );
     
     port(
@@ -145,7 +145,7 @@ begin
 
 	-- Start testing
 	wait for 10 ns;
-	opCode_signal <= data_0 & data_0;
+	opCode_signal <= data_0 & data_0 & data_0;
   reset_signal <= '1';
 	sleepin_signal <= '1';
 

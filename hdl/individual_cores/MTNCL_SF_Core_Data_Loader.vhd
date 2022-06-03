@@ -8,16 +8,18 @@ use ieee.math_real.all;
 
 entity MTNCL_SF_Core_Data_Loader is
 	generic(
-		bitwidth : integer := 8;
-		addresswidth : integer := 12);
+		bitwidth 		: integer := 8;
+		addresswidth 	: integer := 12);
 	port(
-		pixel : in dual_rail_logic_vector(bitwidth-1 downto 0);
-		reset : in std_logic;
-		ki : in std_logic;
-		ko : out std_logic;
-		sleep_in : in std_logic;
-		sleep_out : out std_logic;
-		z : out dual_rail_logic_vector(2*bitwidth-1 downto 0)
+		pixel 			: in dual_rail_logic_vector(bitwidth-1 downto 0);
+		reset 			: in std_logic;
+		ki 				: in std_logic;
+		id 				: in dual_rail_logic;
+		parallelism_en 	: in dual_rail_logic;
+		ko 				: out std_logic;
+		sleep_in 		: in std_logic;
+		sleep_out 		: out std_logic;
+		z 				: out dual_rail_logic_vector(2*bitwidth-1 downto 0)
 	);
 end MTNCL_SF_Core_Data_Loader;
 
@@ -49,6 +51,8 @@ architecture arch_MTNCL_SF_Core_Data_Loader of MTNCL_SF_Core_Data_Loader is
 			input : in dual_rail_logic_vector(4096*bitwidth-1 downto 0);
 			reset : in std_logic;
 			ki : in std_logic;
+			id 				: in dual_rail_logic;
+			parallelism_en 	: in dual_rail_logic;
 			sleep_in : in std_logic;
 			ko : out std_logic;
 			sleep_out : out std_logic;
@@ -58,7 +62,7 @@ architecture arch_MTNCL_SF_Core_Data_Loader of MTNCL_SF_Core_Data_Loader is
 signal output_reg : dual_rail_logic_vector(4096*bitwidth-1 downto 0);
 signal ko_sf_add_gen, sleep_out_reg : std_logic;
 signal reset_count : dual_rail_logic_vector(addresswidth-1 downto 0);
-signal reset_count_p_1 : dual_rail_logic_vector(addresswidth downto 0);
+--signal reset_count_p_1 : dual_rail_logic_vector(addresswidth downto 0);
 signal data0, data1 : dual_rail_logic;
 
 begin 
@@ -71,13 +75,12 @@ begin
 	data0.rail1 <= '0';
 
 	reset_count <= data1 & data1 & data1 & data1 & data1 & data1 & data1 & data1 & data1 & data1 & data1 & data1;	
-	reset_count_p_1 <= data1 & data0 & data0 & data0 & data0 & data0 & data0 & data0 & data0 & data0 & data0 & data0 & data0;	
+	--reset_count_p_1 <= data1 & data0 & data0 & data0 & data0 & data0 & data0 & data0 & data0 & data0 & data0 & data0 & data0;	
 	output_all_pixels_at_once : OAAT_in_all_out
 	generic map(bitwidth => bitwidth, numInputs => 4096, counterWidth => addresswidth, delay_amount => 0)
 	port map( 
 				a => pixel, 
 				reset_count => reset_count,
-				--reset_count => reset_count_p_1, 
 				sleep_in => sleep_in, 
 				reset => reset, 
 				ki => '1', 
@@ -93,6 +96,8 @@ begin
 				input => output_reg,
 				reset => reset,
 				ki => ki,
+				id => id,
+				parallelism_en => parallelism_en,
 				ko => ko_sf_add_gen,
 				sleep_in => sleep_out_reg,
 				sleep_out => sleep_out,

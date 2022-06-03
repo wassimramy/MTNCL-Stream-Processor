@@ -13,14 +13,14 @@ entity MTNCL_SF_Core_Data_Output is
 		clock_delay : integer := 16;
 		mem_delay : integer := 48);
 	port(
-		pixel : in dual_rail_logic_vector(2*bitwidth-1 downto 0);
-		reset : in std_logic;
-		ki : in std_logic;
-		--write_en : in dual_rail_logic;
-		sleep_in : in std_logic;
-		ko : out std_logic;
-		sleep_out : out std_logic;
-		z : out dual_rail_logic_vector(bitwidth-1 downto 0)
+		pixel 			: in dual_rail_logic_vector(2*bitwidth-1 downto 0);
+		reset 			: in std_logic;
+		ki 				: in std_logic;
+		parallelism_en 	: in dual_rail_logic;
+		sleep_in 		: in std_logic;
+		ko 				: out std_logic;
+		sleep_out 		: out std_logic;
+		z 				: out dual_rail_logic_vector(bitwidth-1 downto 0)
 	);
 end MTNCL_SF_Core_Data_Output;
 
@@ -117,6 +117,8 @@ signal accRes, write_en: dual_rail_logic;
 signal counters_ko: std_logic_vector (2 downto 0);
 signal pixel_reg : dual_rail_logic_vector(2*bitwidth-1 downto 0);
 signal pixel_a : dual_rail_logic_vector(2*bitwidth-1 downto 0);
+signal control : dual_rail_logic_vector(1 downto 0);
+signal parallelism_en_vector : dual_rail_logic_vector(0 downto 0);
 begin 
 
 	--Setting up the data0 & data1
@@ -139,7 +141,6 @@ begin
 	const_4096(addresswidth) <= data1;
 
 	generate_pixel_reg : for i in 0 to 2*bitwidth-1 generate
-		--pixel_reg(i).rail0 <= pixel_a(i).rail0 or image_stored_a;
 		generate_pixel_reg_rail0 : or2_a
 			port map(
 				a => pixel_a(i).rail0,
@@ -148,20 +149,15 @@ begin
 		pixel_reg(i).rail1 <= pixel_a(i).rail1;
 	end generate;
 
-	--ko <= counters_ko(1);
-
-	--pixel_a <= pixel (bitwidth-1 downto 0) & pixel (bitwidth-1 downto 0);
 	input_register: regs_gen_null_res_w_compm
 		generic map(width => 2*bitwidth)
 		port map(
 			d => pixel,
 			reset => reset,
 			sleep_in => sleep_in,
-			--ki => ki_input_register,
 			ki => counters_ko(1),
 			sleep_out => sleep_out_d,
 			ko => ko_d,
-			--ko => ko,
 			q => pixel_a
 			);
 
@@ -203,11 +199,10 @@ begin
 				read_address => read_address (addresswidth-2 downto 0),
 				write_en => write_en,
 				standard_read_en => data1,
-				parallelism_en => data0,
+				parallelism_en => parallelism_en,
 				reset => reset,
 				ki => ki_a,
 				ko => counters_ko(1),
-				--sleep_in => sleep_in,
 				sleep_in => sleep_in_image_store_load,
 				sleep_out => sleep_out_a,
 				image_loaded => image_loaded_a,
@@ -223,16 +218,14 @@ begin
 					mem_delay => mem_delay)
 
 		port map(
-				--mem_data => pixel(2*bitwidth-1 downto bitwidth),
 				mem_data => pixel_reg(2*bitwidth-1 downto bitwidth),
 				read_address => read_address (addresswidth-2 downto 0),
 				write_en => write_en,
 				standard_read_en => data1,
-				parallelism_en => data0,
+				parallelism_en => parallelism_en,
 				reset => reset,
 				ki => ki_b,
 				ko => counters_ko(2),
-				--sleep_in => sleep_in,
 				sleep_in => sleep_in_image_store_load,
 				sleep_out => sleep_out_b,
 				image_loaded => image_loaded_b,
@@ -240,7 +233,20 @@ begin
 				z => output (2*bitwidth-1 downto bitwidth)
 		);
 
-		ki_sleep_out_control_vector(0 downto 0) <= count (addresswidth-1 downto addresswidth-1);
+
+			control <= count (addresswidth-2) & count (addresswidth-1);
+		  	switch_to_other_half: mux_nto1_gen
+			generic map(bitwidth => 1,
+			numInputs => 2)
+ 			port map(
+	    		a => control,
+	    		sel => parallelism_en_vector(0 downto 0),
+	    		sleep => '0',
+    			z => ki_sleep_out_control_vector(0 downto 0));	
+
+    			parallelism_en_vector (0).RAIL0 <= parallelism_en.RAIL0;
+    			parallelism_en_vector (0).RAIL1 <= parallelism_en.RAIL1;
+		--ki_sleep_out_control_vector(0 downto 0) <= count (addresswidth-1 downto addresswidth-1);
 		image_store_load_instance_a_sleep_in : MUX21_A 
 		port map(
 			A => sleep_out_d, 

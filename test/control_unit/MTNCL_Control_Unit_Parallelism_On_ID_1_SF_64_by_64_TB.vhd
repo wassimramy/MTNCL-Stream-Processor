@@ -10,7 +10,7 @@ use IEEE.std_logic_unsigned.all;
 use ieee.math_real.all;
 use ieee.numeric_std.all;
 
-entity MTNCL_Control_Unit_parallelism_on_sf_64_by_64_TB is
+entity MTNCL_Control_Unit_parallelism_on_ID_1_sf_64_by_64_TB is
 generic(
 					bitwidth 				: in integer := 8; 
 					addresswidth		: in integer := 12; 
@@ -20,11 +20,11 @@ generic(
 					shadeBitwidth 	: in integer := 12; 
 					numberOfPixels	: in integer := 4096;
 					size 						: in integer := 64; 
-					opCodeBitwidth 	: in integer := 3
+					opCodeBitwidth 	: in integer := 4
 );
-end  MTNCL_Control_Unit_parallelism_on_sf_64_by_64_TB;
+end  MTNCL_Control_Unit_parallelism_on_ID_1_sf_64_by_64_TB;
 
-architecture tb_arch of  MTNCL_Control_Unit_parallelism_on_sf_64_by_64_TB is
+architecture tb_arch of  MTNCL_Control_Unit_parallelism_on_ID_1_sf_64_by_64_TB is
 
   component MTNCL_Control_Unit is
     generic(
@@ -35,7 +35,7 @@ architecture tb_arch of  MTNCL_Control_Unit_parallelism_on_sf_64_by_64_TB is
 					numberOfShades	: in integer := 256; 
 					shadeBitwidth 	: in integer := 12; 
 					numberOfPixels	: in integer := 4096; 
-					opCodeBitwidth 	: in integer := 3
+					opCodeBitwidth 	: in integer := 4
     );
     
     port(
@@ -57,8 +57,8 @@ architecture tb_arch of  MTNCL_Control_Unit_parallelism_on_sf_64_by_64_TB is
 	type matlab_memoryData is array(0 to (size+2)*(size+2)) of std_logic_vector(bitwidth-1 downto 0);
 	signal matlab_memData : matlab_memoryData;
 
-	file output_smoothed_image_64_by_64_binary      : text open write_mode is "../test/output_files/parallelism_on/output_smoothed_image_64_by_64_binary.txt";
-	file output_smoothed_image_64_by_64      				: text open write_mode is "../test/output_files/parallelism_on/output_smoothed_image_64_by_64.txt";
+	file output_smoothed_image_64_by_64_binary      : text open write_mode is "../test/output_files/parallelism_on/output_ID_1_smoothed_image_64_by_64_binary.txt";
+	file output_smoothed_image_64_by_64      				: text open write_mode is "../test/output_files/parallelism_on/output_ID_1_smoothed_image_64_by_64.txt";
 
   signal opCode_signal: dual_rail_logic_vector(opCodeBitwidth-1 downto 0);
   signal input_signal: dual_rail_logic_vector(bitwidth-1 downto 0);
@@ -123,7 +123,7 @@ begin
 
 	-- Get the image(s)
 	file_open(image_64_by_64,		 					"../test/input_files/image_test_64_by_64_clean_binary",				 						read_mode); -- Input image
-	file_open(smoothed_image_64_by_64,	 	"../test/input_files/parallelism_on/self_smoothed_image_test_64_by_64_clean_binary",			read_mode); -- Input image
+	file_open(smoothed_image_64_by_64,	 	"../test/input_files/parallelism_on/ID_1_self_smoothed_image_test_64_by_64_clean_binary",			read_mode); -- Input image
 
   -- Store the input image in an array
 	for i in 1 to size loop
@@ -135,7 +135,7 @@ begin
 	end loop;
 
 	-- Store the MatLab output image in an array
-	for i in 1 to size loop
+	for i in 1 to (size/2) loop
 		for j in 1 to size loop
 			readline(smoothed_image_64_by_64, v_ILINE);
 			read(v_ILINE, v_inval);
@@ -145,11 +145,11 @@ begin
 
 	-- Start testing
 	wait for 10 ns;
-	opCode_signal <= data_1 & data_0 & data_0;
+	opCode_signal <= data_1 & data_1 & data_0 & data_0;
   reset_signal <= '1';
 	sleepin_signal <= '1';
 
-	for i in 1 to (size/2)+1 loop
+	for i in 1 to size loop
 		for j in 1 to size loop
 
 			temp_5 <= memData((i*(size+2))+j);

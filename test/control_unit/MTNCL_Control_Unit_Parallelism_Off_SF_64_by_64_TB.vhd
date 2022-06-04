@@ -20,7 +20,7 @@ generic(
 					shadeBitwidth 	: in integer := 12; 
 					numberOfPixels	: in integer := 4096;
 					size 						: in integer := 64; 
-					opCodeBitwidth 	: in integer := 3
+					opCodeBitwidth 	: in integer := 4
 );
 end  MTNCL_Control_Unit_parallelism_off_sf_64_by_64_TB;
 
@@ -35,7 +35,7 @@ architecture tb_arch of  MTNCL_Control_Unit_parallelism_off_sf_64_by_64_TB is
 					numberOfShades	: in integer := 256; 
 					shadeBitwidth 	: in integer := 12; 
 					numberOfPixels	: in integer := 4096; 
-					opCodeBitwidth 	: in integer := 3
+					opCodeBitwidth 	: in integer := 4
     );
     
     port(
@@ -145,7 +145,7 @@ begin
 
 	-- Start testing
 	wait for 10 ns;
-	opCode_signal <= data_0 & data_0 & data_0;
+	opCode_signal <= data_0 & data_0 & data_0 & data_0;
   reset_signal <= '1';
 	sleepin_signal <= '1';
 

@@ -20,7 +20,7 @@ entity MTNCL_Control_Unit is
 				numberOfShades	: in integer := 256; 
 				shadeBitwidth 	: in integer := 12; 
 				numberOfPixels	: in integer := 4096; 
-				opCodeBitwidth 	: in integer := 3
+				opCodeBitwidth 	: in integer := 4
 
 			);
 	port(
@@ -131,7 +131,7 @@ begin
 				ki 				=> ki_SF,
 				sleep_in 		=> sleep_SF,
 				reset 			=> rst,
-				id 				=> data_0,
+				id 				=> opCode(3),
 				parallelism_en 	=> opCode(2),
 				ko 				=> ko_SF,
 				output 			=> outputSF,

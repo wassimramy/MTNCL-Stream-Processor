@@ -102,8 +102,9 @@ signal output_mux_a, output_mux_b : dual_rail_logic_vector(bitwidth-1 downto 0);
 signal output_register_input : dual_rail_logic_vector(2*bitwidth-1 downto 0);
 signal input_mux : dual_rail_logic_vector(4356*bitwidth-1 downto 0);
 
-signal input_mux_b : dual_rail_logic_vector(2*2244*bitwidth-1 downto 0);
-signal choose_pixel_b_input : dual_rail_logic_vector(2244*bitwidth-1 downto 0);
+signal input_mux_a : dual_rail_logic_vector(2*2244*bitwidth-1 downto 0);
+signal input_mux_b : dual_rail_logic_vector(4*2244*bitwidth-1 downto 0);
+signal choose_pixel_a_input, choose_pixel_b_input : dual_rail_logic_vector(2244*bitwidth-1 downto 0);
 
 signal ko_sf_core_address_gen, sleep_in_sf_core_address_gen, sleepout_sf_add_gen, sf_address_generator_done, output_reg_ko, output_reg_sleep_out, sf_core_w_reg_sleep_out, sleepout_add_select_mux_a, sleepout_add_select_mux_b, ko_add_select_mux_a, ko_add_select_mux_b : std_logic;
 signal ki_mux_input : std_logic_vector (1 downto 0);
@@ -112,9 +113,10 @@ signal ki_mux_output, ki_mux_select : std_logic_vector (0 downto 0);
 signal select_mux: dual_rail_logic_vector(addresswidth downto 0);
 signal select_mux_a, select_mux_b: dual_rail_logic_vector(addresswidth downto 0);
 signal add_select_mux_a, add_select_mux_b: dual_rail_logic_vector(2*addresswidth-1  downto 0);
-signal const_1122: dual_rail_logic_vector(addresswidth-1 downto 0);
+--signal const_1122: dual_rail_logic_vector(addresswidth-1 downto 0);
 
-signal parallelism_en_vector : dual_rail_logic_vector(0  downto 0);
+signal parallelism_en_vector_b : dual_rail_logic_vector(1  downto 0);
+signal parallelism_en_vector_a : dual_rail_logic_vector(0  downto 0);
 
 signal data0, data1 : dual_rail_logic;
 signal accRes : dual_rail_logic;
@@ -129,7 +131,7 @@ begin
 	data0.rail1 <= '0';
 
 	--const_1122 <= data0 & data1 & data0 & data0 & data0 & data1 & data1 & data0 & data0 & data0 & data1 & data0 ;
-	const_1122 <= data0 & data1 & data0 & data0 & data0 & data0 & data1 & data0 & data0 & data0 & data0 & data1 ;
+	--const_1122 <= data0 & data1 & data0 & data0 & data0 & data0 & data1 & data0 & data0 & data0 & data0 & data1 ;
 	generate_sleep_select_0 : for i in 0 to 527 generate
 		input_mux(i) <= data0;
 	end generate;
@@ -153,9 +155,9 @@ begin
 	choose_pixel_a : mux_nto1_gen
 	generic map(bitwidth => bitwidth, numInputs => 2244)
 		port map(
-			a => input_mux(2244*bitwidth-1 downto 0),
+			--a => input_mux(2244*bitwidth-1 downto 0),
+			a => choose_pixel_a_input,
 			sel => select_mux (addresswidth-1 downto 0),
-			--sel => select_mux_a (addresswidth-1 downto 0),
 			sleep => '0',
 			z => output_mux_a);	
 
@@ -181,28 +183,63 @@ begin
 				z 							=> select_mux
 		);	
 
-	--parallelism_en_vector(0).rail1 <=  parallelism_en.rail1 and id.rail0;
-	--parallelism_en_vector(0).rail0 <=  not parallelism_en_vector(0).rail1;
-
-		generate_parallelism_en_vector_rail1 : and2_a 
-		port map(
-				a => parallelism_en.rail1,
-				b => id.rail0,
-				z => parallelism_en_vector(0).rail1);
-
-	generate_parallelism_en_vector_rail0 : inv_a
+	generate_parallelism_en_vector_a_rail1 : and2_a 
 	port map(
-		a => parallelism_en_vector(0).rail1,
-		z => parallelism_en_vector(0).rail0);
+			a => parallelism_en.rail1,
+			b => id.rail1,
+			z => parallelism_en_vector_a(0).rail1);
 
-	input_mux_b <=  input_mux(1056*bitwidth-1 downto 0) & input_mux(2244*bitwidth-1 downto 1056*bitwidth) & input_mux(4356*bitwidth-1 downto 2112*bitwidth) ;
-	generate_choose_pixel_b_input : mux_nto1_gen
+	generate_parallelism_en_vector_a_rail0 : inv_a
+	port map(
+		a => parallelism_en_vector_a(0).rail1,
+		z => parallelism_en_vector_a(0).rail0);
+
+	input_mux_a <=  input_mux(4356*bitwidth-1 downto 2112*bitwidth) & input_mux(2244*bitwidth-1 downto 0) ;
+	generate_choose_pixel_a_input : mux_nto1_gen
 	generic map(bitwidth => 2244*bitwidth, numInputs => 2)
 		port map(
+			a => input_mux_a,
+			sel => parallelism_en_vector_a(0 downto 0),
+			sleep => '0',
+			z => choose_pixel_a_input);	
+
+	--generate_parallelism_en_vector_b_rail1 : and2_a 
+	--port map(
+	--		a => parallelism_en.rail1,
+	--		b => id.rail0,
+	--		z => parallelism_en_vector_b(0).rail1);
+
+	--generate_parallelism_en_vector_b_rail0 : inv_a
+	--port map(
+	--	a => parallelism_en_vector_b(0).rail1,
+	--	z => parallelism_en_vector_b(0).rail0);
+
+	parallelism_en_vector_b (1 downto 0) <= id & parallelism_en;
+	--Option 0
+	input_mux_b (1*2244*bitwidth-1 downto 0) 				<= input_mux(4356*bitwidth-1 downto 2112*bitwidth);
+	--Option 1
+	input_mux_b (2*2244*bitwidth-1 downto 1*2244*bitwidth) 	<= input_mux(1056*bitwidth-1 downto 0) & input_mux(2244*bitwidth-1 downto 1056*bitwidth);
+	--Option 2
+	input_mux_b (3*2244*bitwidth-1 downto 2*2244*bitwidth) 	<= input_mux(4356*bitwidth-1 downto 2112*bitwidth);
+	--Option 3
+	input_mux_b (4*2244*bitwidth-1 downto 3*2244*bitwidth) 	<= input_mux(3168*bitwidth-1 downto 2112*bitwidth) & input_mux(4356*bitwidth-1 downto 3168*bitwidth);
+
+	--input_mux_b <=  input_mux(1056*bitwidth-1 downto 0) & input_mux(2244*bitwidth-1 downto 1056*bitwidth) & input_mux(4356*bitwidth-1 downto 2112*bitwidth) ;
+	generate_choose_pixel_b_input : mux_nto1_gen
+	generic map(bitwidth => 2244*bitwidth, numInputs => 4)
+		port map(
 			a => input_mux_b,
-			sel => parallelism_en_vector(0 downto 0),
+			sel => parallelism_en_vector_b(1 downto 0),
 			sleep => '0',
 			z => choose_pixel_b_input);	
+
+	--generate_choose_pixel_b_input : mux_nto1_gen
+	--generic map(bitwidth => 2244*bitwidth, numInputs => 2)
+	--	port map(
+	--		a => input_mux_b,
+	--		sel => parallelism_en_vector_b(0 downto 0),
+	--		sleep => '0',
+	--		z => choose_pixel_b_input);			
 
     choose_pixel_b : mux_nto1_gen
 	generic map(bitwidth => bitwidth, numInputs => 2244)

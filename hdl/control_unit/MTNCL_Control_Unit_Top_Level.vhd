@@ -101,6 +101,8 @@ architecture arch of MTNCL_Control_Unit_Top_Level is
 	signal data_0,data_1		: dual_rail_logic;
 	signal input_main_memory: dual_rail_logic_vector(2*bitwidth-1 downto 0);
 	signal op_code_node_1, op_code_node_2: dual_rail_logic_vector(opCodeBitwidth downto 0);
+	signal parallelism_en: dual_rail_logic_vector(0 downto 0);
+	signal input_op_code: dual_rail_logic_vector(3 downto 0);
 	signal sleep_out_node_1, sleep_out_node_2, ko_node_1, ko_node_2, ko_main_memory, sleep_in_node_2: std_logic;
 
 
@@ -113,16 +115,17 @@ begin
 	data_1.RAIL0 <= '0';
 	data_1.RAIL1 <= '1';
 
-	--setting_reset_count : for i in 0 to bitwidth-1 generate
-	--	reset_count(i) <= data_1 ;
-	--end generate;
+input_op_code <= 	opCode(2) & data_0 & data_0 & opCode(2);
+generate_new_opcode: mux_nto1_gen
+			generic map(bitwidth => 1,
+			numInputs => 4)
+ 			port map(
+	    		a => input_op_code,
+	    		sel => opCode(1 downto 0),
+	    		sleep => sleep,
+    			z => parallelism_en(0 downto 0));
 
-	--setting_reset_count_plus_one : for i in 0 to shadeBitwidth-1 generate
-	--	reset_count_plus_one(i) <= data_0 ;
-	--end generate;
-	--reset_count_plus_one(shadeBitwidth) <= data_1 ;
-
-	op_code_node_1 <= data_0 & opCode(opCodeBitwidth-1 downto 0);
+	op_code_node_1 <= data_0 & parallelism_en(0) & opCode(opCodeBitwidth-2 downto 0);
  node_1_instance: MTNCL_Control_Unit
  generic map(
 						bitwidth 				=> bitwidth, 
@@ -147,7 +150,7 @@ begin
 					    sleepOut 	=> sleep_out_node_1
     );
 
-	op_code_node_2 <= data_1 & opCode(opCodeBitwidth-1 downto 0);
+	op_code_node_2 <= data_1 & parallelism_en(0) & opCode(opCodeBitwidth-2 downto 0);
  node_2_instance: MTNCL_Control_Unit
  generic map(
 						bitwidth 				=> bitwidth, 
@@ -176,7 +179,7 @@ begin
 		port map(
 			A => '1', 
 			B => sleep,
-			S => op_code_node_2(opCodeBitwidth-1).rail1,
+			S => parallelism_en(0).rail1,
 			Z => sleep_in_node_2);
 
 	main_memory_instance : MTNCL_CU_Data_Output
@@ -186,7 +189,7 @@ begin
 				pixel 					=> input_main_memory,
 				reset 					=> rst,
 				ki 							=> ki,
-				parallelism_en 	=> opCode (2),
+				parallelism_en 	=> parallelism_en(0),
 				sleep_in 				=> sleep_out_node_1,
 				ko 							=> ko_main_memory,
 				sleep_out 			=> sleepOut,

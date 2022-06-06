@@ -60,4 +60,5 @@ vcom -reportprogress 300 -work work ../hdl/storage_units/image_store.vhd
 vcom -reportprogress 300 -work work ../hdl/storage_units/image_store_load.vhd
 
 vcom -reportprogress 300 -work work ../hdl/control_unit/MTNCL_Control_Unit.vhd
-vcom -reportprogress 300 -work work ../hdl/control_unit/MTNCL_CU_W_image_store_load.vhd
+vcom -reportprogress 300 -work work ../hdl/control_unit/MTNCL_CU_Data_Output.vhd
+vcom -reportprogress 300 -work work ../hdl/control_unit/MTNCL_Control_Unit_Top_Level.vhd

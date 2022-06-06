@@ -105,7 +105,7 @@ architecture arch_MTNCL_SF_Core_Data_Output of MTNCL_SF_Core_Data_Output is
 			);
 	end component;
 
-signal ki_a, ki_b, sleep_out_a, sleep_out_b, sleep_out_c, sleep_out_d, sleep_out_e, ko_d, sleep_in_b, sleep_in_image_store_load, ki_input_register: std_logic;
+signal ki_a, ki_b, ki_a_or_load, ki_b_or_load, sleep_out_a, sleep_out_b, sleep_out_c, sleep_out_d, sleep_out_e, ko_d, sleep_in_b, sleep_in_image_store_load, ki_input_register: std_logic;
 signal data0, data1 : dual_rail_logic;
 signal image_loaded_a, image_loaded_b, image_stored_a, image_stored_b : std_logic;
 signal read_address : dual_rail_logic_vector(addresswidth-1 downto 0);
@@ -201,7 +201,8 @@ begin
 				standard_read_en => data1,
 				parallelism_en => parallelism_en,
 				reset => reset,
-				ki => ki_a,
+				--ki => ki_a,
+				ki => ki_a_or_load,
 				ko => counters_ko(1),
 				sleep_in => sleep_in_image_store_load,
 				sleep_out => sleep_out_a,
@@ -224,7 +225,8 @@ begin
 				standard_read_en => data1,
 				parallelism_en => parallelism_en,
 				reset => reset,
-				ki => ki_b,
+				--ki => ki_b,
+				ki => ki_b_or_load,
 				ko => counters_ko(2),
 				sleep_in => sleep_in_image_store_load,
 				sleep_out => sleep_out_b,
@@ -267,6 +269,20 @@ begin
 			B => ki, 
 			S => ki_sleep_out_control_vector(0).rail1,
 			Z => ki_b);
+
+		--This portion is to make sure that the counter does not reset itself
+		generate_ki_a_or_load : or2_a
+			port map(
+				a => ki_a,
+				b => image_loaded_a,
+				z => ki_a_or_load);
+
+		--This portion is to make sure that the counter does not reset itself
+		generate_ki_b_or_load : or2_a
+			port map(
+				a => ki_b,
+				b => image_loaded_b,
+				z => ki_b_or_load);		
 
 		image_store_load_instance_b_sleep : MUX21_A 
 		port map(

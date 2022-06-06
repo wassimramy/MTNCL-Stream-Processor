@@ -32,6 +32,7 @@ architecture arch_tb_sf_data_output of tb_sf_data_output is
 				pixel : in dual_rail_logic_vector(2*bitwidth-1 downto 0);
 				reset : in std_logic;
 				ki : in std_logic;
+				parallelism_en 	: in dual_rail_logic;
 				ko : out std_logic;
 				sleep_in : in std_logic;
 				sleep_out : out std_logic;
@@ -53,7 +54,7 @@ architecture arch_tb_sf_data_output of tb_sf_data_output is
 	signal pixel : dual_rail_logic_vector(2*bitwidth-1 downto 0);
 	signal z : dual_rail_logic_vector(bitwidth-1 downto 0);
 	signal temp : std_logic_vector(2*bitwidth-1 downto 0);
-	signal write_en: dual_rail_logic;
+	signal parallelism_en: dual_rail_logic;
 
 	  signal CORRECT: std_logic;
 	  signal checker : std_logic_vector(bitwidth-1 downto 0):= (others => 'U');		
@@ -68,6 +69,7 @@ begin
 				pixel => pixel,
 				reset => reset,
 				ki => ki_sig,
+				parallelism_en => parallelism_en,
 				sleep_in => sleep_in,
 				ko => ko_sig,
 				sleep_out => sleep_out,
@@ -97,8 +99,7 @@ begin
 
 		reset <= '1';
 		sleep_in <= '1';
-		write_en.RAIL0 <= '0';
-		write_en.RAIL1 <= '0';
+		parallelism_en <= to_DR('0');
 
 	for i in 0 to (size/2)-1 loop
 		for j in 0 to (size)-1 loop
@@ -113,7 +114,6 @@ begin
 				pixel(k).rail0 <= not temp(k);
 				pixel(k).rail1 <= temp(k);
 			end loop;
-			write_en <= to_DR('1');	
 			wait on ko_sig until ko_sig = '0';
 			sleep_in <= '1';
 		end loop;
@@ -129,7 +129,6 @@ begin
 				pixel(k).rail0 <= '0';
 				pixel(k).rail1 <= '0';
 			end loop;
-			write_en <= to_DR('0');
 			wait on ko_sig until ko_sig = '0';
 			sleep_in <= '1';
 	end loop;
@@ -141,7 +140,7 @@ begin
 			reset <= '0';
 			sleep_in <= '0';
 			Icheck <= memData((i*(size))+j);
-			write_en <= to_DR('0');
+			--write_en <= to_DR('0');
 			wait on ko_sig until ko_sig = '0';
 			sleep_in <= '1';
 			--Icheck <= memData((i*(size))+j);

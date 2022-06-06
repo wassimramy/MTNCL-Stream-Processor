@@ -39,27 +39,46 @@ architecture arch of MTNCL_Control_Unit_Top_Level is
 
   component MTNCL_Control_Unit is
     generic(
-					bitwidth 		: in integer := 4; 
-					addresswidth	: in integer := 12; 
-					clock_delay 	: in integer := 16; 
-					mem_delay		: in integer := 48; 
+					bitwidth 				: in integer := 4; 
+					addresswidth		: in integer := 12; 
+					clock_delay 		: in integer := 16; 
+					mem_delay				: in integer := 48; 
 					numberOfShades	: in integer := 256; 
 					shadeBitwidth 	: in integer := 12; 
 					numberOfPixels	: in integer := 4096; 
-					opCodeBitwidth 	: in integer := 2
+					opCodeBitwidth 	: in integer := 4
     );
     
     port(
 					opCode    	: in  dual_rail_logic_vector(opCodeBitwidth-1 downto 0);
-					input    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
-					ki	 		: in std_logic;
-					sleep 		: in  std_logic;
-					rst  		: in std_logic;
-					sleepOut 	: out std_logic;
-					ko 	     	: out std_logic;
-					output   	: out dual_rail_logic_vector((bitwidth)-1 downto 0)
+					input    		: in  dual_rail_logic_vector(bitwidth-1 downto 0);
+					ki	 				: in std_logic;
+					sleep 			: in  std_logic;
+					rst  				: in std_logic;
+					sleepOut 		: out std_logic;
+					ko 	     		: out std_logic;
+					output   		: out dual_rail_logic_vector((bitwidth)-1 downto 0)
       );
   end component;
+
+	component MTNCL_CU_Data_Output is
+		generic(
+			bitwidth 			: integer := bitwidth;
+			addresswidth 	: integer := addresswidth;
+			clock_delay 	: integer := clock_delay;
+			mem_delay 		: integer := mem_delay
+			);
+		port(
+				pixel : in dual_rail_logic_vector(2*bitwidth-1 downto 0);
+				reset : in std_logic;
+				ki : in std_logic;
+				parallelism_en 	: in dual_rail_logic;
+				ko : out std_logic;
+				sleep_in : in std_logic;
+				sleep_out : out std_logic;
+				z : out dual_rail_logic_vector(bitwidth-1 downto 0)
+			);
+	end component;
 
 	component MUX21_A is 
 		port(
@@ -79,20 +98,11 @@ architecture arch of MTNCL_Control_Unit_Top_Level is
 			z 		: out dual_rail_logic_vector(bitwidth-1 downto 0));
 	end component;
 
-
-
 	signal data_0,data_1		: dual_rail_logic;
-	--signal reset_count, roundedPixelRegister	: dual_rail_logic_vector(bitwidth-1 downto 0);
-	--signal reset_count_plus_one	: dual_rail_logic_vector(shadeBitwidth downto 0);
+	signal input_main_memory: dual_rail_logic_vector(2*bitwidth-1 downto 0);
+	signal op_code_node_1, op_code_node_2: dual_rail_logic_vector(opCodeBitwidth downto 0);
+	signal sleep_out_node_1, sleep_out_node_2, ko_node_1, ko_node_2, ko_main_memory, sleep_in_node_2: std_logic;
 
-	signal inputHEQMUX, inputSFMUX: dual_rail_logic_vector(2*bitwidth-1 downto 0);
-	signal globalOutput: dual_rail_logic_vector(2*bitwidth-1 downto 0);
-	signal inputHEQ, inputSF, outputSF, outputHEQ: dual_rail_logic_vector(bitwidth-1 downto 0);
-	signal sleep_SF, sleep_HEQ, sleepOut_HEQ, sleepOut_SF: std_logic;
-	signal ki_SF, ki_HEQ, ko_HEQ, ko_SF: std_logic;
-	signal sleep_global_00, sleep_global_01: std_logic;
-	signal ko_global_00, ko_global_01: std_logic;
-	signal ki_xor: std_logic;
 
 begin
 
@@ -112,7 +122,7 @@ begin
 	--end generate;
 	--reset_count_plus_one(shadeBitwidth) <= data_1 ;
 
-
+	op_code_node_1 <= data_0 & opCode(opCodeBitwidth-1 downto 0);
  node_1_instance: MTNCL_Control_Unit
  generic map(
 						bitwidth 				=> bitwidth, 
@@ -122,20 +132,22 @@ begin
 						numberOfShades 	=> numberOfShades,  
 						shadeBitwidth 	=> shadeBitwidth, 
 						numberOfPixels 	=> numberOfPixels, 
-						opCodeBitwidth 	=> opCodeBitwidth-1
+						opCodeBitwidth 	=> opCodeBitwidth+1
 						)
 
   port map(
-					    opCode 		=> opCode(opCodeBitwidth-2 downto 0),
+					    opCode 		=> op_code_node_1,
 					    input 		=> input,
-					    ki 				=> ki_node_1,
-					    sleep 		=> sleep_in_node_1,
-					    rst 			=> reset,
-					    ko 				=> ko_node_1,
-					    output 		=> output_node_1,
+					    ki 				=> ko_main_memory,
+					    sleep 		=> sleep,
+					    rst 			=> rst,
+					    --ko 				=> ko_node_1,
+					    ko 				=> ko,
+					    output 		=> input_main_memory (bitwidth-1 downto 0),
 					    sleepOut 	=> sleep_out_node_1
     );
 
+	op_code_node_2 <= data_1 & opCode(opCodeBitwidth-1 downto 0);
  node_2_instance: MTNCL_Control_Unit
  generic map(
 						bitwidth 				=> bitwidth, 
@@ -145,70 +157,40 @@ begin
 						numberOfShades 	=> numberOfShades,  
 						shadeBitwidth 	=> shadeBitwidth, 
 						numberOfPixels 	=> numberOfPixels, 
-						opCodeBitwidth 	=> opCodeBitwidth-1
+						opCodeBitwidth 	=> opCodeBitwidth+1
 						)
 
   port map(
-					    opCode 		=> opCode(opCodeBitwidth-2 downto 0),
+					    opCode 		=> op_code_node_2,
 					    input 		=> input,
-					    ki 				=> ki_node_2,
+					    ki 				=> ko_main_memory,
 					    sleep 		=> sleep_in_node_2,
-					    rst 			=> reset,
+					    rst 			=> rst,
 					    ko 				=> ko_node_2,
-					    output 		=> output_node_2,
+					    output 		=> input_main_memory (2*bitwidth-1 downto bitwidth),
 					    sleepOut 	=> sleep_out_node_2
     );
 
-	--Generate sleep_in_node_1
-	generate_sleep_in_node_1 : MUX21_A 
-		port map(
-			A => sleep, 
-			B => '1',
-			S => opCode(2).RAIL1,
-			Z => sleep_in_node_1);
-
-	--Generate sleep_in_node_2
+	--Generate sleep_node_2
 	generate_sleep_in_node_2 : MUX21_A 
 		port map(
 			A => '1', 
 			B => sleep,
-			S => opCode(2).RAIL1,
+			S => op_code_node_2(opCodeBitwidth-1).rail1,
 			Z => sleep_in_node_2);
 
-	--Generate ko
-	generate_global_ko : MUX21_A 
+	main_memory_instance : MTNCL_CU_Data_Output
+		generic map(bitwidth => bitwidth,
+					addresswidth => addresswidth)
 		port map(
-			A => ko_node_1, 
-			B => ko_node_2,
-			S => opCode(2).RAIL1,
-			Z => ko);
-
-	--Generate sleep_out
-	generate_global_sleep_out : MUX21_A 
-		port map(
-			A => sleep_out_node_1,
-			B => sleep_out_node_2,
-			S => opCode(2).RAIL1,
-			Z => sleepOut);
-
-	--Generate ki_HEQ
-	--HEQ_ki : MUX21_A 
-	--	port map(
-	--		A => ki,
-	--		B => ko_SF,
-	--		S => opCode(0).RAIL1,
-	--		Z => ki_HEQ);
-
-	--Generate Global output
-	globalOutput <= output_node_2 & output_node_1;
-  	global_output: mux_nto1_gen
-	generic map(bitwidth => bitwidth,
-		numInputs => 2)
- 	port map(
-    		a =>globalOutput,
-    		sel => opCode(2 downto 2),
-    		sleep => '0',
-    		z => output);
-
+				pixel 					=> input_main_memory,
+				reset 					=> rst,
+				ki 							=> ki,
+				parallelism_en 	=> opCode (2),
+				sleep_in 				=> sleep_out_node_1,
+				ko 							=> ko_main_memory,
+				sleep_out 			=> sleepOut,
+				z 							=> output
+	);
 
 end arch;

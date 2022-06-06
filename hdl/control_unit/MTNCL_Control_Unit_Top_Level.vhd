@@ -122,7 +122,7 @@ generate_new_opcode: mux_nto1_gen
  			port map(
 	    		a => input_op_code,
 	    		sel => opCode(1 downto 0),
-	    		sleep => sleep,
+	    		sleep => '0',
     			z => parallelism_en(0 downto 0));
 
 	op_code_node_1 <= data_0 & parallelism_en(0) & opCode(opCodeBitwidth-2 downto 0);

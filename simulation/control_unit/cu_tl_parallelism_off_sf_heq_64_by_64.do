@@ -5,4 +5,4 @@ vsim -voptargs=+acc work.MTNCL_Control_Unit_Top_Level_Parallelism_Off_SF_HEQ_64_
 add wave -position end  sim:/MTNCL_Control_Unit_Top_Level_Parallelism_Off_SF_HEQ_64_by_64_TB/*
 add wave -position end  sim:/MTNCL_Control_Unit_Top_Level_Parallelism_Off_SF_HEQ_64_by_64_TB/UUT/*
 add wave -position end  sim:/MTNCL_Control_Unit_Top_Level_Parallelism_Off_SF_HEQ_64_by_64_TB/UUT/main_memory_instance/*
-run 1806 us
+run 1808 us

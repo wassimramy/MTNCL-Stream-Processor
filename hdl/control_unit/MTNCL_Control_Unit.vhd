@@ -96,7 +96,15 @@ architecture arch of MTNCL_Control_Unit is
 			z 		: out dual_rail_logic_vector(bitwidth-1 downto 0));
 	end component;
 
-
+component mux_nto1_sr_gen is
+	generic(
+		bitwidth: integer := 4;
+		numInputs : integer := 4);
+    		port(
+			a: in std_logic_vector((numInputs*bitwidth)-1 downto 0);
+			sel: in std_logic_vector(integer(ceil(log2(real(numInputs))))-1 downto 0);
+			z: out std_logic_vector(bitwidth-1 downto 0));
+	end component;
 
 	signal data_0,data_1		: dual_rail_logic;
 
@@ -109,6 +117,9 @@ architecture arch of MTNCL_Control_Unit is
 	signal ko_global_00, ko_global_01: std_logic;
 	signal ki_xor: std_logic;
 
+	signal choose_ki_HEQ_output : std_logic_vector (0 downto 0);
+	signal choose_ki_HEQ_input : std_logic_vector (3 downto 0);
+	signal choose_ki_HEQ_select : std_logic_vector (1 downto 0);
 begin
 
 	--set data_0 & data_1 for padding
@@ -213,13 +224,23 @@ begin
 			S => opCode(0).RAIL1,
 			Z => sleep_HEQ);
 
-	--Generate ki_HEQ
-	HEQ_ki : MUX21_A 
+	choose_ki_HEQ_input <= ko_SF & ki & ki & '1';
+	choose_ki_HEQ_select <= opCode(1).RAIL1 & opCode(0).RAIL1;
+	choose_ki_HEQ : mux_nto1_sr_gen
+	generic map(bitwidth => 1, numInputs => 4)
 		port map(
-			A => ki,
-			B => ko_SF,
-			S => opCode(0).RAIL1,
-			Z => ki_HEQ);
+			a => choose_ki_HEQ_input,
+			sel => choose_ki_HEQ_select,
+			z => choose_ki_HEQ_output);	
+
+			ki_HEQ <= choose_ki_HEQ_output(0);
+	--Generate ki_HEQ
+	--HEQ_ki : MUX21_A 
+	--	port map(
+	--		A => ki,
+	--		B => ko_SF,
+	--		S => opCode(0).RAIL1,
+	--		Z => ki_HEQ);
 
 	--Generate Global output
 	globalOutput <= outputSF & outputHEQ & outputHEQ & outputSF;

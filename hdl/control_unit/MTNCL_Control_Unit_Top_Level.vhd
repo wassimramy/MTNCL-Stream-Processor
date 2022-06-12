@@ -31,7 +31,7 @@ entity MTNCL_Control_Unit_Top_Level is
 				rst  			: in std_logic;
 				sleepOut 	: out std_logic;
 				ko 	     	: out std_logic;
-				output   	: out dual_rail_logic_vector(bitwidth-1 downto 0)
+				output   	: out dual_rail_logic_vector(2*bitwidth-1 downto 0)
 	);
 end;
 
@@ -78,7 +78,7 @@ architecture arch of MTNCL_Control_Unit_Top_Level is
 				sleep_in_node_1 : in std_logic;
 				sleep_in_node_2 : in std_logic;
 				sleep_out : out std_logic;
-				z : out dual_rail_logic_vector(bitwidth-1 downto 0)
+				z : out dual_rail_logic_vector(2*bitwidth-1 downto 0)
 			);
 	end component;
 

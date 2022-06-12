@@ -22,7 +22,7 @@ entity MTNCL_CU_Data_Output is
 		ko_node_1 		: out std_logic;
 		ko_node_2 		: out std_logic;
 		sleep_out 		: out std_logic;
-		z 				: out dual_rail_logic_vector(bitwidth-1 downto 0)
+		z 				: out dual_rail_logic_vector(2*bitwidth-1 downto 0)
 	);
 end MTNCL_CU_Data_Output;
 
@@ -122,14 +122,20 @@ component th22d_a is
 		output   	: out dual_rail_logic_vector(bitwidth-1 downto 0)      );
   end component;
 
-signal ki_single_core_input, sleep_out_single_core_input, ko_single_core_input, ki_main_memory, sleep_out_main_memory, ko_main_memory, pre_ko, pre_ko_node_1  : std_logic;
+signal ki_single_core_input, sleep_out_single_core_input, ko_single_core_input, ki_main_memory, sleep_out_main_memory, ko_main_memory, pre_ko, pre_ko_node_1, pre_ko_node_2  : std_logic;
 signal ko_counter, sleep_out_counter, global_sleep_in, ko_1, sleep_out_1 : std_logic;
+signal ko_output_registers_2P, ko_output_registers_non_2P, sleep_out_output_registers_2P, sleep_out_output_registers_non_2P : std_logic;
+
 signal pixel_a, pixel_b : dual_rail_logic_vector(bitwidth-1 downto 0);
+signal pixel_output_registers_non_2P, pixel_output_registers_2P, double_pixel_a : dual_rail_logic_vector(2*bitwidth-1 downto 0);
+signal input_output_2P_registers : dual_rail_logic_vector(4*bitwidth-1 downto 0);
 
-signal const_8192, count : dual_rail_logic_vector(addresswidth+1 downto 0);
 
-signal input_mux : dual_rail_logic_vector(3 downto 0);
+signal const_4096, count : dual_rail_logic_vector(addresswidth downto 0);
+
+signal input_mux : dual_rail_logic_vector(1 downto 0);
 signal parallelism_en_vector : dual_rail_logic_vector(1 downto 0);
+
 signal data0, data1 : dual_rail_logic;
 signal accRes : dual_rail_logic;
 begin 
@@ -141,27 +147,23 @@ begin
 	data0.rail0 <= '1';
 	data0.rail1 <= '0';
 
---parallelism_en_vector(0) <= parallelism_en;
-
---Generate reset_count depending on the number of words
-	--Generate 8192 (4096*2)
-	generate_8192 : for i in 0 to addresswidth generate
-		const_8192(i) <= data0;
+	--Generate 4096
+	generate_4096 : for i in 0 to addresswidth-1 generate
+		const_4096(i) <= data0;
 	end generate;
-	const_8192(addresswidth+1) <= data1;
+	const_4096(addresswidth) <= data1;
 
-		input_mux <= count(12 downto 12) & count(12 downto 12) & count(addresswidth-1 downto addresswidth-1) & data0;
+
+		input_mux <= count(addresswidth-1 downto addresswidth-1) & data0;
 		global_input_mux: mux_nto1_gen
 			generic map(bitwidth => 1,
-			numInputs => 4)
+			numInputs => 2)
  			port map(
 	    		a => input_mux ,
-	    		sel => parallelism_en(1 downto 0),
+	    		sel => parallelism_en(0 downto 0),
 	    		sleep => '0',
-    			z => parallelism_en_vector(0 downto 0));
+    			z => parallelism_en_vector(1 downto 1));
 
-    parallelism_en_vector(1).rail0 <= parallelism_en_vector(0).rail0;
-	parallelism_en_vector(1).rail1 <= '1' and parallelism_en_vector(0).rail1;
 	generate_global_sleep_in : MUX21_A 
 		port map(
 			A => sleep_in_node_1, 
@@ -170,8 +172,8 @@ begin
 			Z => global_sleep_in);
 
 	MUX_select_generate : counter_selfReset
-		generic map(width => addresswidth+2)
-		port map(reset_count => const_8192,
+		generic map(width => addresswidth+1)
+		port map(reset_count => const_4096,
 			sleep_in => global_sleep_in,
 		 	reset => reset,
 		 	ko => ko_counter,
@@ -190,43 +192,76 @@ begin
     			z => pixel_a);
 
 	
-	single_core_input: regs_gen_null_res_w_compm
-		generic map(width => bitwidth)
+		double_pixel_a <= pixel_a & pixel_a;
+		output_registers_non_2P_mux : regs_gen_null_res_w_compm
+		generic map(width => 2*bitwidth)
 		port map(
-			d => pixel_a (bitwidth-1 downto 0),
+			d => double_pixel_a,
 			reset => reset,
 			sleep_in => global_sleep_in,
 			ki => ki,
-			sleep_out => sleep_out,
-			ko => ko_single_core_input,
-			q => z
+			sleep_out => sleep_out_output_registers_non_2P,
+			ko => ko_output_registers_non_2P,
+			q => pixel_output_registers_non_2P
 			);
 
-	th22d_instance : th22d_a
-		port map(
-			a => ko_counter,
-			b => ko_single_core_input,
-			rst => reset,
-			z => pre_ko);
 		
-		global_ko_node_1 : MUX21_A 
+		generate_pre_ko_node_1 : MUX21_A 
 		port map(
-			A => pre_ko,
-			--A => ko_counter,
+			A => ko_counter,
 			B => '1',
 			S => parallelism_en_vector(1).rail1,
-			Z => ko_node_1);
+			Z => pre_ko_node_1);
 
-			--ko_node_1 <= '1' and pre_ko_node_1;
-		global_ko_node_2 : MUX21_A 
+		generate_pre_ko_node_2 : MUX21_A 
 		port map(
 			A => '1',
-			B => pre_ko,
-			--B => ko_counter,
+			B => ko_counter,
 			S => parallelism_en_vector(1).rail1,
-			Z => ko_node_2);
-			
+			Z => pre_ko_node_2);
 
-		  	
+		generate_ko_node_1 : MUX21_A 
+		port map(
+			A => pre_ko_node_1,
+			B => ko_output_registers_2P,
+			S => parallelism_en(1).rail1,
+			Z => ko_node_1);
+
+		generate_ko_node_2 : MUX21_A 
+		port map(
+			A => pre_ko_node_2,
+			B => ko_output_registers_2P,
+			S => parallelism_en(1).rail1,
+			Z => ko_node_2);	
+			
+		
+		output_2P_registers : regs_gen_null_res_w_compm
+		generic map(width => 2*bitwidth)
+		port map(
+			d => pixel,
+			reset => reset,
+			sleep_in => sleep_in_node_1,
+			ki => ki,
+			sleep_out => sleep_out_output_registers_2P,
+			ko => ko_output_registers_2P,
+			q => pixel_output_registers_2P
+			);  	
+
+			input_output_2P_registers <= pixel_output_registers_2P & pixel_output_registers_non_2P;
+			global_output_mux: mux_nto1_gen
+			generic map(bitwidth => 2*bitwidth,
+			numInputs => 2)
+ 			port map(
+	    		a => input_output_2P_registers ,
+	    		sel => parallelism_en(1 downto 1),
+	    		sleep => '0',
+    			z => z);
+
+    		global_sleep_out : MUX21_A 
+			port map(
+			A => sleep_out_output_registers_non_2P,
+			B => sleep_out_output_registers_2P,
+			S => parallelism_en(1).rail1,
+			Z => sleep_out);	
 
 end arch_MTNCL_CU_Data_Output; 

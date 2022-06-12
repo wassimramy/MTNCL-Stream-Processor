@@ -67,13 +67,13 @@ architecture tb_arch of  MTNCL_Control_Unit_Top_Level_2P_on_heq_64_by_64_TB is
   signal ki_signal: std_logic := '1';
   signal sleepin_signal: std_logic;
   signal sleepout_signal: std_logic;
-  signal S_signal: dual_rail_logic_vector(bitwidth-1 downto 0);
+  signal S_signal: dual_rail_logic_vector(2*bitwidth-1 downto 0);
 
   signal temp_5: std_logic_vector(bitwidth-1 downto 0);	
   signal CORRECT: std_logic;
 
-  signal checker : std_logic_vector(bitwidth-1 downto 0):= (others => 'U');		
-  signal Icheck : std_logic_vector(bitwidth-1 downto 0);
+  signal checker : std_logic_vector(2*bitwidth-1 downto 0):= (others => 'U');		
+  signal Icheck : std_logic_vector(2*bitwidth-1 downto 0);
 
 	signal null_a : dual_rail_logic_vector(bitwidth-1 downto 0);
   signal data_0,data_1		: dual_rail_logic;
@@ -173,14 +173,7 @@ begin
 	for i in 1 to size loop
 		for j in 1 to size loop
 			wait on ki_signal until ki_signal = '0';
-			Icheck <= matlab_memData_0((i*(size+2))+j);
-		end loop;
-	end loop;
-
-	for i in 1 to size loop
-		for j in 1 to size loop
-			wait on ki_signal until ki_signal = '0';
-			Icheck <= matlab_memData_1((i*(size+2))+j);
+			Icheck <= matlab_memData_1((i*(size+2))+j) & matlab_memData_0((i*(size+2))+j);
 		end loop;
 	end loop;
 
@@ -197,7 +190,7 @@ begin
   end if;
 
 	if is_data(S_signal) then
-		for i in 0 to bitwidth-1 loop			
+		for i in 0 to 2*bitwidth-1 loop			
 			checker(i) <= S_signal(i).rail1;
 		end loop;
 		if checker = Icheck then

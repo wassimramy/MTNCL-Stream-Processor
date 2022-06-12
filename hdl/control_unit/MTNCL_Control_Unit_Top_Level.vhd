@@ -116,7 +116,7 @@ component mux_nto1_sr_gen is
 	signal parallelism_en: dual_rail_logic_vector(1 downto 0);
 	signal input_parallelism_en_nodes: dual_rail_logic_vector(1 downto 0);
 	signal parallelism_en_nodes: dual_rail_logic_vector(0 downto 0);
-	signal input_op_code: dual_rail_logic_vector(3 downto 0);
+	signal input_op_code, input_op_code_0: dual_rail_logic_vector(3 downto 0);
 	signal sleep_out_node_1, sleep_out_node_2, ko_node_1, ko_node_2, ko_main_memory_1, ko_main_memory_2: std_logic;
 	signal sleep_in_node_2_mux: std_logic_vector (3 downto 0);
 	signal sleep_in_node_2_select: std_logic_vector (1 downto 0);
@@ -132,9 +132,22 @@ begin
 	data_1.RAIL0 <= '0';
 	data_1.RAIL1 <= '1';
 
-parallelism_en(1) <= opCode (3);
+	--opCode (1 downto 0) ==> Operation
+	--opCode (2 downto 2) ==> Parallelism Enable
+	--opCode (3 downto 3) ==> 2P Enable
+
+input_op_code_0 <= 	data_0 & opCode (3) & opCode(3) & opCode (3);
+generate_parallelism_en_1: mux_nto1_gen
+			generic map(bitwidth => 1,
+			numInputs => 4)
+ 			port map(
+	    		a => input_op_code_0,
+	    		sel => opCode(3 downto 2),
+	    		sleep => '0',
+    			z => parallelism_en(1 downto 1));
+
 input_op_code <= 	opCode(2) & data_0 & data_0 & opCode(2);
-generate_new_opcode: mux_nto1_gen
+generate_parallelism_en_0: mux_nto1_gen
 			generic map(bitwidth => 1,
 			numInputs => 4)
  			port map(
@@ -210,14 +223,6 @@ generate_input_node_2: mux_nto1_gen
 					    output 		=> input_main_memory (2*bitwidth-1 downto bitwidth),
 					    sleepOut 	=> sleep_out_node_2
     );
-
-	--Generate sleep_node_2
-	--generate_sleep_in_node_2 : MUX21_A 
-	--	port map(
-	--		A => '1', 
-	--		B => sleep,
-	--		S => parallelism_en(0).rail1,
-	--		Z => sleep_in_node_2);
 
 	sleep_in_node_2_select(0) <=parallelism_en(0).rail1;
 	sleep_in_node_2_select(1) <=parallelism_en(1).rail1;

@@ -3,3 +3,5 @@ simulation/work/
 *.qpg
 *.qtl
 simulation/
+simulation/work/_lib.qdb
+simulation/work/_info

@@ -112,7 +112,7 @@ component mux_nto1_sr_gen is
 
 	signal data_0,data_1		: dual_rail_logic;
 	signal input_main_memory: dual_rail_logic_vector(2*bitwidth-1 downto 0);
-	signal op_code_node_1, op_code_node_2: dual_rail_logic_vector(opCodeBitwidth downto 0);
+	signal op_code_node_1, op_code_node_2: dual_rail_logic_vector(opCodeBitwidth-1 downto 0);
 	signal parallelism_en: dual_rail_logic_vector(1 downto 0);
 	signal input_parallelism_en_nodes: dual_rail_logic_vector(1 downto 0);
 	signal parallelism_en_nodes: dual_rail_logic_vector(0 downto 0);
@@ -166,7 +166,7 @@ generate_parallelism_en_nodes: mux_nto1_gen
 	    		sleep => '0',
     			z => parallelism_en_nodes(0 downto 0));    			
 
-	op_code_node_1 <= data_0 & parallelism_en_nodes(0) & opCode(opCodeBitwidth-2 downto 0);
+	op_code_node_1 <= data_0 & parallelism_en_nodes(0) & opCode(1 downto 0);
  node_1_instance: MTNCL_Control_Unit
  generic map(
 						bitwidth 				=> bitwidth, 
@@ -176,7 +176,7 @@ generate_parallelism_en_nodes: mux_nto1_gen
 						numberOfShades 	=> numberOfShades,  
 						shadeBitwidth 	=> shadeBitwidth, 
 						numberOfPixels 	=> numberOfPixels, 
-						opCodeBitwidth 	=> opCodeBitwidth+1
+						opCodeBitwidth 	=> opCodeBitwidth
 						)
 
   port map(
@@ -200,7 +200,7 @@ generate_input_node_2: mux_nto1_gen
 	    		sleep => '0',
     			z => input_node_2);
 
-	op_code_node_2 <= data_1 & parallelism_en_nodes(0) & opCode(opCodeBitwidth-2 downto 0);
+	op_code_node_2 <= data_1 & parallelism_en_nodes(0) & opCode(1 downto 0);
  node_2_instance: MTNCL_Control_Unit
  generic map(
 						bitwidth 				=> bitwidth, 
@@ -210,7 +210,7 @@ generate_input_node_2: mux_nto1_gen
 						numberOfShades 	=> numberOfShades,  
 						shadeBitwidth 	=> shadeBitwidth, 
 						numberOfPixels 	=> numberOfPixels, 
-						opCodeBitwidth 	=> opCodeBitwidth+1
+						opCodeBitwidth 	=> opCodeBitwidth
 						)
 
   port map(

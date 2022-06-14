@@ -52,10 +52,10 @@ architecture tb_arch of  MTNCL_Control_Unit_Top_Level_parallelism_on_heq_sf_64_b
 
   --Updated the file names
 	file image_64_by_64, equalized_smoothed_image_64_by_64 : text;
-	type memoryData is array(0 to (size+2)*(size+2)) of std_logic_vector(bitwidth-1 downto 0);
+	type memoryData is array(0 to (size)*(size)) of std_logic_vector(2*bitwidth-1 downto 0);
 	signal memData : memoryData;
-	type matlab_memoryData is array(0 to (size+2)*(size+2)) of std_logic_vector(bitwidth-1 downto 0);
-	signal matlab_memData_0, matlab_memData_1 : matlab_memoryData;
+	type matlab_memoryData is array(0 to (size)*(size)) of std_logic_vector(2*bitwidth-1 downto 0);
+	signal matlab_memData: matlab_memoryData;
 
 	file output_equalized_smoothed_image_64_by_64_binary      : text open write_mode is "../test/output_files/output_equalized_smoothed_image_64_by_64_binary.txt";
 	file output_equalized_smoothed_image_64_by_64      				: text open write_mode is "../test/output_files/output_equalized_smoothed_image_64_by_64.txt";
@@ -69,7 +69,7 @@ architecture tb_arch of  MTNCL_Control_Unit_Top_Level_parallelism_on_heq_sf_64_b
   signal sleepout_signal: std_logic;
   signal S_signal: dual_rail_logic_vector(2*bitwidth-1 downto 0);
 
-  signal temp_5: std_logic_vector(bitwidth-1 downto 0);	
+  signal temp_5: std_logic_vector(2*bitwidth-1 downto 0);	
   signal CORRECT: std_logic;
 
   signal checker : std_logic_vector(2*bitwidth-1 downto 0):= (others => 'U');		
@@ -111,7 +111,7 @@ architecture tb_arch of  MTNCL_Control_Unit_Top_Level_parallelism_on_heq_sf_64_b
  
   signal_tb: process
 	variable v_ILINE : line;
-	variable v_inval : std_logic_vector(bitwidth-1 downto 0);
+	variable v_inval : std_logic_vector(2*bitwidth-1 downto 0);
 
 begin
 	--set data_0 & data_1 for padding
@@ -126,21 +126,20 @@ begin
 	file_open(equalized_smoothed_image_64_by_64,	 	"../test/input_files/self_smoothed_equalized_image_test_64_by_64_clean_binary",			read_mode); -- Input image
 
   -- Store the input image in an array
-	for i in 1 to size loop
-		for j in 1 to size loop
+	for i in 0 to size-1 loop
+		for j in 0 to size-1 loop
 			readline(image_64_by_64, v_ILINE);
 			read(v_ILINE, v_inval);
-			memData((i*(size+2))+j) <= v_inval;
+			memData((i*(size))+j) <= v_inval;
 		end loop;
 	end loop;
 
 	-- Store the MatLab output image in an array
-	for i in 1 to size loop
-		for j in 1 to size loop
+	for i in 0 to size-1 loop
+		for j in 0 to size-1 loop
 			readline(equalized_smoothed_image_64_by_64, v_ILINE);
 			read(v_ILINE, v_inval);
-			matlab_memData_0((i*(size+2))+j) <= v_inval;
-			matlab_memData_1((i*(size+2))+j) <= v_inval;
+			matlab_memData((i*(size))+j) <= v_inval;
 		end loop;
 	end loop;
 
@@ -150,19 +149,17 @@ begin
   reset_signal <= '1';
 	sleepin_signal <= '1';
 
-	for i in 1 to size loop
-		for j in 1 to size loop
+	for i in 0 to size-1 loop
+		for j in 0 to size-1 loop
 
-			temp_5 <= memData((i*(size+2))+j);
+			temp_5 <= memData((i*(size))+j);
 
 			wait on ko_signal until ko_signal = '1';
 			reset_signal <= '0';
 			sleepin_signal <= '0';
-			for k in 0 to bitwidth-1 loop
+			for k in 0 to 2*bitwidth-1 loop
 				input_signal(k).rail0 <= not temp_5(k);
 				input_signal(k).rail1 <= temp_5(k);
-				input_signal(k+bitwidth).rail0 <= not temp_5(k);
-				input_signal(k+bitwidth).rail1 <= temp_5(k);
 			end loop;
 			
 			wait on ko_signal until ko_signal = '0';
@@ -170,10 +167,10 @@ begin
 		end loop;
 	end loop;
 	
-	for i in 1 to size loop
-		for j in 1 to size loop
+	for i in 0 to size-1 loop
+		for j in 0 to size-1 loop
 			wait on ki_signal until ki_signal = '0';
-			Icheck <= matlab_memData_1((i*(size+2))+j) & matlab_memData_0((i*(size+2))+j);
+			Icheck <= matlab_memData((i*(size))+j) (bitwidth-1 downto 0) & matlab_memData((i*(size))+j) (bitwidth-1 downto 0);
 		end loop;
 	end loop;
 

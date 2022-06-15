@@ -160,8 +160,6 @@ begin
 	--dual rail 134
 	count(18*(addresswidth+1)-1 downto 17*(addresswidth+1)) <= data0 & data0 & data0 & data0 & data0 & data1 & data0 & data0 & data0 & data0 & data1 & data1 & data0;
 	--reset count is set to 4221
-	--const_4221 <= data1 & data0 & data0 & data0 & data0 & data0 & data1 & data1 & data1 & data1 & data1 & data0 & data1;
-	--const_2109 <= data0 & data1 & data0 & data0 & data0 & data0 & data0 & data1 & data1 & data1 & data1 & data0 & data1;
 	const_2110 <= data0 & data1 & data0 & data0 & data0 & data0 & data0 & data1 & data1 & data1 & data1 & data1 & data0;
 	const_1055 <= data0 & data0 & data1 & data0 & data0 & data0 & data0 & data0 & data1 & data1 & data1 & data1 & data1;
 
@@ -188,7 +186,6 @@ begin
 	generic map(width => addresswidth+1)
 		port map(
 			reset_count => reset_count,
-			--reset_count => const_2110,
 			sleep_in => sleep_in,
 		 	reset => reset,
 		 	ki => ki_mux_select(0),

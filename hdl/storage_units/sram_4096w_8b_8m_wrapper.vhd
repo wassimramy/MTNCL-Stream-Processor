@@ -178,9 +178,13 @@ end generate;
 		port map(a => all_dr_inputs_reg(0).rail1,
 			z => WEN);
 
+	check_if_addresswidth_10: if addresswidth = 10 generate
+		adj_address_sr <= '0' & '0' & address_sr;
+	end generate;
+
 	check_if_addresswidth_11: if addresswidth = 11 generate
 		adj_address_sr <= '0' & address_sr;
-		end generate;
+	end generate;
 
 	check_if_addresswidth_12: if addresswidth = 12 generate
 		adj_address_sr <= address_sr;

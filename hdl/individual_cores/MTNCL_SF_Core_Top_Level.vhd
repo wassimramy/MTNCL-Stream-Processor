@@ -10,6 +10,7 @@ entity MTNCL_SF_Core_Top_Level is
 	generic(
 		bitwidth : integer := 8;
 		addresswidth : integer := 12;
+		sf_cores : integer := 2;
 		clock_delay : integer := 16;		--ADD DELAY FOR INCREASED SETUP TIMES
 		mem_delay : integer := 48);		--ADD DELAY FOR INCREASED MEMORY DELAY
 	port(
@@ -31,6 +32,7 @@ architecture arch_MTNCL_SF_Core_Top_Level of MTNCL_SF_Core_Top_Level is
 	component MTNCL_SF_Core_Data_Loader is
 		generic(
 			bitwidth 		: integer := bitwidth;
+			sf_cores 		: integer := sf_cores;
 			addresswidth 	: integer := addresswidth);
 		port(
 
@@ -42,19 +44,20 @@ architecture arch_MTNCL_SF_Core_Top_Level of MTNCL_SF_Core_Top_Level is
 			ko 				: out std_logic;
 			sleep_in 		: in std_logic;
 			sleep_out 		: out std_logic;
-			z 				: out dual_rail_logic_vector(2*bitwidth-1 downto 0)
+			z 				: out dual_rail_logic_vector(sf_cores*bitwidth-1 downto 0)
 			);
 	end component;
 
 	component MTNCL_SF_Core_Data_Output is
 		generic(
 			bitwidth : integer := bitwidth;
+			sf_cores : integer := sf_cores;
 			addresswidth : integer := addresswidth;
 			clock_delay : integer := clock_delay;
 			mem_delay : integer := mem_delay);
 			
 		port(
-				pixel : in dual_rail_logic_vector(2*bitwidth-1 downto 0);
+				pixel : in dual_rail_logic_vector(sf_cores*bitwidth-1 downto 0);
 				reset : in std_logic;
 				ki : in std_logic;
 				parallelism_en 	: in dual_rail_logic;
@@ -111,12 +114,13 @@ architecture arch_MTNCL_SF_Core_Top_Level of MTNCL_SF_Core_Top_Level is
 	end component;
 
 
-signal pixel : dual_rail_logic_vector(2*bitwidth-1 downto 0);
-signal ko_data_loader, sleepout_data_loader, sleep_out_a, sleep_out_b, sleep_out_c, ko_sf_core_w_reg, ko_sf_core_w_reg_a, ko_sf_core_w_reg_b : std_logic;
+signal pixel : dual_rail_logic_vector(sf_cores*bitwidth-1 downto 0);
+signal input_sf_core : dual_rail_logic_vector(sf_cores*bitwidth-1 downto 0);
+
+signal ko_data_loader, sleepout_data_loader: std_logic;
 signal output_image_store_load : dual_rail_logic_vector(bitwidth-1 downto 0);
-signal input_sf_core : dual_rail_logic_vector(2*bitwidth-1 downto 0);
 signal ko_pixels_a: std_logic; 
-signal tree_input: std_logic_vector (1 downto 0);
+signal ko_sf_cores, sleep_out_sf_cores: std_logic_vector (sf_cores downto 0);
 
 
 begin 
@@ -125,13 +129,14 @@ begin
 
 	sf_data_loader_instance : MTNCL_SF_Core_Data_Loader
 	generic map(
-				addresswidth => addresswidth,
-				bitwidth => bitwidth)
+				addresswidth 	=> addresswidth,
+				sf_Cores 		=> sf_cores,
+				bitwidth 		=> bitwidth)
 
 	port map(
 			pixel => input,
 			reset => reset,
-			ki => ko_sf_core_w_reg,
+			ki => ko_sf_cores (sf_cores),
 			id => id,
 			parallelism_en => parallelism_en,
 			ko => ko_data_loader,
@@ -140,41 +145,40 @@ begin
 			z => input_sf_core
 	);
 
-	tree_input <= ko_sf_core_w_reg_a & ko_sf_core_w_reg_b;
-	th22d_counter_tree : th22d_tree_gen
-	generic map(numInputs => 2 )
+	th22d_ko_sf_cores : th22d_tree_gen
+	generic map(numInputs => sf_cores )
 	port map(
-		a => tree_input,
+		a => ko_sf_cores (sf_cores-1 downto 0),
 		rst => reset,
-		z => ko_sf_core_w_reg
+		z => ko_sf_cores (sf_cores)
 	);
 
-    sf_core_w_reg_instance_a: MTNCL_SF_Node_W_Registers
- 	generic map(bitwidth => bitwidth)
-  	port map(
-		    input => input_sf_core(bitwidth-1 downto 0),
+	generate_sf_cores : for i in 0 to sf_cores-1 generate
+		sf_core_w_reg_instance_i: MTNCL_SF_Node_W_Registers
+ 		generic map(bitwidth => bitwidth)
+  		port map(
+		    input => input_sf_core((i+1)*bitwidth-1 downto i*bitwidth),
 		    ki => ko_pixels_a,
 		    sleep => sleepout_data_loader,
 		    rst => reset,
-		    ko => ko_sf_core_w_reg_a,
-		    output => pixel(bitwidth-1 downto 0),
-		    sleepOut => sleep_out_a
+		    ko => ko_sf_cores (i),
+		    output => pixel((i+1)*bitwidth-1 downto i*bitwidth),
+		    sleepOut => sleep_out_sf_cores (i)
     );
+	end generate;
 
-	sf_core_w_reg_instance_b: MTNCL_SF_Node_W_Registers
- 	generic map(bitwidth => bitwidth)
-  	port map(
-			    input => input_sf_core(2*bitwidth-1 downto bitwidth),
-			    ki => ko_pixels_a,
-			    sleep => sleepout_data_loader,
-			    rst => reset,
-			    ko => ko_sf_core_w_reg_b,
-			    output => pixel(2*bitwidth-1 downto bitwidth),
-			    sleepOut => sleep_out_b
-    );
+	th22d_sleep_out_sf_cores : th22d_tree_gen
+	generic map(numInputs => sf_cores )
+	port map(
+		a => sleep_out_sf_cores (sf_cores-1 downto 0),
+		rst => reset,
+		z => sleep_out_sf_cores (sf_cores)
+	);
 
 	sf_core_data_output : MTNCL_SF_Core_Data_Output
-		generic map(bitwidth => bitwidth,
+		generic map(
+					bitwidth => bitwidth,
+					sf_cores => sf_cores,
 					addresswidth => addresswidth)
 		port map(
 				pixel => pixel,
@@ -187,11 +191,5 @@ begin
 				z => output
 	);
 
-    generate_global_sleep_out : th22_a
-	port map(
-		a => sleep_out_a,
-		b => sleep_out_b,
-		z => sleep_out_c
-	);
 
 end arch_MTNCL_SF_Core_Top_Level; 

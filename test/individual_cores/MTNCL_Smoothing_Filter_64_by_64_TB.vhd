@@ -14,6 +14,7 @@ entity MTNCL_Smoothing_Filter_TB is
 generic(
 			bitwidth : integer := 8;
 			addresswidth : integer := 12;
+			sf_cores : integer := 2;
 			numberOfPixels : integer := 4096;
 			size: in integer := 64;
 			clock_delay : integer := 16;
@@ -26,12 +27,15 @@ architecture tb_arch of MTNCL_Smoothing_Filter_TB is
     generic(
     					bitwidth: in integer := 4; 
     					addresswidth: in integer := 12; 
+    					sf_cores: in integer := 2;
     					clock_delay: in integer := 16; 
     					mem_delay: in integer := 48);
     port(
 					input : in dual_rail_logic_vector(bitwidth-1 downto 0);
 					reset : in std_logic;
 					ki : in std_logic;
+					id 	: in dual_rail_logic;
+					parallelism_en 	: in dual_rail_logic;
 					ko : out std_logic;
 					sleep_in : in std_logic;
 					sleep_out : out std_logic;
@@ -41,9 +45,9 @@ architecture tb_arch of MTNCL_Smoothing_Filter_TB is
 
   --Updated the file names
 	file image_64_by_64, smoothed_image_64_by_64, image_64_by_64_check : text;
-	type memoryData is array(0 to (size+2)*(size+2)) of std_logic_vector(bitwidth-1 downto 0);
+	type memoryData is array(0 to (size)*(size)) of std_logic_vector(bitwidth-1 downto 0);
 	signal memData : memoryData;
-	type matlab_memoryData is array(0 to (size+2)*(size+2)) of std_logic_vector(bitwidth-1 downto 0);
+	type matlab_memoryData is array(0 to (size)*(size)) of std_logic_vector(bitwidth-1 downto 0);
 	signal matlab_memData : matlab_memoryData;
 
 	file output_smoothed_image_64_by_64_binary      : text open write_mode is "../test/output_files/output_smoothed_image_64_by_64_binary.txt";
@@ -51,6 +55,7 @@ architecture tb_arch of MTNCL_Smoothing_Filter_TB is
 
 
   signal pixel: dual_rail_logic_vector(bitwidth-1 downto 0);
+  signal id, parallelism_en: dual_rail_logic;
   signal reset: std_logic;
   signal ko_sig: std_logic;
   signal ki_sig: std_logic;
@@ -69,12 +74,15 @@ architecture tb_arch of MTNCL_Smoothing_Filter_TB is
   uut: MTNCL_SF_Core_Top_Level
  generic map(
  							bitwidth => bitwidth, 
- 							addresswidth => addresswidth,  
+ 							addresswidth => addresswidth, 
+ 							sf_cores => sf_cores,
  							clock_delay => clock_delay, 
  							mem_delay => mem_delay)
   port map(
 					    input => pixel,
 					    reset => reset,
+					    id => id,
+					    parallelism_en => parallelism_en,
 					    ki => ki_sig,
 					    ko => ko_sig,
 					    sleep_in => sleep_in,
@@ -92,46 +100,40 @@ variable v_inval : std_logic_vector(bitwidth-1 downto 0);
     
 
 	-- Get the image(s)
-	file_open(image_64_by_64,		 "../test/input_files/image_test_64_by_64_clean_binary",				 read_mode); -- Input image
-	file_open(smoothed_image_64_by_64,	 "../test/input_files/smoothed_image_test_64_by_64_clean_binary",			 read_mode); -- Input image
+	file_open(image_64_by_64,		 "../test/input_files_lena/image_test_64_by_64_clean_binary",				 read_mode); -- Input image
+	file_open(smoothed_image_64_by_64,	 "../test/input_files_lena/self_smoothed_image_test_64_by_64_clean_binary",			 read_mode); -- Input image
 
   	-- Store the input image in an array
-	for i in 1 to size loop
-		for j in 1 to size loop
+	for i in 0 to size-1 loop
+		for j in 0 to size-1 loop
 			readline(image_64_by_64, v_ILINE);
 			read(v_ILINE, v_inval);
-			memData((i*(size+2))+j) <= v_inval;
+			memData((i*(size))+j) <= v_inval;
 		end loop;
 	end loop;
 
 	-- Store the MatLab output image in an array
-	for i in 1 to size loop
-		for j in 1 to size loop
+	for i in 0 to size-1 loop
+		for j in 0 to size-1 loop
 			readline(smoothed_image_64_by_64, v_ILINE);
 			read(v_ILINE, v_inval);
-			matlab_memData((i*(size+2))+j) <= v_inval;
+			matlab_memData((i*(size))+j) <= v_inval;
 		end loop;
 	end loop;
 
 	-- Start testing
 	wait for 10 ns;
 
-	for i in 0 to size+1 loop
-		memData((i*(size+2))+0) <= "00000000";
-		memData((i*(size+2))+(size+1)) <= "00000000";
-	end loop;
-
-	for i in 1 to size loop
-		memData(i) <= "00000000";
-		memData((size+2)*(size+1)+i) <= "00000000";
-	end loop;
-
 				wait for 10 ns;
         reset <= '1';
 				sleep_in <= '1';
+				parallelism_en.rail0 <= '1';
+				parallelism_en.rail1 <= '0';
+				id.rail0 <= '1';
+				id.rail1 <= '0';
 
-	for i in 1 to (size) loop
-		for j in 1 to (size) loop
+	for i in 0 to (size-1) loop
+		for j in 0 to (size-1) loop
 
 			temp(bitwidth-1 downto 0) <= memData((i*(size))+j);
 
@@ -147,26 +149,12 @@ variable v_inval : std_logic_vector(bitwidth-1 downto 0);
 		end loop;
 	end loop;
 
-	for i in 0 to 0 loop
-			wait on ko_sig until ko_sig = '1';
-			reset <= '0';
-			sleep_in <= '0';
-			for k in 0 to bitwidth-1 loop
-				pixel(k).rail0 <= '0';
-				pixel(k).rail1 <= '0';
-			end loop;
-			wait on ko_sig until ko_sig = '0';
-			sleep_in <= '1';
-	end loop;
+	sleep_in <= '0';
 
-	for i in 1 to size loop
-		for j in 1 to size loop
-			wait on ko_sig until ko_sig = '1';
-			reset <= '0';
-			sleep_in <= '0';
-			Icheck <= memData((i*(size))+j);
-			wait on ko_sig until ko_sig = '0';
-			sleep_in <= '1';
+	for i in 0 to size-1 loop
+		for j in 0 to size-1 loop
+			wait on ki_sig until ki_sig = '0';
+			Icheck <= matlab_memData((i*(size))+j);
 		end loop;
 	end loop;
 
@@ -174,31 +162,29 @@ variable v_inval : std_logic_vector(bitwidth-1 downto 0);
       end process;
 
         
-        process(z)
-          begin
-            if is_null(z) then
-              ki_sig <= '1';
-            elsif is_data(z) then
-              ki_sig <= '0';
-            end if;
 
-						if is_data(z) then
-							for i in 0 to bitwidth-1 loop			
-								checker(i) <= z(i).rail1;
-							end loop;
-						end if;
-        end process;
+	process(z)
+begin
+  if is_null(z) then
+    ki_sig <= '1';
+  elsif is_data(z) then
+    ki_sig <= '0';
+  end if;
 
-	process( checker)
-	begin
-			if checker = Icheck then
-				report "correct";
-				CORRECT <= '1';
-			else
-				report "incorrect";
-				CORRECT <= '0';
-			end if;
-	end process;
+	if is_data(z) then
+		for i in 0 to bitwidth-1 loop			
+			checker(i) <= z(i).rail1;
+		end loop;
+		if checker = Icheck then
+			report "correct";
+			CORRECT <= '1';
+		else
+			report "incorrect";
+			CORRECT <= '0';
+		end if;
+	end if;
+end process;
+
 
 process(ki_sig)
 	variable row          : line;

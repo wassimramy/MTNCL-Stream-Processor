@@ -9,6 +9,7 @@ use ieee.math_real.all;
 entity MTNCL_SF_Core_Data_Loader is
 	generic(
 		bitwidth 		: integer := 8;
+		sf_cores 		: integer := 2;
 		addresswidth 	: integer := 12);
 	port(
 		pixel 			: in dual_rail_logic_vector(bitwidth-1 downto 0);
@@ -19,7 +20,7 @@ entity MTNCL_SF_Core_Data_Loader is
 		ko 				: out std_logic;
 		sleep_in 		: in std_logic;
 		sleep_out 		: out std_logic;
-		z 				: out dual_rail_logic_vector(2*bitwidth-1 downto 0)
+		z 				: out dual_rail_logic_vector(sf_cores*bitwidth-1 downto 0)
 	);
 end MTNCL_SF_Core_Data_Loader;
 
@@ -43,20 +44,21 @@ architecture arch_MTNCL_SF_Core_Data_Loader of MTNCL_SF_Core_Data_Loader is
 
 	component MTNCL_SF_Core_Address_Gen_w_MUX is
 	generic(
-			bitwidth : integer := bitwidth;
-			addresswidth : integer := addresswidth);
+			bitwidth 		: integer := bitwidth;
+			sf_cores 		: integer := sf_cores;
+			addresswidth 	: integer := addresswidth);
 			
 	port(
 
-			input : in dual_rail_logic_vector(4096*bitwidth-1 downto 0);
-			reset : in std_logic;
-			ki : in std_logic;
+			input 			: in dual_rail_logic_vector(4096*bitwidth-1 downto 0);
+			reset 			: in std_logic;
+			ki 				: in std_logic;
 			id 				: in dual_rail_logic;
 			parallelism_en 	: in dual_rail_logic;
-			sleep_in : in std_logic;
-			ko : out std_logic;
-			sleep_out : out std_logic;
-			z : out dual_rail_logic_vector(2*bitwidth-1 downto 0));
+			sleep_in 		: in std_logic;
+			ko 				: out std_logic;
+			sleep_out 		: out std_logic;
+			z 				: out dual_rail_logic_vector(sf_cores*bitwidth-1 downto 0));
 	end component;
 
 signal output_reg : dual_rail_logic_vector(4096*bitwidth-1 downto 0);
@@ -90,7 +92,9 @@ begin
 			);
 
 		sf_address_gen_w_mux_instance : MTNCL_SF_Core_Address_Gen_w_MUX
-		generic map(bitwidth => bitwidth,
+		generic map(
+					bitwidth => bitwidth,
+					--sf_cores => sf_cores,
 					addresswidth => addresswidth)
 		port map(
 				input => output_reg,

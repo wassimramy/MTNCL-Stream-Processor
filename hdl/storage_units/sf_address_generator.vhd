@@ -7,13 +7,14 @@ use work.ncl_signals.all;
 use ieee.math_real.all;
 
 entity sf_address_generator is
-	generic(bitwidth : integer := 8;
+	generic(
+		bitwidth : integer := 8;
+		sf_cores : integer := 2;
 		addresswidth : integer := 12);
 	port(
 		reset : in std_logic;
 		ki : in std_logic;
 		sleep_in : in std_logic;
-		id 				: in dual_rail_logic;
 		parallelism_en 	: in dual_rail_logic;
 		ko : out std_logic;
 		sleep_out : out std_logic;
@@ -109,7 +110,7 @@ architecture arch_sf_address_generator of sf_address_generator is
 			 z: out std_logic); 
 	end component; 
 
-signal reset_count, const_2110, const_1055 : dual_rail_logic_vector(addresswidth downto 0);
+signal reset_count, const_2110, const_1054, const_526 : dual_rail_logic_vector(addresswidth downto 0);
 signal reset_count_mux_input : dual_rail_logic_vector(2*addresswidth+2-1 downto 0);
 signal data0, data1: dual_rail_logic;
 
@@ -161,7 +162,16 @@ begin
 	count(18*(addresswidth+1)-1 downto 17*(addresswidth+1)) <= data0 & data0 & data0 & data0 & data0 & data1 & data0 & data0 & data0 & data0 & data1 & data1 & data0;
 	--reset count is set to 4221
 	const_2110 <= data0 & data1 & data0 & data0 & data0 & data0 & data0 & data1 & data1 & data1 & data1 & data1 & data0;
-	const_1055 <= data0 & data0 & data1 & data0 & data0 & data0 & data0 & data0 & data1 & data1 & data1 & data1 & data1;
+	const_1054 <= data0 & data0 & data1 & data0 & data0 & data0 & data0 & data0 & data1 & data1 & data1 & data1 & data0;
+	const_526  <= data0 & data0 & data0 & data1 & data0 & data0 & data0 & data0 & data0 & data1 & data1 & data1 & data0;
+
+	check_if_sf_cores_2: if sf_cores = 2 generate
+		reset_count_mux_input <= const_1054 & const_2110;
+	end generate;
+
+	check_if_sf_cores_4: if sf_cores = 4 generate
+		reset_count_mux_input <= const_526 & const_1054;
+	end generate;
 
 	sf_address_generator_done <= sf_address_generator_done_temp;
 	generate_sf_address_generator_done : th12nm_a
@@ -172,7 +182,7 @@ begin
 			z => sf_address_generator_done_temp);
 
 
-	reset_count_mux_input <= const_1055 & const_2110;
+	--reset_count_mux_input <= const_1054 & const_2110;
 	parallelism_en_vector(0) <= parallelism_en;
 	choose_reset_count : mux_nto1_gen
 	generic map(bitwidth => addresswidth+1, numInputs => 2)

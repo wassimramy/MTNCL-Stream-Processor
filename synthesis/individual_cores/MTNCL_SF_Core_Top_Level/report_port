@@ -1,0 +1,90 @@
+Warning: Design 'MTNCL_SF_Core_Top_Level' has '141' unresolved references. For more detailed information, use the "link" command. (UID-341)
+ 
+****************************************
+Report : port
+Design : MTNCL_SF_Core_Top_Level
+Version: S-2021.06-SP2
+Date   : Sat Jun 18 04:07:54 2022
+****************************************
+
+
+                       Pin      Wire     Max     Max     Connection
+Port           Dir     Load     Load     Trans   Cap     Class      Attrs
+--------------------------------------------------------------------------------
+id[RAIL0]      in      0.0000   0.0000   --      --      --         
+id[RAIL1]      in      0.0000   0.0000   --      --      --         
+input[0][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+input[0][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+input[1][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+input[1][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+input[2][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+input[2][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+input[3][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+input[3][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+input[4][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+input[4][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+input[5][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+input[5][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+input[6][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+input[6][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+input[7][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+input[7][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+ki             in      0.0000   0.0000   --      --      --         
+parallelism_en[RAIL0]
+               in      0.0000   0.0000   --      --      --         
+parallelism_en[RAIL1]
+               in      0.0000   0.0000   --      --      --         
+reset          in      0.0000   0.0000   --      --      --         
+sleep_in       in      0.0000   0.0000   --      --      --         
+ko             out     0.0000   0.0000   --      --      --         
+output[0][RAIL0]
+               out     0.0000   0.0000   --      --      --         
+output[0][RAIL1]
+               out     0.0000   0.0000   --      --      --         
+output[1][RAIL0]
+               out     0.0000   0.0000   --      --      --         
+output[1][RAIL1]
+               out     0.0000   0.0000   --      --      --         
+output[2][RAIL0]
+               out     0.0000   0.0000   --      --      --         
+output[2][RAIL1]
+               out     0.0000   0.0000   --      --      --         
+output[3][RAIL0]
+               out     0.0000   0.0000   --      --      --         
+output[3][RAIL1]
+               out     0.0000   0.0000   --      --      --         
+output[4][RAIL0]
+               out     0.0000   0.0000   --      --      --         
+output[4][RAIL1]
+               out     0.0000   0.0000   --      --      --         
+output[5][RAIL0]
+               out     0.0000   0.0000   --      --      --         
+output[5][RAIL1]
+               out     0.0000   0.0000   --      --      --         
+output[6][RAIL0]
+               out     0.0000   0.0000   --      --      --         
+output[6][RAIL1]
+               out     0.0000   0.0000   --      --      --         
+output[7][RAIL0]
+               out     0.0000   0.0000   --      --      --         
+output[7][RAIL1]
+               out     0.0000   0.0000   --      --      --         
+sleep_out      out     0.0000   0.0000   --      --      --         
+
+1

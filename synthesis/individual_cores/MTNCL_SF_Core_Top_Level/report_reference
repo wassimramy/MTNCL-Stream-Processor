@@ -1,0 +1,46 @@
+Warning: Design 'MTNCL_SF_Core_Top_Level' has '141' unresolved references. For more detailed information, use the "link" command. (UID-341)
+ 
+****************************************
+Report : reference
+Design : MTNCL_SF_Core_Top_Level
+Version: S-2021.06-SP2
+Date   : Sat Jun 18 04:07:55 2022
+****************************************
+
+Attributes:
+    b - black box (unknown)
+   bo - allows boundary optimization
+    d - dont_touch
+   mo - map_only
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    s - synthetic operator
+    u - contains unmapped logic
+
+Reference          Library       Unit Area   Count    Total Area   Attributes
+-----------------------------------------------------------------------------
+BUFFER_C                          0.000000       5      0.000000  b
+and2_a                            0.000000      45      0.000000  b
+inv_a                             0.000000    4262      0.000000  b
+or2_a                             0.000000      39      0.000000  b
+sram_4096w_8b_8m_wrapper          0.000000       2      0.000000  b
+th12dm_a                          0.000000     118      0.000000  b
+th12m_a                           0.000000    2078      0.000000  b
+th12nm_a                          0.000000   66919      0.000000  b
+th13m_a                           0.000000    4101      0.000000  b
+th14m_a                           0.000000   12346      0.000000  b
+th22_a                            0.000000       5      0.000000  b
+th22d_a                           0.000000      27      0.000000  b
+th22m_a                           0.000000   65979      0.000000  b
+th22n_a                           0.000000     113      0.000000  b
+th23m_a                           0.000000     736      0.000000  b
+th23w2m_a                         0.000000    4114      0.000000  b
+th24compm_a                       0.000000     834      0.000000  b
+th33m_a                           0.000000    4137      0.000000  b
+th34w2m_a                         0.000000     736      0.000000  b
+th44m_a                           0.000000   12554      0.000000  b
+thxor0m_a                         0.000000  224878      0.000000  b
+-----------------------------------------------------------------------------
+Total 21 references                                     0.000000
+1

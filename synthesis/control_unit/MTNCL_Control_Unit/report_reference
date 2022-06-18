@@ -1,0 +1,49 @@
+Warning: Design 'MTNCL_Control_Unit' has '208' unresolved references. For more detailed information, use the "link" command. (UID-341)
+ 
+****************************************
+Report : reference
+Design : MTNCL_Control_Unit
+Version: S-2021.06-SP2
+Date   : Sat Jun 18 03:52:18 2022
+****************************************
+
+Attributes:
+    b - black box (unknown)
+   bo - allows boundary optimization
+    d - dont_touch
+   mo - map_only
+    h - hierarchical
+    n - noncombinational
+    r - removable
+    s - synthetic operator
+    u - contains unmapped logic
+
+Reference          Library       Unit Area   Count    Total Area   Attributes
+-----------------------------------------------------------------------------
+BUFFER_A                          0.000000      69      0.000000  b
+BUFFER_C                          0.000000       6      0.000000  b
+and2_a                            0.000000      95      0.000000  b
+inv_a                             0.000000    5622      0.000000  b
+or2_a                             0.000000      63      0.000000  b
+or3_a                             0.000000       1      0.000000  b
+sram_4096w_8b_8m                  0.000000       1      0.000000  b
+sram_4096w_8b_8m_wrapper          0.000000       2      0.000000  b
+th12dm_a                          0.000000    3525      0.000000  b
+th12m_a                           0.000000   17637      0.000000  b
+th12nm_a                          0.000000  107365      0.000000  b
+th13m_a                           0.000000    4101      0.000000  b
+th14m_a                           0.000000   13386      0.000000  b
+th22_a                            0.000000       7      0.000000  b
+th22d_a                           0.000000     802      0.000000  b
+th22m_a                           0.000000   74306      0.000000  b
+th22n_a                           0.000000    1177      0.000000  b
+th23m_a                           0.000000    6506      0.000000  b
+th23w2m_a                         0.000000    4370      0.000000  b
+th24compm_a                       0.000000   12846      0.000000  b
+th33m_a                           0.000000    4147      0.000000  b
+th34w2m_a                         0.000000    6506      0.000000  b
+th44m_a                           0.000000   17577      0.000000  b
+thxor0m_a                         0.000000  235972      0.000000  b
+-----------------------------------------------------------------------------
+Total 24 references                                     0.000000
+1

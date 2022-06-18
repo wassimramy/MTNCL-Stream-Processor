@@ -36,6 +36,13 @@ vcom -reportprogress 300 -work work ../hdl/OAAT/OAAT_out_all_in.vhd
 vcom -reportprogress 300 -work work ../hdl/MTNCL_treecomps.vhd
 vcom -reportprogress 300 -work work ../hdl/MUX21_A_GATEIMPLEMENTATION.vhd
 
+vlog -reportprogress 300 -work work ../hdl/storage_units/sram_4096w_8b_8m.v
+vcom -reportprogress 300 -work work ../hdl/storage_units/sram_4096w_8b_8m_wrapper.vhd
+vcom -reportprogress 300 -work work ../hdl/storage_units/standard_address_generator.vhd
+vcom -reportprogress 300 -work work ../hdl/storage_units/sf_address_generator.vhd
+vcom -reportprogress 300 -work work ../hdl/storage_units/image_store.vhd
+vcom -reportprogress 300 -work work ../hdl/storage_units/image_store_load.vhd
+
 vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_RCA_GEN.vhd
 vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_RCA_TREE_GEN.vhd
 vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_Rounding_Checker.vhd
@@ -51,13 +58,6 @@ vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_Shade_Counter.
 vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_Shade_Calculator.vhd
 vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_Image_Reconstructor.vhd
 vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_Histogram_Equalization.vhd
-
-vlog -reportprogress 300 -work work ../hdl/storage_units/sram_4096w_8b_8m.v
-vcom -reportprogress 300 -work work ../hdl/storage_units/sram_4096w_8b_8m_wrapper.vhd
-vcom -reportprogress 300 -work work ../hdl/storage_units/standard_address_generator.vhd
-vcom -reportprogress 300 -work work ../hdl/storage_units/sf_address_generator.vhd
-vcom -reportprogress 300 -work work ../hdl/storage_units/image_store.vhd
-vcom -reportprogress 300 -work work ../hdl/storage_units/image_store_load.vhd
 
 vcom -reportprogress 300 -work work ../hdl/control_unit/MTNCL_Control_Unit.vhd
 vcom -reportprogress 300 -work work ../hdl/control_unit/MTNCL_CU_Data_Output.vhd

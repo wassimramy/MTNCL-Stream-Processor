@@ -6,13 +6,14 @@
 
 Library IEEE;
 use IEEE.std_logic_1164.all;
+use ieee.std_logic_arith.all;
 use IEEE.numeric_std.all;
 use work.MTNCL_gates.all;
 use work.ncl_signals.all;
 use ieee.math_real.all;
 
 entity MTNCL_Shade_Counter is
-generic(bitwidth: in integer := 4; numberOfShades: in integer := 256; shadeBitwidth: in integer := 12);
+generic(bitwidth: in integer := 8; numberOfShades: in integer := 256; shadeBitwidth: in integer := 12);
 	port(
 		input    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
 		ki	 	: in std_logic;
@@ -108,7 +109,8 @@ architecture arch of MTNCL_Shade_Counter is
 	signal inputReg	: dual_rail_logic_vector(bitwidth-1 downto 0);
 	signal data_0,data_1		: dual_rail_logic;
 	signal sleep_1, ko_1, ko_2, ko_3: std_logic;
-	signal decoder_output	: dual_rail_logic_vector(numberOfShades-1 downto 0);
+	--signal decoder_output	: dual_rail_logic_vector(numberOfShades-1 downto 0);
+	signal decoder_output	: dual_rail_logic_vector(2**bitwidth-1 downto 0);
 	signal counters_sleep_out, counters_ko: std_logic_vector (numberOfShades-1 downto 0);
 
 	signal reset_count, global_count: dual_rail_logic_vector (shadeBitwidth downto 0);

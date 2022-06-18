@@ -13,7 +13,7 @@ use ieee.math_real.all;
 
 entity MTNCL_Histogram_Equalization is
 generic(
-					bitwidth: in integer := 4; 
+					bitwidth: in integer := 8; 
 					addresswidth: in integer := 12; 
 					clock_delay: in integer := 12; 
 					mem_delay: in integer := 12; 

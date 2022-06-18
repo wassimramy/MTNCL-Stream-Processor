@@ -5,3 +5,11 @@ simulation/work/
 simulation/
 simulation/work/_lib.qdb
 simulation/work/_info
+synthesis/individual_cores/MTNCL_SF_Core_Top_Level/MTNCL_SF_Core_Top_Level.v
+synthesis/individual_cores/MTNCL_SF_Core_Top_Level/MTNCL_SF_Core_Top_Level_lines.v
+synthesis/control_unit/MTNCL_Control_Unit/MTNCL_Control_Unit.v
+synthesis/control_unit/MTNCL_Control_Unit/MTNCL_Control_Unit_lines.v
+synthesis/control_unit/MTNCL_Control_Unit_Top_Level/MTNCL_Control_Unit_Top_Level.v
+synthesis/control_unit/MTNCL_Control_Unit_Top_Level/report_cell
+synthesis/control_unit/MTNCL_Control_Unit_Top_Level/report_net
+synthesis/control_unit/MTNCL_Control_Unit_Top_Level/MTNCL_Control_Unit_Top_Level_lines.v

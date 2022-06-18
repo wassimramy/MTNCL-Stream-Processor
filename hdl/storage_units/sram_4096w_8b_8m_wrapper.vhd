@@ -179,11 +179,11 @@ end generate;
 			z => WEN);
 
 	check_if_addresswidth_11: if addresswidth = 11 generate
-		adj_address_sr <= '0' & address_sr;
+		adj_address_sr(11 downto 0) <= '0' & address_sr(10 downto 0);
 		end generate;
 
 	check_if_addresswidth_12: if addresswidth = 12 generate
-		adj_address_sr <= address_sr;
+		adj_address_sr(11 downto 0) <= address_sr(11 downto 0);
 	end generate;
 
 --SRAM instantiation

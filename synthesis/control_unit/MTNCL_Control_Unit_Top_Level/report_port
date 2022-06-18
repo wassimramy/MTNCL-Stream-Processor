@@ -1,0 +1,164 @@
+Warning: Design 'MTNCL_Control_Unit_Top_Level' has '209' unresolved references. For more detailed information, use the "link" command. (UID-341)
+ 
+****************************************
+Report : port
+Design : MTNCL_Control_Unit_Top_Level
+Version: S-2021.06-SP2
+Date   : Sat Jun 18 04:29:57 2022
+****************************************
+
+
+                       Pin      Wire     Max     Max     Connection
+Port           Dir     Load     Load     Trans   Cap     Class      Attrs
+--------------------------------------------------------------------------------
+input[0][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+input[0][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+input[1][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+input[1][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+input[2][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+input[2][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+input[3][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+input[3][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+input[4][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+input[4][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+input[5][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+input[5][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+input[6][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+input[6][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+input[7][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+input[7][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+input[8][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+input[8][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+input[9][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+input[9][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+input[10][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+input[10][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+input[11][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+input[11][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+input[12][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+input[12][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+input[13][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+input[13][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+input[14][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+input[14][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+input[15][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+input[15][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+ki             in      0.0000   0.0000   --      --      --         
+opCode[0][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+opCode[0][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+opCode[1][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+opCode[1][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+opCode[2][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+opCode[2][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+opCode[3][RAIL0]
+               in      0.0000   0.0000   --      --      --         
+opCode[3][RAIL1]
+               in      0.0000   0.0000   --      --      --         
+rst            in      0.0000   0.0000   --      --      --         
+sleep          in      0.0000   0.0000   --      --      --         
+ko             out     0.0000   0.0000   --      --      --         
+output[0][RAIL0]
+               out     0.0000   0.0000   --      --      --         
+output[0][RAIL1]
+               out     0.0000   0.0000   --      --      --         
+output[1][RAIL0]
+               out     0.0000   0.0000   --      --      --         
+output[1][RAIL1]
+               out     0.0000   0.0000   --      --      --         
+output[2][RAIL0]
+               out     0.0000   0.0000   --      --      --         
+output[2][RAIL1]
+               out     0.0000   0.0000   --      --      --         
+output[3][RAIL0]
+               out     0.0000   0.0000   --      --      --         
+output[3][RAIL1]
+               out     0.0000   0.0000   --      --      --         
+output[4][RAIL0]
+               out     0.0000   0.0000   --      --      --         
+output[4][RAIL1]
+               out     0.0000   0.0000   --      --      --         
+output[5][RAIL0]
+               out     0.0000   0.0000   --      --      --         
+output[5][RAIL1]
+               out     0.0000   0.0000   --      --      --         
+output[6][RAIL0]
+               out     0.0000   0.0000   --      --      --         
+output[6][RAIL1]
+               out     0.0000   0.0000   --      --      --         
+output[7][RAIL0]
+               out     0.0000   0.0000   --      --      --         
+output[7][RAIL1]
+               out     0.0000   0.0000   --      --      --         
+output[8][RAIL0]
+               out     0.0000   0.0000   --      --      --         
+output[8][RAIL1]
+               out     0.0000   0.0000   --      --      --         
+output[9][RAIL0]
+               out     0.0000   0.0000   --      --      --         
+output[9][RAIL1]
+               out     0.0000   0.0000   --      --      --         
+output[10][RAIL0]
+               out     0.0000   0.0000   --      --      --         
+output[10][RAIL1]
+               out     0.0000   0.0000   --      --      --         
+output[11][RAIL0]
+               out     0.0000   0.0000   --      --      --         
+output[11][RAIL1]
+               out     0.0000   0.0000   --      --      --         
+output[12][RAIL0]
+               out     0.0000   0.0000   --      --      --         
+output[12][RAIL1]
+               out     0.0000   0.0000   --      --      --         
+output[13][RAIL0]
+               out     0.0000   0.0000   --      --      --         
+output[13][RAIL1]
+               out     0.0000   0.0000   --      --      --         
+output[14][RAIL0]
+               out     0.0000   0.0000   --      --      --         
+output[14][RAIL1]
+               out     0.0000   0.0000   --      --      --         
+output[15][RAIL0]
+               out     0.0000   0.0000   --      --      --         
+output[15][RAIL1]
+               out     0.0000   0.0000   --      --      --         
+sleepOut       out     0.0000   0.0000   --      --      --         
+
+1

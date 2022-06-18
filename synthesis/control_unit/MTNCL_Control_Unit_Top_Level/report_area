@@ -1,0 +1,33 @@
+Warning: Design 'MTNCL_Control_Unit_Top_Level' has '209' unresolved references. For more detailed information, use the "link" command. (UID-341)
+ 
+****************************************
+Report : area
+Design : MTNCL_Control_Unit_Top_Level
+Version: S-2021.06-SP2
+Date   : Sat Jun 18 04:29:57 2022
+****************************************
+
+Library(s) Used:
+
+    No libraries used.
+
+Number of ports:                           77
+Number of nets:                       1024137
+Number of cells:                      1032845
+Number of combinational cells:              0
+Number of sequential cells:           1032663
+Number of macros/black boxes:               0
+Number of buf/inv:                          0
+Number of references:                      24
+
+Combinational area:                  0.000000
+Buf/Inv area:                        0.000000
+Noncombinational area:               0.000000
+Macro/Black Box area:                0.000000
+Net Interconnect area:      undefined  (No wire load specified)
+
+Total cell area:                     0.000000
+Total area:                 undefined
+
+Information: This design contains black box (unknown) components. (RPT-8)
+1

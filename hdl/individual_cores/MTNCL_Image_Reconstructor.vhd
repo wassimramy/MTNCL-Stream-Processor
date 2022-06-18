@@ -12,7 +12,7 @@ use work.ncl_signals.all;
 use ieee.math_real.all;
 
 entity MTNCL_Image_Reconstructor is
-generic(bitwidth: in integer := 4; numberOfShades: in integer := 256);
+generic(bitwidth: in integer := 8; numberOfShades: in integer := 256);
 	port(
 		input    	: in  dual_rail_logic_vector((numberOfShades)*bitwidth-1 downto 0);
 		pixel    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);

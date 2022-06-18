@@ -1,0 +1,41 @@
+#!/bin/bash
+
+designName="sram_4096w_8b_8m_wrapper"
+
+echo
+echo "===========> Running $designName"
+
+#Create a directory named after the design name where all the files will be output
+echo "======> Setting up the synthesis directory"
+mkdir -p $SUB_DIR$designName
+cd $SUB_DIR$designName
+currentPath=$(pwd)
+echo $currentPath
+
+#Design Flattening
+source /home/chsherri/Synopsys/newsynopsys.sh > /dev/null 2>&1 l
+echo "======> Flattening"
+#Don't forget to edit the read.tcl file according to your design
+dc_shell -f ../${designName}_read.tcl > design_compiler.log
+
+echo "======> Running SingleLinesOnly.py"
+python /home/chsherri/bin/From_Brent/SingleLinesOnly/SingleLinesOnly.py $designName.v
+
+echo "======> Running Clean.jar"
+java -jar /home/chsherri/bin/Clean/Clean.jar ${designName}_lines.v
+
+echo "======> Running Buffering using $BUFFERING_CSV"
+java -jar /home/chsherri/bin/Buffering/V1.0.5/Buffering.jar $BUFFERING_CSV ${designName}_lines_BE.v
+mv Buffered.v ${designName}_lines_BE_buffered.v   
+
+echo "======> Preparing Netlist for Cadence"
+java -jar /home/chsherri/bin/PrepareNetlistForCadence/V2.0.5/PrepareNetlistForCadence.jar ${designName}_lines_BE_buffered.v
+
+echo "======> Setting up the place and route directory"
+mkdir -p ../../place_and_route/$designName
+mkdir -p ../../place_and_route/$designName/innovus
+cp ${designName}_lines_BE_buffered_Ready_For_Cadence.v ../../../place_and_route/${designName}/${designName}_lines_BE_buffered_Ready_For_Cadence.v 
+
+
+echo "===========> $designName is completed"
+echo

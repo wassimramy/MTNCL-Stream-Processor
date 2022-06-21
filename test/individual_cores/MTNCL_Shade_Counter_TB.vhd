@@ -30,11 +30,11 @@ architecture tb_arch of MTNCL_Shade_Counter_TB is
   end component;
 
   --Updated the file names
-	file image_64_by_64, smoothed_image_64_by_64 : text;
+	file image_64_by_64, image_64_by_64_pixel_count_steps : text;
 	type memoryData is array(0 to size*size) of std_logic_vector(bitwidth-1 downto 0);
 	signal memData : memoryData;
-	type matlab_memoryData is array(0 to size*size) of std_logic_vector(7 downto 0);
-	signal matlab_memData : matlab_memoryData;
+	type matlab_memoryData is array(0 to size*size) of std_logic_vector(numberOfShades*shadeBitwidth-1 downto 0);
+	signal memData_pixel_count : matlab_memoryData;
 
 	--type output_memoryData is array(0 to 256-1) of std_logic_vector(12-1 downto 0);
 	--signal output_memData : output_memoryData;
@@ -55,7 +55,7 @@ architecture tb_arch of MTNCL_Shade_Counter_TB is
 
   signal checker : std_logic_vector(bitwidth-1 downto 0):= (others => 'U');		
   signal Icheck, slowIcheck : std_logic_vector(bitwidth-1 downto 0);
-  signal pixelCount : std_logic_vector(12-1 downto 0):= "000000000000";
+  signal pixelCount : std_logic_vector(numberOfShades*shadeBitwidth-1 downto 0);
 	
   signal pixelCountTemp : std_logic_vector(256*12-1 downto 0);
   signal pixelCountChecker : std_logic_vector(12-1 downto 0) := "111111111111";
@@ -79,15 +79,16 @@ architecture tb_arch of MTNCL_Shade_Counter_TB is
 
 variable v_ILINE : line;
 variable v_inval : std_logic_vector(bitwidth-1 downto 0);
---variable pixelCount : unsigned(13-1 downto 0);
+variable v_inval_pixel_count : std_logic_vector(numberOfShades*shadeBitwidth-1 downto 0);
 
     begin
     
 
 	-- Get the image(s)
-	file_open(image_64_by_64,		 "../test/input_files_lena/image_test_64_by_64_clean_binary",				 read_mode); -- Input image
+	file_open(image_64_by_64,		 										"../test/input_files_lena/image_test_64_by_64_clean_binary",				 									read_mode); 
+	file_open(image_64_by_64_pixel_count_steps,		 	"../test/input_files_lena/image_test_64_by_64_clean_binary_pixel_count_steps",				read_mode);
 
-  	-- Store the input image in an array
+  -- Store the input image in an array
 	for i in 0 to size-1 loop
 		for j in 0 to size-1 loop
 			readline(image_64_by_64, v_ILINE);
@@ -96,10 +97,18 @@ variable v_inval : std_logic_vector(bitwidth-1 downto 0);
 		end loop;
 	end loop;
 
+	-- Store the input image pixel count in an array
+	for i in 0 to size*size-1 loop
+			readline(image_64_by_64_pixel_count_steps, v_ILINE);
+			read(v_ILINE, v_inval_pixel_count);
+			memData_pixel_count(i) <= v_inval_pixel_count;
+	end loop;
+
+	wait;
 	-- Start testing
 	wait for 10 ns;
-        reset_signal <= '1';
-	sleepin_signal <= '1';
+  reset_signal 		<= '1';
+	sleepin_signal 	<= '1';
 
 	for i in 0 to size-1 loop
 		for j in 0 to size-1 loop
@@ -114,11 +123,8 @@ variable v_inval : std_logic_vector(bitwidth-1 downto 0);
 				input_signal(k).rail1 <= temp(k);
 			end loop;
 			
-			--wait on ko_signal until ko_signal = '0';
-			--sleepin_signal <= '1';
-		--for i in 0 to 256-1 loop
-			--pixelCount := pixelCount + unsigned(output_memData(i));
-		--end loop;
+			wait on ki_signal until ki_signal = '0';
+			pixelCount <= memData_pixel_count(i*size+j);
 		end loop;
 	end loop;
 
@@ -135,19 +141,16 @@ variable v_inval : std_logic_vector(bitwidth-1 downto 0);
             end if;
 
 	if is_data(S_signal) then
-		for i in 0 to 12*256-1 loop
+		for i in 0 to numberOfShades*shadeBitwidth-1 loop
 			pixelCountTemp(i) <= S_signal(i).rail1;
-			--pixelCount <= pixelCount + pixelCount;
 		end loop;
---		if pixelCount = pixelCountChecker then
---			report "MADE IT";
---			CORRECT <= '1';
---		else
---			report "STILL MAKING IT";
---			CORRECT <= '0';
---		end if;
+		if pixelCount = pixelCountTemp then
+			CORRECT <= '1';
+		else
+			CORRECT <= '0';
+		end if;
 	end if;
-        end process;
+  end process;
         
 	--final process to assign output comparison
 --	process( pixelCountTemp)

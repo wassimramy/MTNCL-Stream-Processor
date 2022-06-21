@@ -16,7 +16,7 @@ entity MTNCL_Shade_Counter is
 generic(bitwidth: in integer := 8; numberOfShades: in integer := 256; shadeBitwidth: in integer := 12);
 	port(
 		input    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
-		ki	 	: in std_logic;
+		ki	 		: in std_logic;
 		sleep 		: in  std_logic;
 		rst  		: in std_logic;
 		sleepOut 	: out std_logic;

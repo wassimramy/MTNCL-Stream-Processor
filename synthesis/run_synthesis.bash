@@ -37,8 +37,8 @@ java -jar /home/chsherri/bin/PrepareNetlistForCadence/V2.0.5/PrepareNetlistForCa
 #python /home/wrkhalil/Programs_and_Scripts/generate_final_netlist.py ${DESIGN_NAME}_lines_BE_Ready_For_Cadence.v
 #python /home/wrkhalil/Programs_and_Scripts/generate_final_netlist.py netlist.v
 
-#echo "======> Edit the SRAM Sensitivity List"
-#python /home/wrkhalil/Programs_and_Scripts/memory_sensitivity_list.py ${DESIGN_NAME}_lines_BE_buffered_Ready_For_Cadence.v
+echo "======> Edit the SRAM Sensitivity List"
+python /home/wrkhalil/Programs_and_Scripts/memory_sensitivity_list.py ${DESIGN_NAME}_lines_BE_buffered_Ready_For_Cadence.v
 
 #echo "======> Importing to Cadence"
 #cd ../../../cadence

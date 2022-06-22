@@ -13,16 +13,16 @@ scale = 8
 
 for line in readfile:
 	n = "{0:08b}".format(int(line)).zfill(8)
-	shade_count [int(line)-1] += 1;
+	shade_count [int(line)] += 1;
 	for index in range(0, 256):
-		n_12 = "{0:08b}".format(shade_count[256-index]).zfill(12)
+		n_12 = "{0:08b}".format(shade_count[255-index]).zfill(12)
 		writefile_pixel_count_steps.write(n_12)
 	writefile_pixel_count_steps.write("\n")
 	writefile.write(n)
 	writefile.write("\n")
 
 for index in range(0, 256):
-	n_12 = "{0:08b}".format(shade_count[256-index]).zfill(12)
+	n_12 = "{0:08b}".format(shade_count[255-index]).zfill(12)
 	writefile_pixel_count.write(n_12)
 	writefile_pixel_count.write("\n")
 

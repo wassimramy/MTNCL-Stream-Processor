@@ -39,8 +39,8 @@ architecture tb_arch of MTNCL_Shade_Counter_TB is
 	--type output_memoryData is array(0 to 256-1) of std_logic_vector(12-1 downto 0);
 	--signal output_memData : output_memoryData;
 
-	--file output_smoothed_image_64_by_64_binary      : text open write_mode is "output_smoothed_image_64_by_64_binary.txt";
-	--file output_smoothed_image_64_by_64      : text open write_mode is "output_smoothed_image_64_by_64.txt";
+	file output_image_64_by_64_binary_pixel_count_steps      : text open write_mode is "../test/output_files/output_image_64_by_64_binary_pixel_count_steps.txt";
+	
 
   signal input_signal: dual_rail_logic_vector((bitwidth)-1 downto 0);
   signal reset_signal: std_logic;
@@ -104,11 +104,11 @@ variable v_inval_pixel_count : std_logic_vector(numberOfShades*shadeBitwidth-1 d
 			memData_pixel_count(i) <= v_inval_pixel_count;
 	end loop;
 
-	wait;
 	-- Start testing
 	wait for 10 ns;
   reset_signal 		<= '1';
 	sleepin_signal 	<= '1';
+
 
 	for i in 0 to size-1 loop
 		for j in 0 to size-1 loop
@@ -122,9 +122,10 @@ variable v_inval_pixel_count : std_logic_vector(numberOfShades*shadeBitwidth-1 d
 				input_signal(k).rail0 <= not temp(k);
 				input_signal(k).rail1 <= temp(k);
 			end loop;
-			
-			wait on ki_signal until ki_signal = '0';
-			pixelCount <= memData_pixel_count(i*size+j);
+			wait on ko_signal until ko_signal = '0';
+			sleepin_signal <= '1';
+			--wait on ki_signal until ki_signal = '0';
+			--pixelCount <= memData_pixel_count(i*size+j);
 		end loop;
 	end loop;
 
@@ -152,31 +153,14 @@ variable v_inval_pixel_count : std_logic_vector(numberOfShades*shadeBitwidth-1 d
 	end if;
   end process;
         
-	--final process to assign output comparison
---	process( pixelCountTemp)
---	begin
---		for i in 0 to 256-1 loop
---			output_memData(i) <= pixelCountTemp ((i+1)*12-1 downto i*12);
---		end loop;
---		--pixelCount <= pixelCount + pixelCountTemp;
---	end process;
 
---	process( pixelCountTemp)
---	begin
---			pixelCount <= output_memData (0) + output_memData (1) + output_memData (2) + output_memData (3) + output_memData (4) + output_memData (5);
---	end process;
---	process(ko_signal)
---	variable row          : line;
---	begin
---
---		if checker(0) <= 'U' then
---
---		elsif (ko_signal = '1') then
---			write(row, conv_integer(checker), right, 0);
---			writeline(output_smoothed_image_64_by_64,row);
---			write(row, checker, right, 0);
---			writeline(output_smoothed_image_64_by_64_binary,row);
---		end if;
---
---	end process;
+
+	process(ki_signal)
+	variable row          : line;
+	begin
+		if ki_signal = '0' then
+			write(row, pixelCountTemp);
+			writeline(output_image_64_by_64_binary_pixel_count_steps,row);
+		end if;	
+	end process;
 end;

@@ -22,6 +22,8 @@ for line in readfile:
 	for index in range(0, 256):
 		n_12 = "{0:08b}".format(shade_count[255-index]).zfill(12)
 		writefile_pixel_count_steps.write(n_12)
+	n_12 = "{0:08b}".format(0).zfill(12)
+	writefile_pixel_count_steps.write(n_12)
 	writefile_pixel_count_steps.write("\n")
 	writefile.write(n)
 	writefile.write("\n")

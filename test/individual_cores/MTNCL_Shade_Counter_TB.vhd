@@ -53,8 +53,8 @@ architecture tb_arch of MTNCL_Shade_Counter_TB is
   signal  temp : std_logic_vector(bitwidth-1 downto 0);	
   signal CORRECT: std_logic;
 
-  signal checker : std_logic_vector(bitwidth-1 downto 0):= (others => 'U');		
-  signal Icheck, slowIcheck : std_logic_vector(bitwidth-1 downto 0);
+  --signal checker : std_logic_vector(bitwidth-1 downto 0):= (others => 'U');		
+  --signal Icheck, slowIcheck : std_logic_vector(bitwidth-1 downto 0);
   signal pixelCount : std_logic_vector(numberOfShades*shadeBitwidth-1 downto 0);
 	
   signal pixelCountTemp : std_logic_vector(256*12-1 downto 0);
@@ -125,7 +125,7 @@ variable v_inval_pixel_count : std_logic_vector(numberOfShades*shadeBitwidth-1 d
 			wait on ko_signal until ko_signal = '0';
 			sleepin_signal <= '1';
 			--wait on ki_signal until ki_signal = '0';
-			--pixelCount <= memData_pixel_count(i*size+j);
+			pixelCount <= memData_pixel_count(i*size+j);
 		end loop;
 	end loop;
 
@@ -145,15 +145,17 @@ variable v_inval_pixel_count : std_logic_vector(numberOfShades*shadeBitwidth-1 d
 		for i in 0 to numberOfShades*shadeBitwidth-1 loop
 			pixelCountTemp(i) <= S_signal(i).rail1;
 		end loop;
+	end if;
+  end process;
+        
+  process(pixelCountTemp)
+  begin
 		if pixelCount = pixelCountTemp then
 			CORRECT <= '1';
 		else
 			CORRECT <= '0';
 		end if;
-	end if;
   end process;
-        
-
 
 	process(ki_signal)
 	variable row          : line;

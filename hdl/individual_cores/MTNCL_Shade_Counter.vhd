@@ -104,12 +104,11 @@ architecture arch of MTNCL_Shade_Counter is
 			 ko             : OUT std_logic);
 	end component;
 	
-	signal outputCounter, increments	: dual_rail_logic_vector((numberOfShades*shadeBitwidth)-1 downto 0);
+	signal increments	: dual_rail_logic_vector((numberOfShades*shadeBitwidth)-1 downto 0);
 	signal outputReg	: dual_rail_logic_vector((numberOfShades*shadeBitwidth)-1 downto 0);
 	signal inputReg	: dual_rail_logic_vector(bitwidth-1 downto 0);
 	signal data_0,data_1		: dual_rail_logic;
 	signal sleep_1, ko_1, ko_2, ko_3: std_logic;
-	--signal decoder_output	: dual_rail_logic_vector(numberOfShades-1 downto 0);
 	signal decoder_output	: dual_rail_logic_vector(2**bitwidth-1 downto 0);
 	signal counters_sleep_out, counters_ko: std_logic_vector (numberOfShades-1 downto 0);
 

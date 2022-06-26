@@ -17,7 +17,7 @@ end MTNCL_Histogram_Equalization_TB;
 architecture tb_arch of MTNCL_Histogram_Equalization_TB is
 
   component MTNCL_Histogram_Equalization is
-    generic(bitwidth: in integer := 4; numberOfShades: in integer := 256; shadeBitwidth: in integer := 12; numberOfPixels: in integer := 4096);
+    generic(bitwidth: in integer := 8; numberOfShades: in integer := 256; shadeBitwidth: in integer := 12; numberOfPixels: in integer := 4096);
     port(
 		input    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
 		ki	 	: in std_logic;
@@ -31,9 +31,9 @@ architecture tb_arch of MTNCL_Histogram_Equalization_TB is
 
   --Updated the file names
 	file image_64_by_64, equalized_image_64_by_64 : text;
-	type memoryData is array(0 to (size+2)*(size+2)) of std_logic_vector(bitwidth-1 downto 0);
+	type memoryData is array(0 to (size)*(size)) of std_logic_vector(bitwidth-1 downto 0);
 	signal memData : memoryData;
-	type matlab_memoryData is array(0 to (size+2)*(size+2)) of std_logic_vector(bitwidth-1 downto 0);
+	type matlab_memoryData is array(0 to (size)*(size)) of std_logic_vector(bitwidth-1 downto 0);
 	signal matlab_memData : matlab_memoryData;
 
 	file output_equalized_image_64_by_64_binary      : text open write_mode is "../test/output_files/output_equalized_image_64_by_64_binary.txt";
@@ -52,7 +52,7 @@ architecture tb_arch of MTNCL_Histogram_Equalization_TB is
   signal CORRECT: std_logic;
 
   signal checker : std_logic_vector(bitwidth-1 downto 0):= (others => 'U');		
-  signal Icheck, slowIcheck : std_logic_vector(bitwidth-1 downto 0);
+  signal Icheck : std_logic_vector(bitwidth-1 downto 0);
 
   begin
     
@@ -78,65 +78,36 @@ variable v_inval : std_logic_vector(bitwidth-1 downto 0);
     
 
 	-- Get the image(s)
-	file_open(image_64_by_64,		 "../test/input_files/image_test_64_by_64_clean_binary",				 read_mode); -- Input image
-	file_open(equalized_image_64_by_64,	 "../test/input_files/equalized_image_test_64_by_64_clean_binary",			 read_mode); -- Input image
+	file_open(image_64_by_64,		 "../test/input_files_lena/image_test_64_by_64_clean_binary",				 read_mode); -- Input image
+	file_open(equalized_image_64_by_64,	 "../test/input_files_lena/equalized_image_test_64_by_64_clean_binary",			 read_mode); -- Input image
 
   	-- Store the input image in an array
-	for i in 1 to size loop
-		for j in 1 to size loop
+	for i in 0 to size-1 loop
+		for j in 0 to size-1 loop
 			readline(image_64_by_64, v_ILINE);
 			read(v_ILINE, v_inval);
-			memData((i*(size+2))+j) <= v_inval;
+			memData((i*(size))+j) <= v_inval;
 		end loop;
 	end loop;
 
 	-- Store the MatLab output image in an array
-	for i in 1 to size loop
-		for j in 1 to size loop
+	for i in 0 to size-1 loop
+		for j in 0 to size-1 loop
 			readline(equalized_image_64_by_64, v_ILINE);
 			read(v_ILINE, v_inval);
-			matlab_memData((i*(size+2))+j) <= v_inval;
+			matlab_memData((i*(size))+j) <= v_inval;
 		end loop;
 	end loop;
 
 	-- Start testing
 	wait for 10 ns;
-
-	for i in 0 to size+1 loop
-		memData((i*(size+2))+0) <= "00000000";
-		memData((i*(size+2))+(size+1)) <= "00000000";
-	end loop;
-
-	for i in 1 to size loop
-		memData(i) <= "00000000";
-		memData((size+2)*(size+1)+i) <= "00000000";
-	end loop;
-
-	wait for 10 ns;
-        reset_signal <= '1';
+  reset_signal <= '1';
 	sleepin_signal <= '1';
 
-	for i in 1 to size loop
-		for j in 1 to size loop
+	for i in 0 to size-1 loop
+		for j in 0 to size-1 loop
 
-			temp_5 <= memData((i*(size+2))+j);
-
-			wait on ko_signal until ko_signal = '1';
-			reset_signal <= '0';
-			sleepin_signal <= '0';
-			for k in 0 to bitwidth-1 loop
-				input_signal(k).rail0 <= not temp_5(k);
-				input_signal(k).rail1 <= temp_5(k);
-			end loop;
-			wait on ko_signal until ko_signal = '0';
-			sleepin_signal <= '1';
-		end loop;
-	end loop;
-
-	for i in 1 to size loop
-		for j in 1 to size loop
-
-			temp_5 <= memData((i*(size+2))+j);
+			temp_5 <= memData((i*(size))+j);
 
 			wait on ko_signal until ko_signal = '1';
 			reset_signal <= '0';
@@ -150,10 +121,10 @@ variable v_inval : std_logic_vector(bitwidth-1 downto 0);
 		end loop;
 	end loop;
 
-	for i in 1 to size loop
-		for j in 1 to size loop
-			wait on sleepout_signal until sleepout_signal = '0';
-			Icheck <= matlab_memData((i*(size+2))+j);
+	for i in 0 to size-1 loop
+		for j in 0 to size-1 loop
+			wait on ki_signal until ki_signal = '0';
+			Icheck <= matlab_memData((i*(size))+j);
 		end loop;
 	end loop;
 
@@ -161,33 +132,32 @@ variable v_inval : std_logic_vector(bitwidth-1 downto 0);
       end process;
 
         
-        process(S_signal)
-          begin
-            if is_null(S_signal) then
-              ki_signal <= '1';
-            elsif is_data(S_signal) then
-              ki_signal <= '0';
-            end if;
+  process(S_signal)
+    begin
+      if is_null(S_signal) then
+        ki_signal <= '1';
+      elsif is_data(S_signal) then
+        ki_signal <= '0';
+      end if;
 
-	if is_data(S_signal) then
-		for i in 0 to bitwidth-1 loop			
-			checker(i) <= S_signal(i).rail1;
-		end loop;
-		if checker = slowIcheck then
+			if is_data(S_signal) then
+				for i in 0 to bitwidth-1 loop			
+					checker(i) <= S_signal(i).rail1;
+				end loop;
+			end if;
+  end process;
+        
+	--final process to assign output comparison
+	process(checker)
+  begin
+		if checker = Icheck then
 			report "correct";
 			CORRECT <= '1';
 		else
 			report "incorrect";
 			CORRECT <= '0';
 		end if;
-	end if;
-        end process;
-        
-	--final process to assign output comparison
-	process( checker)
-	begin
-		slowIcheck <= Icheck;
-	end process;
+  end process;
 
 	process(sleepout_signal)
 	variable row          : line;

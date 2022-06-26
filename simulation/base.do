@@ -58,6 +58,7 @@ vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_Shade_Counter.
 vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_Shade_Calculator.vhd
 vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_Image_Reconstructor.vhd
 vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_Histogram_Equalization.vhd
+vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_Histogram_Equalization_wo_sram.vhd
 
 vcom -reportprogress 300 -work work ../hdl/control_unit/MTNCL_Control_Unit.vhd
 vcom -reportprogress 300 -work work ../hdl/control_unit/MTNCL_CU_Data_Output.vhd

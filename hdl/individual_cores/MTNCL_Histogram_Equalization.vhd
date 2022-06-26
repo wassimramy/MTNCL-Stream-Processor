@@ -180,7 +180,7 @@ architecture arch of MTNCL_Histogram_Equalization is
 
 	signal hold, accReg: dual_rail_logic_vector((shadeBitwidth)-1 downto 0);
 
-	signal non_repeatable_register_count_0 : dual_rail_logic_vector((2*shadeBitwidth) downto 0);
+	signal non_repeatable_register_count_0 : dual_rail_logic_vector((bitwidth-1) downto 0);
 	signal newShadeValues: dual_rail_logic_vector(numberOfShades*bitwidth-1 downto 0);
 	signal shade_counter_output: dual_rail_logic_vector((numberOfShades*shadeBitwidth)-1 downto 0);
 	
@@ -306,8 +306,8 @@ begin
 	generic map(bitwidth => bitwidth, numberOfShades => numberOfShades)
 	port map( input => newShadeValues(numberOfShades*bitwidth-1 downto 0), 
 	pixel => roundedPixelRegister, 
-	--ki => ki_image_reconstructor, 
-	ki => ki,
+	ki => ki_image_reconstructor, 
+	--ki => ki,
 	sleep => sleeps(0), 
 	rst => rst, 
 	sleepOut => sleepOut, 

@@ -21,14 +21,14 @@ export DESIGN_NAME
 
 #HEQ Core Synthesis
 SUB_DIR="individual_cores/"
-#DESIGN_NAME="MTNCL_Shade_Counter"
-#./run_synthesis.bash
+DESIGN_NAME="MTNCL_Shade_Counter"
+./run_synthesis.bash
 #DESIGN_NAME="MTNCL_Shade_Calculator"
 #./run_synthesis.bash
 #DESIGN_NAME="MTNCL_Image_Reconstructor"
 #./run_synthesis.bash
-#DESIGN_NAME="MTNCL_Histogram_Equalization"
-#./run_synthesis.bash
+DESIGN_NAME="MTNCL_Histogram_Equalization"
+./run_synthesis.bash
 
 #SF Core Synthesis
 SUB_DIR="individual_cores/"
@@ -47,5 +47,5 @@ SUB_DIR="individual_cores/"
 SUB_DIR="control_unit/"
 #DESIGN_NAME="MTNCL_Control_Unit"
 #./run_synthesis.bash
-DESIGN_NAME="MTNCL_Control_Unit_Top_Level"
-./run_synthesis.bash
+#DESIGN_NAME="MTNCL_Control_Unit_Top_Level"
+#./run_synthesis.bash

@@ -53,6 +53,7 @@ vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_SF_Core_Data_L
 vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_SF_Core_Data_Output.vhd
 vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_SF_Core_w_reg_sram.vhd
 vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_SF_Core_Top_Level.vhd
+vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_SF_Core_Top_Level_wo_sram.vhd
 
 vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_Shade_Counter.vhd
 vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_Shade_Calculator.vhd

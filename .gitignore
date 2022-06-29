@@ -7,3 +7,4 @@ simulation/work/_lib.qdb
 simulation/work/_info
 synthesis/
 cadence/
+hdl/individual_cores/MTNCL_SF_Core_Top_Level_wo_sram_lines_BE_buffered.v

@@ -66,16 +66,16 @@ architecture arch_MTNCL_SF_Core_Top_Level of MTNCL_SF_Core_Top_Level is
 			);
 	end component;
 
-	component MTNCL_SF_Node_W_Registers is
-    generic(bitwidth: in integer := bitwidth);
+	component MTNCL_SF_Core_Logic is
+    generic(bitwidth: in integer := bitwidth; sf_cores: in integer := sf_cores);
     port(
-		input    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
-		ki	 	: in std_logic;
-		sleep 		: in  std_logic;
-		rst  		: in std_logic;
-		sleepOut 	: out std_logic;
-		ko 	     	: out std_logic;
-		output   	: out dual_rail_logic_vector((bitwidth-1) downto 0)
+		pixel    		: in  dual_rail_logic_vector(sf_cores*bitwidth-1 downto 0);
+		reset 			: in std_logic;
+		ki 				: in std_logic;
+		ko 				: out std_logic;
+		sleep_in 		: in std_logic;
+		sleep_out 		: out std_logic;
+		z 				: out dual_rail_logic_vector(sf_cores*bitwidth-1 downto 0)
       );
   end component;
 
@@ -87,12 +87,12 @@ architecture arch_MTNCL_SF_Core_Top_Level of MTNCL_SF_Core_Top_Level is
 			z: out std_logic);
 	end component;
 
-signal ko_data_loader, sleepout_data_loader, ko_pixels_a: std_logic;
+signal ko_data_loader, sleepout_data_loader, ko_pixels_a, sf_core_logic_sleep_out, sf_core_logic_ko: std_logic;
 
 signal pixel : dual_rail_logic_vector(sf_cores*bitwidth-1 downto 0);
 signal input_sf_core : dual_rail_logic_vector(sf_cores*bitwidth-1 downto 0);
-signal ko_sf_cores: std_logic_vector (sf_cores downto 0);
-signal sleep_out_sf_cores: std_logic_vector (sf_cores-1 downto 0);
+--signal ko_sf_cores: std_logic_vector (sf_cores downto 0);
+--signal sleep_out_sf_cores: std_logic_vector (sf_cores-1 downto 0);
 
 begin 
 
@@ -106,7 +106,7 @@ begin
 	port map(
 			pixel => input,
 			reset => reset,
-			ki => ko_sf_cores (sf_cores),
+			ki => sf_core_logic_ko,
 			id => id,
 			parallelism_en => parallelism_en,
 			ko => ko_data_loader,
@@ -115,27 +115,18 @@ begin
 			z => input_sf_core
 	);
 
-	th22d_ko_sf_cores : th22d_tree_gen
-	generic map(numInputs => sf_cores )
-	port map(
-		a => ko_sf_cores (sf_cores-1 downto 0),
-		rst => reset,
-		z => ko_sf_cores (sf_cores)
+	sf_core_logic : MTNCL_SF_Core_Logic
+		generic map(bitwidth => bitwidth,
+					sf_cores => sf_cores)
+		port map(
+				pixel => input_sf_core,
+				reset => reset,
+				ki => ko_pixels_a,
+				sleep_in => sleepout_data_loader,
+				ko => sf_core_logic_ko,
+				sleep_out => sf_core_logic_sleep_out,
+				z => pixel
 	);
-
-	generate_sf_cores : for i in 0 to sf_cores-1 generate
-		sf_core_w_reg_instance_i: MTNCL_SF_Node_W_Registers
- 		generic map(bitwidth => bitwidth)
-  		port map(
-		    input => input_sf_core((i+1)*bitwidth-1 downto i*bitwidth),
-		    ki => ko_pixels_a,
-		    sleep => sleepout_data_loader,
-		    rst => reset,
-		    ko => ko_sf_cores (i),
-		    output => pixel((i+1)*bitwidth-1 downto i*bitwidth),
-		    sleepOut => sleep_out_sf_cores (i)
-    );
-	end generate;
 
 	sf_core_data_output : MTNCL_SF_Core_Data_Output
 		generic map(bitwidth => bitwidth,
@@ -151,12 +142,6 @@ begin
 				z => output
 	);
 
-    --th22d_sleep_out_sf_cores : th22d_tree_gen
-	--generic map(numInputs => sf_cores )
-	--port map(
-	--	a => sleep_out_sf_cores (sf_cores-1 downto 0),
-	--	rst => reset,
-	--	z => sleep_out_sf_cores (sf_cores)
-	--);
+    
 
 end arch_MTNCL_SF_Core_Top_Level; 

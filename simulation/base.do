@@ -50,6 +50,7 @@ vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_SF_Node.vhd
 vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_SF_Node_W_Registers.vhd
 vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_SF_Core_Address_Gen_w_MUX.vhd
 vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_SF_Core_Data_Loader.vhd
+vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_SF_Core_Logic.vhd
 vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_SF_Core_Data_Output.vhd
 vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_SF_Core_w_reg_sram.vhd
 vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_SF_Core_Top_Level.vhd

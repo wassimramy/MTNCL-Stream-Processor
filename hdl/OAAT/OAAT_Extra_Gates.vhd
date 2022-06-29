@@ -21,6 +21,28 @@ begin
 	end process;
 end arch; 
 
+----------------------------------------------------------- 
+-- BUFFER_B
+----------------------------------------------------------- 
+library ieee; 
+use ieee.std_logic_1164.all; 
+
+entity BUFFER_B is 
+	port(A: in std_logic; 
+		 Z: out std_logic); 
+end BUFFER_B; 
+
+architecture arch of BUFFER_B is
+begin
+	BUFFER_B: process(A)
+	begin
+		if A = '1' then
+			Z <= '1' after 160 ps;
+		elsif A = '0' then
+			Z <= '0' after 160 ps;
+		end if ;
+	end process;
+end arch; 
 
 ----------------------------------------------------------- 
 -- BUFFER_C
@@ -45,6 +67,51 @@ begin
 	end process;
 end arch; 
 
+----------------------------------------------------------- 
+-- BUFFER_D
+----------------------------------------------------------- 
+library ieee; 
+use ieee.std_logic_1164.all; 
+
+entity BUFFER_D is 
+	port(A: in std_logic; 
+		 Z: out std_logic); 
+end BUFFER_D; 
+
+architecture arch of BUFFER_D is
+begin
+	BUFFER_D: process(A)
+	begin
+		if A = '1' then
+			Z <= '1' after 160 ps;
+		elsif A = '0' then
+			Z <= '0' after 160 ps;
+		end if ;
+	end process;
+end arch; 
+
+----------------------------------------------------------- 
+-- BUFFER_E
+----------------------------------------------------------- 
+library ieee; 
+use ieee.std_logic_1164.all; 
+
+entity BUFFER_E is 
+	port(A: in std_logic; 
+		 Z: out std_logic); 
+end BUFFER_E; 
+
+architecture arch of BUFFER_E is
+begin
+	BUFFER_E: process(A)
+	begin
+		if A = '1' then
+			Z <= '1' after 160 ps;
+		elsif A = '0' then
+			Z <= '0' after 160 ps;
+		end if ;
+	end process;
+end arch; 
 
 ----------------------------------------------------------- 
 -- and2_a

@@ -1,6 +1,7 @@
 set storage_units_testbench "../test/storage_units"
 set individual_cores_testbench "../test/individual_cores"
 set control_unit_testbench "../test/control_unit"
+set oaat_testbench "../test/oaat"
 
 vcom -reportprogress 300 -work work ../hdl/async/NCL_signals.vhd
 vcom -reportprogress 300 -work work ../hdl/async/NCL_random.vhd
@@ -31,6 +32,7 @@ vcom -reportprogress 300 -work work ../hdl/OAAT/OAAT_adder_gen.vhd
 vcom -reportprogress 300 -work work ../hdl/OAAT/OAAT_counter_selfReset.vhd
 vcom -reportprogress 300 -work work ../hdl/OAAT/OAAT_counter_selfReset_mod_inc.vhd
 vcom -reportprogress 300 -work work ../hdl/OAAT/OAAT_in_all_out.vhd
+vcom -reportprogress 300 -work work ../hdl/OAAT/OAAT_in_all_out_2047.vhd
 vcom -reportprogress 300 -work work ../hdl/OAAT/OAAT_out_all_in.vhd
 
 vcom -reportprogress 300 -work work ../hdl/MTNCL_treecomps.vhd

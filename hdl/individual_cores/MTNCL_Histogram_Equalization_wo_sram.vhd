@@ -38,7 +38,7 @@ architecture arch of MTNCL_Histogram_Equalization_wo_sram is
 	generic(bitwidth: in integer := 4;  shadeBitwidth: in integer := 12);
 	port(
 		input    	: in  dual_rail_logic_vector(shadeBitwidth-1 downto 0);
-		count    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
+		--count    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
 		ki	 	: in std_logic;
 		sleep 		: in  std_logic;
 		rst  		: in std_logic;
@@ -277,7 +277,7 @@ counter_0 : counter_selfReset
 	generic map(bitwidth => bitwidth, shadeBitwidth => shadeBitwidth)
 	port map( 
 		input => hold, 
-		count => non_repeatable_register_count_0(bitwidth-1 downto 0), 
+		--count => non_repeatable_register_count_0(bitwidth-1 downto 0), 
 		ki => kos(5), 
 		sleep => sleeps(3), 
 		rst => rst, 

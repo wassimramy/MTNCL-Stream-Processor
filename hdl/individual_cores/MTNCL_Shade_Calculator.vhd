@@ -12,10 +12,10 @@ use work.ncl_signals.all;
 use ieee.math_real.all;
 
 entity MTNCL_Shade_Calculator is
-generic(bitwidth: in integer := 4; shadeBitwidth: in integer := 12);
+generic(bitwidth: in integer := 8; shadeBitwidth: in integer := 12);
 	port(
 		input    	: in  dual_rail_logic_vector(shadeBitwidth-1 downto 0);
-		count    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
+		--count    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
 		ki	 	: in std_logic;
 		sleep 		: in  std_logic;
 		rst  		: in std_logic;

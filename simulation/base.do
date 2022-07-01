@@ -35,6 +35,7 @@ vcom -reportprogress 300 -work work ../hdl/OAAT/OAAT_in_all_out.vhd
 vcom -reportprogress 300 -work work ../hdl/OAAT/OAAT_in_all_out_lite.vhd
 vcom -reportprogress 300 -work work ../hdl/OAAT/OAAT_in_all_out_2047.vhd
 vcom -reportprogress 300 -work work ../hdl/OAAT/OAAT_out_all_in.vhd
+vcom -reportprogress 300 -work work ../hdl/OAAT/OAAT_out_all_in_forever.vhd
 vcom -reportprogress 300 -work work ../hdl/OAAT/OAAT_out_all_in_255.vhd
 
 vcom -reportprogress 300 -work work ../hdl/MTNCL_treecomps.vhd

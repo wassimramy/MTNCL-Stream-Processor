@@ -1,0 +1,781 @@
+# //  Questa Sim
+# //  Version 2021.4 linux Oct 13 2021
+# //
+# //  Copyright 1991-2021 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading project GRNN_w_IO
+vsim -t ps work.tb_grnn_gru_8_16
+# vsim -t ps work.tb_grnn_gru_8_16 
+# Start time: 14:05:41 on May 06,2022
+# ** Note: (vsim-3812) Design is being optimized...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_textio(body)
+# Loading ieee.numeric_std(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading work.ncl_signals
+# Loading work.functions(body)
+# Loading work.tree_funcs(body)
+# Loading work.tb_grnn_gru_8_16(arch_tb_grnn_gru_8_16)#1
+# Loading ieee.math_real(body)
+# Loading work.grnn_w_io(arch_grnn_w_io)#1
+# Loading work.flashaccessgrnn(arch_flashaccessgrnn)#1
+# Loading work.counter_selfreset(arch_counter_selfreset)#1
+# Loading work.compm(arch)#1
+# Loading work.regs_gen_null_res(behavioral)#1
+# Loading work.full_adder(arch1)#1
+# Loading work.andtreem(arch)#1
+# Loading work.ortreem(arch)#1
+# Loading work.compdm(arch)#1
+# Loading work.regs_gen_zero_res(arch1)#1
+# Loading work.compm(arch)#2
+# Loading work.regs_gen_null_res(behavioral)#2
+# Loading work.sdc_w_en(arch_sdc_w_en)#1
+# Loading work.th22m_en_gen(arch_th22m_en_gen)#1
+# Loading work.flashtomemgrnn(arch_flashtomemgrnn)#1
+# Loading work.compm(arch)#3
+# Loading work.regs_gen_null_res(behavioral)#3
+# Loading work.andtreem(arch)#2
+# Loading work.ortreem(arch)#2
+# Loading work.th22m_en_gen(arch_th22m_en_gen)#2
+# Loading work.mux_21_gen_nic(behavioral)#1
+# Loading work.reg_gen(arch)#2
+# Loading work.sdc_w_en(arch_sdc_w_en)#2
+# Loading work.compm(arch)#4
+# Loading work.andtreem(arch)#14
+# Loading work.regs_gen_null_res(behavioral)#4
+# Loading work.oaat_in_all_out(arch_oaat_in_all_out)#1
+# Loading work.compm(arch)#5
+# Loading work.andtreem(arch)#7
+# Loading work.regs_gen_null_res(behavioral)#5
+# Loading work.counter_selfreset(arch_counter_selfreset)#2
+# Loading work.compm(arch)#6
+# Loading work.regs_gen_null_res(behavioral)#6
+# Loading work.compdm(arch)#2
+# Loading work.regs_gen_zero_res(arch1)#2
+# Loading work.compm(arch)#7
+# Loading work.decoder_gen(behavioral)#1
+# Loading work.grnn_control_w_mem(arch_grnn_control_w_mem)#1
+# Loading work.mux21_dr_gen(arch)#1
+# Loading work.oaat_out_all_in_forever(arch_oaat_out_all_in_forever)#1
+# Loading work.regs_gen_null_res(behavioral)#8
+# Loading work.counter_selfreset(arch_counter_selfreset)#3
+# Loading work.compm(arch)#8
+# Loading work.regs_gen_null_res(behavioral)#9
+# Loading work.compdm(arch)#3
+# Loading work.mux_21_gen(behavioral)#3
+# Loading work.regs_gen_null_res(behavioral)#10
+# Loading work.compm(arch)#9
+# Loading work.compm(arch)#10
+# Loading work.andtreem(arch)#16
+# Loading work.th22m_a(archth22m_a)#1
+# Loading work.th12m_a(archth12m_a)#1
+# Loading work.compdm(arch)#4
+# Loading work.andtreem(arch)#17
+# Loading work.th22_a(archth22_a)#1
+# Loading work.regs_gen_zero_res(arch1)#4
+# Loading work.reg_zero_res(arch1)#1
+# Loading work.th22m_en_gen(arch_th22m_en_gen)#3
+# Loading work.mux_nto1_gen(behavioral)#2
+# Loading work.mux_21_gen(behavioral)#2
+# Loading work.thxor0m_a(archthxor0m_a)#1
+# Loading work.mux_21_gen_nic(behavioral)#2
+# Loading work.oaat_in_all_out(arch_oaat_in_all_out)#2
+# Loading work.counter_selfreset(arch_counter_selfreset)#4
+# Loading work.compm(arch)#11
+# Loading work.regs_gen_null_res(behavioral)#11
+# Loading work.andtreem(arch)#5
+# Loading work.ortreem(arch)#5
+# Loading work.compdm(arch)#5
+# Loading work.regs_gen_zero_res(arch1)#5
+# Loading work.compm(arch)#12
+# Loading work.regs_gen_null_res(behavioral)#12
+# Loading work.decoder_gen(behavioral)#2
+# Loading work.rcf_oaat_out_all_in_128_forever(arch_rcf_oaat_out_all_in_128_forever)#1
+# Loading work.regs_gen_null_res(behavioral)#13
+# Loading work.reg_null_res(behavioral)#1
+# Loading work.counter_selfreset(arch_counter_selfreset)#5
+# Loading work.compm(arch)#13
+# Loading work.regs_gen_null_res(behavioral)#14
+# Loading work.andtreem(arch)#6
+# Loading work.ortreem(arch)#6
+# Loading work.compdm(arch)#6
+# Loading work.compm(arch)#14
+# Loading work.regs_gen_null_res(behavioral)#15
+# Loading work.mux_nto1_gen(behavioral)#3
+# Loading work.mux_21_gen(behavioral)#4
+# Loading work.ortreem(arch)#7
+# Loading work.mux_nto1_gen(behavioral)#4
+# Loading work.grnn_layer_w_mem(arch_grnn_layer_w_mem)#1
+# Loading work.mux21_dr_gen(arch)#2
+# Loading work.rcf_oaat_out_all_in_rpt(arch_rcf_oaat_out_all_in_rpt)#1
+# Loading work.regs_gen_null_res(behavioral)#16
+# Loading work.twophasecounter(arch_twophasecounter)#1
+# Loading work.compm(arch)#15
+# Loading work.andtreem(arch)#11
+# Loading work.regs_gen_null_res(behavioral)#17
+# Loading work.ortreem(arch)#8
+# Loading work.compdm(arch)#7
+# Loading work.regs_gen_zero_res(arch1)#7
+# Loading work.compm(arch)#16
+# Loading work.regs_gen_null_res(behavioral)#18
+# Loading work.mux_nto1_gen(behavioral)#5
+# Loading work.compm_half_sel(arch)#1
+# Loading work.addressgen(behavioral)#1
+# Loading work.mux_21_gen(behavioral)#1
+# Loading work.regs_gen_null_res(behavioral)#19
+# Loading work.memwritecounter(arch_memwritecounter)#1
+# Loading work.mux_21_gen_nic(behavioral)#3
+# Loading work.andtreem(arch)#8
+# Loading work.ortreem(arch)#9
+# Loading work.regs_gen_null_res(behavioral)#20
+# Loading work.mux_21_gen_nic(behavioral)#4
+# Loading work.compm(arch)#18
+# Loading work.weightmemory_4layers(arch_weightmemory_4layers)#1
+# Loading work.weightmemory_4layers_wrapper(arch_weightmemory_4layers_wrapper)#1
+# Loading work.mux_21_gen_nic(behavioral)#5
+# Loading work.compm(arch)#19
+# Loading work.regs_gen_null_res(behavioral)#21
+# Loading work.sram2176x16(fast)
+# Loading work.sram4096x16(fast)
+# Loading work.mult_of_accumulate_8_16(behavioral)#1
+# Loading work.regs_gen_null_res(behavioral)#22
+# Loading work.wrap_multiply_of_accumulate_8(behavioral)#1
+# Loading work.baugh_wooley_gen(arch1)#1
+# Loading work.adder_w_and(arch1)#1
+# Loading work.adder_w_nand(arch1)#2
+# Loading work.adder_w_nand(arch1)#1
+# Loading work.adder_w_and(arch1)#2
+# Loading work.accumulator_outputonreset(arch_accumulator_outputonreset)#1
+# Loading work.add_of_checkv2(arch_add_of_checkv2)#1
+# Loading work.counter_selfreset(arch_counter_selfreset)#6
+# Loading work.compdm(arch)#8
+# Loading work.regs_gen_zero_res(arch1)#8
+# Loading work.compm(arch)#20
+# Loading work.regs_gen_null_res(behavioral)#23
+# Loading work.regs_gen_zero_res(arch1)#9
+# Loading work.mult_acc_of_check_8(arch_mult_acc_of_check_8)#1
+# Loading work.mux_21_gen(behavioral)#5
+# Loading work.wrap_multiply_of_accumulate(behavioral)#1
+# Loading work.baugh_wooley_gen(arch1)#2
+# Loading work.timeszerocheck(arch_timeszerocheck)#1
+# Loading work.mult_of_checkv2(arch_mult_of_checkv2)#1
+# Loading work.rcf_oaat_in_all_out(arch_rcf_oaat_in_all_out)#1
+# Loading work.decoder_gen(behavioral)#3
+# Loading work.rcf_oaat_out_all_in_128(arch_rcf_oaat_out_all_in_128)#1
+# Loading work.adder_8_16(behavioral)#1
+# Loading work.wrap_elem_adder_8(behavioral)#1
+# Loading work.add_of_checkv2(arch_add_of_checkv2)#2
+# Loading work.wrap_elem_adder(behavioral)#1
+# Loading work.lut_sigmoid_8_16(behavioral)#1
+# Loading work.lut_sigmoid_8_wrapper(arch_lut_sigmoid_8_wrapper)#1
+# Loading work.sdc_w_en(arch_sdc_w_en)#3
+# Loading work.sigmoid_8Bit_rom(fast)
+# Loading work.wrap_lut_sigmoid(behavioral)#1
+# Loading work.lut_sigmoid_wrapper(arch_lut_sigmoid_wrapper)#1
+# Loading work.sigmoid_rom(fast)
+# Loading work.mult_8_16(behavioral)#1
+# Loading work.wrap_elem_mult_8(behavioral)#1
+# Loading work.timeszerocheck(arch_timeszerocheck)#2
+# Loading work.mult_of_check_8(arch_mult_of_check_8)#1
+# Loading work.wrap_elem_mult(behavioral)#1
+# Loading work.mux21_dr_gen(arch)#3
+# Loading work.one_sub_8_16_reverse(behavioral)#1
+# Loading work.one_elem_sub_reverse(behavioral)#1
+# Loading work.wrap_one_elem_sub_reverse(behavioral)#1
+# Loading work.sub_of_check(arch_sub_of_check)#2
+# Loading work.one_mult_8_16(behavioral)#1
+# Loading work.wrap_one_elem_mult_8(behavioral)#1
+# Loading work.wrap_one_elem_mult(behavioral)#1
+# Loading work.one_adder_8_16(behavioral)#1
+# Loading work.wrap_one_elem_adder_8(behavioral)#1
+# Loading work.wrap_one_elem_adder(behavioral)#1
+# Loading work.andtreem(arch)#10
+# Loading work.lut_tanh_8_16(behavioral)#1
+# Loading work.lut_tanh_8_wrapper(arch_lut_tanh_8_wrapper)#1
+# Loading work.tanh_8Bit_rom(fast)
+# Loading work.wrap_lut_tanh(behavioral)#1
+# Loading work.lut_tanh_wrapper(arch_lut_tanh_wrapper)#1
+# Loading work.tanh_rom(fast)
+# Loading work.convert_8_16(arch_convert_8_16)#1
+# Loading work.mux_21_gen(behavioral)#6
+# Loading work.convert_16_8(arch_convert_16_8)#1
+# Loading work.compm(arch)#21
+# Loading work.compm(arch)#22
+# Loading work.regs_gen_null_res(behavioral)#24
+# Loading work.twophasecounter(arch_twophasecounter)#2
+# Loading work.compm(arch)#17
+# Loading work.compdm(arch)#10
+# Loading work.regs_gen_zero_res(arch1)#10
+# Loading work.compm(arch)#23
+# Loading work.regs_gen_null_res(behavioral)#25
+# Loading work.rcf_grnn_fc_layer(arch_rcf_grnn_fc_layer)#1
+# Loading work.rcf_oaat_out_all_in_128_rpt(arch_rcf_oaat_out_all_in_128_rpt)#1
+# Loading work.twophasecounter(arch_twophasecounter)#3
+# Loading work.compdm(arch)#11
+# Loading work.regs_gen_zero_res(arch1)#11
+# Loading work.oaat_in_all_out(arch_oaat_in_all_out)#3
+# Loading work.counter_selfreset(arch_counter_selfreset)#7
+# Loading work.ortreem(arch)#11
+# Loading work.regs_gen_zero_res(arch1)#12
+# Loading work.decoder_gen(behavioral)#4
+# Loading work.oaat_out_all_in_forever(arch_oaat_out_all_in_forever)#2
+# Loading work.compm(arch)#25
+# Loading work.andtreem(arch)#22
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/A_3(11) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/A_3(10) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/A_3(9) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/A_3(8) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/A_3(7) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/A_3(6) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/A_3(5) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/A_3(4) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/A_3(3) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/A_3(2) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/A_3(1) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/A_3(0) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/D_3(15) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/D_3(14) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/D_3(13) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/D_3(12) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/D_3(11) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/D_3(10) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/D_3(9) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/D_3(8) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/D_3(7) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/D_3(6) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/D_3(5) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/D_3(4) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/D_3(3) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/D_3(2) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/D_3(1) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Zt_weightMem/sram_wrapper/D_3(0) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/A_3(11) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/A_3(10) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/A_3(9) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/A_3(8) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/A_3(7) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/A_3(6) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/A_3(5) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/A_3(4) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/A_3(3) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/A_3(2) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/A_3(1) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/A_3(0) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/D_3(15) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/D_3(14) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/D_3(13) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/D_3(12) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/D_3(11) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/D_3(10) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/D_3(9) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/D_3(8) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/D_3(7) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/D_3(6) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/D_3(5) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/D_3(4) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/D_3(3) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/D_3(2) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/D_3(1) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Rt_weightMem/sram_wrapper/D_3(0) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/A_3(11) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/A_3(10) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/A_3(9) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/A_3(8) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/A_3(7) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/A_3(6) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/A_3(5) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/A_3(4) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/A_3(3) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/A_3(2) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/A_3(1) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/A_3(0) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/D_3(15) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/D_3(14) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/D_3(13) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/D_3(12) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/D_3(11) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/D_3(10) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/D_3(9) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/D_3(8) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/D_3(7) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/D_3(6) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/D_3(5) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/D_3(4) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/D_3(3) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/D_3(2) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/D_3(1) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /tb_grnn_gru_8_16/uut/GRNN_Main/GRNN_Computation/Sht_weightMem/sram_wrapper/D_3(0) has no driver.
+# This port will contribute value (U) to the signal network.
+quit -sim
+# End time: 14:09:15 on May 06,2022, Elapsed time: 0:03:34
+# Errors: 0, Warnings: 85
+vsim -t ps -debugDB weightMemory_4Layers
+# vsim -t ps -debugDB weightMemory_4Layers 
+# Start time: 14:09:42 on May 06,2022
+# ** Warning: (vsim-4308) Enabling visibility using +acc is recommended with debug flow.
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Note: (vsim-8611) Generating debug db.
+# ** Warning: (vopt-4308) Enabling visibility using +acc is recommended with debug flow.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=2.
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading work.ncl_signals
+# Loading work.weightmemory_4layers(arch_weightmemory_4layers)#1
+# Loading work.weightmemory_4layers_wrapper(arch_weightmemory_4layers_wrapper)#1
+# Loading work.compm(arch)#1
+# Loading work.th24compm_a(archth24compm_a)#1
+# Loading work.tree_funcs(body)
+# Loading work.andtreem(arch)#1
+# Loading work.th44m_a(archth44m_a)#1
+# Loading work.th33m_a(archth33m_a)#1
+# Loading work.th22n_a(archth22n_a)#1
+# Loading work.inv_a(archinv_a)#1
+# Loading work.regs_gen_null_res(behavioral)#1
+# Loading work.reg_null_res(behavioral)#1
+# Loading work.th12nm_a(archth12nm_a)#1
+# Loading work.and2_a(arch)#1
+# Loading work.buffer_a(arch)#1
+# Loading work.sdc_w_en(arch_sdc_w_en)#1
+# Loading work.th22m_a(archth22m_a)#1
+# Loading work.mux_21_gen_nic(behavioral)#1
+# Loading work.th12m_a(archth12m_a)#1
+# Loading work.compm(arch)#2
+# Loading work.andtreem(arch)#2
+# Loading work.regs_gen_null_res(behavioral)#2
+# Loading work.th22m_en_gen(arch_th22m_en_gen)#1
+# Loading work.sram2176x16(fast)
+# Loading work.sram4096x16(fast)
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/A_3(11) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/A_3(10) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/A_3(9) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/A_3(8) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/A_3(7) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/A_3(6) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/A_3(5) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/A_3(4) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/A_3(3) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/A_3(2) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/A_3(1) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/A_3(0) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/D_3(15) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/D_3(14) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/D_3(13) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/D_3(12) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/D_3(11) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/D_3(10) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/D_3(9) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/D_3(8) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/D_3(7) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/D_3(6) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/D_3(5) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/D_3(4) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/D_3(3) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/D_3(2) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/D_3(1) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Warning: (vsim-8683) Uninitialized out port /weightmemory_4layers/sram_wrapper/D_3(0) has no driver.
+# This port will contribute value (U) to the signal network.
+# ** Note: (vsim-8900) Creating design debug database vsim.dbg.
+add schematic -full sim:/weightmemory_4layers
+quit -sim
+# End time: 14:14:33 on May 06,2022, Elapsed time: 0:04:51
+# Errors: 0, Warnings: 31
+# Compile of weightMemory_4Layers_wrapper.vhd was successful.
+vsim -t ps -debugDB weightMemory_4Layers
+# vsim -t ps -debugDB weightMemory_4Layers 
+# Start time: 14:14:56 on May 06,2022
+# ** Warning: (vsim-4308) Enabling visibility using +acc is recommended with debug flow.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Note: (vsim-8611) Generating debug db.
+# ** Warning: (vopt-4308) Enabling visibility using +acc is recommended with debug flow.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=2.
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_arith(body)
+# Loading work.ncl_signals
+# Loading work.weightmemory_4layers(arch_weightmemory_4layers)#1
+# Loading work.weightmemory_4layers_wrapper(arch_weightmemory_4layers_wrapper)#1
+# Loading work.compm(arch)#1
+# Loading work.th24compm_a(archth24compm_a)#1
+# Loading work.tree_funcs(body)
+# Loading work.andtreem(arch)#1
+# Loading work.th44m_a(archth44m_a)#1
+# Loading work.th33m_a(archth33m_a)#1
+# Loading work.th22n_a(archth22n_a)#1
+# Loading work.inv_a(archinv_a)#1
+# Loading work.regs_gen_null_res(behavioral)#1
+# Loading work.reg_null_res(behavioral)#1
+# Loading work.th12nm_a(archth12nm_a)#1
+# Loading work.and2_a(arch)#1
+# Loading work.buffer_a(arch)#1
+# Loading work.sdc_w_en(arch_sdc_w_en)#1
+# Loading work.th22m_a(archth22m_a)#1
+# Loading work.mux_21_gen_nic(behavioral)#1
+# Loading work.th12m_a(archth12m_a)#1
+# Loading work.compm(arch)#2
+# Loading work.andtreem(arch)#2
+# Loading work.regs_gen_null_res(behavioral)#2
+# Loading work.th22m_en_gen(arch_th22m_en_gen)#1
+# Loading work.sram2176x16(fast)
+# Loading work.sram4096x16(fast)
+# ** Note: (vsim-8900) Creating design debug database vsim.dbg.
+add schematic -full sim:/weightmemory_4layers
+quit -sim
+# End time: 14:16:03 on May 06,2022, Elapsed time: 0:01:07
+# Errors: 0, Warnings: 4
+vsim -t ps work.tb_grnn_gru_8_16
+# vsim -t ps work.tb_grnn_gru_8_16 
+# Start time: 14:16:18 on May 06,2022
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.std_logic_textio(body)
+# Loading ieee.numeric_std(body)
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading work.ncl_signals
+# Loading work.functions(body)
+# Loading work.tree_funcs(body)
+# Loading work.tb_grnn_gru_8_16(arch_tb_grnn_gru_8_16)#1
+# Loading ieee.math_real(body)
+# Loading work.grnn_w_io(arch_grnn_w_io)#1
+# Loading work.flashaccessgrnn(arch_flashaccessgrnn)#1
+# Loading work.counter_selfreset(arch_counter_selfreset)#1
+# Loading work.compm(arch)#1
+# Loading work.regs_gen_null_res(behavioral)#1
+# Loading work.full_adder(arch1)#1
+# Loading work.andtreem(arch)#1
+# Loading work.ortreem(arch)#1
+# Loading work.compdm(arch)#1
+# Loading work.regs_gen_zero_res(arch1)#1
+# Loading work.compm(arch)#2
+# Loading work.regs_gen_null_res(behavioral)#2
+# Loading work.sdc_w_en(arch_sdc_w_en)#1
+# Loading work.th22m_en_gen(arch_th22m_en_gen)#1
+# Loading work.flashtomemgrnn(arch_flashtomemgrnn)#1
+# Loading work.compm(arch)#3
+# Loading work.regs_gen_null_res(behavioral)#3
+# Loading work.andtreem(arch)#2
+# Loading work.ortreem(arch)#2
+# Loading work.th22m_en_gen(arch_th22m_en_gen)#2
+# Loading work.mux_21_gen_nic(behavioral)#1
+# Loading work.reg_gen(arch)#2
+# Loading work.sdc_w_en(arch_sdc_w_en)#2
+# Loading work.compm(arch)#4
+# Loading work.andtreem(arch)#14
+# Loading work.regs_gen_null_res(behavioral)#4
+# Loading work.oaat_in_all_out(arch_oaat_in_all_out)#1
+# Loading work.compm(arch)#5
+# Loading work.andtreem(arch)#7
+# Loading work.regs_gen_null_res(behavioral)#5
+# Loading work.counter_selfreset(arch_counter_selfreset)#2
+# Loading work.compm(arch)#6
+# Loading work.regs_gen_null_res(behavioral)#6
+# Loading work.compdm(arch)#2
+# Loading work.regs_gen_zero_res(arch1)#2
+# Loading work.compm(arch)#7
+# Loading work.decoder_gen(behavioral)#1
+# Loading work.grnn_control_w_mem(arch_grnn_control_w_mem)#1
+# Loading work.mux21_dr_gen(arch)#1
+# Loading work.oaat_out_all_in_forever(arch_oaat_out_all_in_forever)#1
+# Loading work.regs_gen_null_res(behavioral)#8
+# Loading work.counter_selfreset(arch_counter_selfreset)#3
+# Loading work.compm(arch)#8
+# Loading work.regs_gen_null_res(behavioral)#9
+# Loading work.compdm(arch)#3
+# Loading work.mux_21_gen(behavioral)#3
+# Loading work.regs_gen_null_res(behavioral)#10
+# Loading work.compm(arch)#9
+# Loading work.compm(arch)#10
+# Loading work.andtreem(arch)#16
+# Loading work.th22m_a(archth22m_a)#1
+# Loading work.th12m_a(archth12m_a)#1
+# Loading work.compdm(arch)#4
+# Loading work.andtreem(arch)#17
+# Loading work.th22_a(archth22_a)#1
+# Loading work.regs_gen_zero_res(arch1)#4
+# Loading work.reg_zero_res(arch1)#1
+# Loading work.th22m_en_gen(arch_th22m_en_gen)#3
+# Loading work.mux_nto1_gen(behavioral)#2
+# Loading work.mux_21_gen(behavioral)#2
+# Loading work.thxor0m_a(archthxor0m_a)#1
+# Loading work.mux_21_gen_nic(behavioral)#2
+# Loading work.oaat_in_all_out(arch_oaat_in_all_out)#2
+# Loading work.counter_selfreset(arch_counter_selfreset)#4
+# Loading work.compm(arch)#11
+# Loading work.regs_gen_null_res(behavioral)#11
+# Loading work.andtreem(arch)#5
+# Loading work.ortreem(arch)#5
+# Loading work.compdm(arch)#5
+# Loading work.regs_gen_zero_res(arch1)#5
+# Loading work.compm(arch)#12
+# Loading work.regs_gen_null_res(behavioral)#12
+# Loading work.decoder_gen(behavioral)#2
+# Loading work.rcf_oaat_out_all_in_128_forever(arch_rcf_oaat_out_all_in_128_forever)#1
+# Loading work.regs_gen_null_res(behavioral)#13
+# Loading work.reg_null_res(behavioral)#1
+# Loading work.counter_selfreset(arch_counter_selfreset)#5
+# Loading work.compm(arch)#13
+# Loading work.regs_gen_null_res(behavioral)#14
+# Loading work.andtreem(arch)#6
+# Loading work.ortreem(arch)#6
+# Loading work.compdm(arch)#6
+# Loading work.compm(arch)#14
+# Loading work.regs_gen_null_res(behavioral)#15
+# Loading work.mux_nto1_gen(behavioral)#3
+# Loading work.mux_21_gen(behavioral)#4
+# Loading work.ortreem(arch)#7
+# Loading work.mux_nto1_gen(behavioral)#4
+# Loading work.grnn_layer_w_mem(arch_grnn_layer_w_mem)#1
+# Loading work.mux21_dr_gen(arch)#2
+# Loading work.rcf_oaat_out_all_in_rpt(arch_rcf_oaat_out_all_in_rpt)#1
+# Loading work.regs_gen_null_res(behavioral)#16
+# Loading work.twophasecounter(arch_twophasecounter)#1
+# Loading work.compm(arch)#15
+# Loading work.andtreem(arch)#11
+# Loading work.regs_gen_null_res(behavioral)#17
+# Loading work.ortreem(arch)#8
+# Loading work.compdm(arch)#7
+# Loading work.regs_gen_zero_res(arch1)#7
+# Loading work.compm(arch)#16
+# Loading work.regs_gen_null_res(behavioral)#18
+# Loading work.mux_nto1_gen(behavioral)#5
+# Loading work.compm_half_sel(arch)#1
+# Loading work.addressgen(behavioral)#1
+# Loading work.mux_21_gen(behavioral)#1
+# Loading work.regs_gen_null_res(behavioral)#19
+# Loading work.memwritecounter(arch_memwritecounter)#1
+# Loading work.mux_21_gen_nic(behavioral)#3
+# Loading work.andtreem(arch)#8
+# Loading work.ortreem(arch)#9
+# Loading work.regs_gen_null_res(behavioral)#20
+# Loading work.mux_21_gen_nic(behavioral)#4
+# Loading work.compm(arch)#18
+# Loading work.weightmemory_4layers(arch_weightmemory_4layers)#1
+# Loading work.weightmemory_4layers_wrapper(arch_weightmemory_4layers_wrapper)#1
+# Loading work.mux_21_gen_nic(behavioral)#5
+# Loading work.compm(arch)#19
+# Loading work.regs_gen_null_res(behavioral)#21
+# Loading work.sram2176x16(fast)
+# Loading work.sram4096x16(fast)
+# Loading work.mult_of_accumulate_8_16(behavioral)#1
+# Loading work.regs_gen_null_res(behavioral)#22
+# Loading work.wrap_multiply_of_accumulate_8(behavioral)#1
+# Loading work.baugh_wooley_gen(arch1)#1
+# Loading work.adder_w_and(arch1)#1
+# Loading work.adder_w_nand(arch1)#2
+# Loading work.adder_w_nand(arch1)#1
+# Loading work.adder_w_and(arch1)#2
+# Loading work.accumulator_outputonreset(arch_accumulator_outputonreset)#1
+# Loading work.add_of_checkv2(arch_add_of_checkv2)#1
+# Loading work.counter_selfreset(arch_counter_selfreset)#6
+# Loading work.compdm(arch)#8
+# Loading work.regs_gen_zero_res(arch1)#8
+# Loading work.compm(arch)#20
+# Loading work.regs_gen_null_res(behavioral)#23
+# Loading work.regs_gen_zero_res(arch1)#9
+# Loading work.mult_acc_of_check_8(arch_mult_acc_of_check_8)#1
+# Loading work.mux_21_gen(behavioral)#5
+# Loading work.wrap_multiply_of_accumulate(behavioral)#1
+# Loading work.baugh_wooley_gen(arch1)#2
+# Loading work.timeszerocheck(arch_timeszerocheck)#1
+# Loading work.mult_of_checkv2(arch_mult_of_checkv2)#1
+# Loading work.rcf_oaat_in_all_out(arch_rcf_oaat_in_all_out)#1
+# Loading work.decoder_gen(behavioral)#3
+# Loading work.rcf_oaat_out_all_in_128(arch_rcf_oaat_out_all_in_128)#1
+# Loading work.adder_8_16(behavioral)#1
+# Loading work.wrap_elem_adder_8(behavioral)#1
+# Loading work.add_of_checkv2(arch_add_of_checkv2)#2
+# Loading work.wrap_elem_adder(behavioral)#1
+# Loading work.lut_sigmoid_8_16(behavioral)#1
+# Loading work.lut_sigmoid_8_wrapper(arch_lut_sigmoid_8_wrapper)#1
+# Loading work.sdc_w_en(arch_sdc_w_en)#3
+# Loading work.sigmoid_8Bit_rom(fast)
+# Loading work.wrap_lut_sigmoid(behavioral)#1
+# Loading work.lut_sigmoid_wrapper(arch_lut_sigmoid_wrapper)#1
+# Loading work.sigmoid_rom(fast)
+# Loading work.mult_8_16(behavioral)#1
+# Loading work.wrap_elem_mult_8(behavioral)#1
+# Loading work.timeszerocheck(arch_timeszerocheck)#2
+# Loading work.mult_of_check_8(arch_mult_of_check_8)#1
+# Loading work.wrap_elem_mult(behavioral)#1
+# Loading work.mux21_dr_gen(arch)#3
+# Loading work.one_sub_8_16_reverse(behavioral)#1
+# Loading work.one_elem_sub_reverse(behavioral)#1
+# Loading work.wrap_one_elem_sub_reverse(behavioral)#1
+# Loading work.sub_of_check(arch_sub_of_check)#2
+# Loading work.one_mult_8_16(behavioral)#1
+# Loading work.wrap_one_elem_mult_8(behavioral)#1
+# Loading work.wrap_one_elem_mult(behavioral)#1
+# Loading work.one_adder_8_16(behavioral)#1
+# Loading work.wrap_one_elem_adder_8(behavioral)#1
+# Loading work.wrap_one_elem_adder(behavioral)#1
+# Loading work.andtreem(arch)#10
+# Loading work.lut_tanh_8_16(behavioral)#1
+# Loading work.lut_tanh_8_wrapper(arch_lut_tanh_8_wrapper)#1
+# Loading work.tanh_8Bit_rom(fast)
+# Loading work.wrap_lut_tanh(behavioral)#1
+# Loading work.lut_tanh_wrapper(arch_lut_tanh_wrapper)#1
+# Loading work.tanh_rom(fast)
+# Loading work.convert_8_16(arch_convert_8_16)#1
+# Loading work.mux_21_gen(behavioral)#6
+# Loading work.convert_16_8(arch_convert_16_8)#1
+# Loading work.compm(arch)#21
+# Loading work.compm(arch)#22
+# Loading work.regs_gen_null_res(behavioral)#24
+# Loading work.twophasecounter(arch_twophasecounter)#2
+# Loading work.compm(arch)#17
+# Loading work.compdm(arch)#10
+# Loading work.regs_gen_zero_res(arch1)#10
+# Loading work.compm(arch)#23
+# Loading work.regs_gen_null_res(behavioral)#25
+# Loading work.rcf_grnn_fc_layer(arch_rcf_grnn_fc_layer)#1
+# Loading work.rcf_oaat_out_all_in_128_rpt(arch_rcf_oaat_out_all_in_128_rpt)#1
+# Loading work.twophasecounter(arch_twophasecounter)#3
+# Loading work.compdm(arch)#11
+# Loading work.regs_gen_zero_res(arch1)#11
+# Loading work.oaat_in_all_out(arch_oaat_in_all_out)#3
+# Loading work.counter_selfreset(arch_counter_selfreset)#7
+# Loading work.ortreem(arch)#11
+# Loading work.regs_gen_zero_res(arch1)#12
+# Loading work.decoder_gen(behavioral)#4
+# Loading work.oaat_out_all_in_forever(arch_oaat_out_all_in_forever)#2
+# Loading work.compm(arch)#25
+# Loading work.andtreem(arch)#22
+do GRNN_w_io_signals2.do
+run
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_grnn_gru_8_16
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 0  Instance: /tb_grnn_gru_8_16
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 1  Instance: /tb_grnn_gru_8_16
+# ** Warning: NUMERIC_STD.TO_INTEGER: metavalue detected, returning 0
+#    Time: 0 ps  Iteration: 1  Instance: /tb_grnn_gru_8_16
+# End time: 13:08:34 on May 07,2022, Elapsed time: 22:52:16
+# Errors: 0, Warnings: 5

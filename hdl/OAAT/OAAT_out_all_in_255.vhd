@@ -20,7 +20,7 @@ end OAAT_out_all_in_255;
 
 architecture arch_OAAT_out_all_in_255 of OAAT_out_all_in_255 is
 
-		component OAAT_out_all_in is
+		component OAAT_out_all_in_forever is
 	generic( bitwidth : integer := 8;
 		 numInputs : integer := 9);
 	port(	 
@@ -56,7 +56,7 @@ end generate;
 
 	
 
-  sf_data_loader_instance : OAAT_out_all_in
+  sf_data_loader_instance : OAAT_out_all_in_forever
  generic map(
  							bitwidth => bitwidth,
 							numInputs => numInputs)

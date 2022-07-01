@@ -1,0 +1,1214 @@
+/home/mtennant/Projects/GRNN_w_IO_WrapperTest/one_elem_adder.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/one_elem_adder.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity one_elem_adder
+-- Compiling architecture behavioral of one_elem_adder
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/RCF_GRNN_fc_layer.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/RCF_GRNN_fc_layer.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Loading package MATH_REAL
+-- Compiling entity RCF_GRNN_fc_layer
+-- Compiling architecture arch_RCF_GRNN_fc_layer of RCF_GRNN_fc_layer
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/RCF_OAAT_in_all_out.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/RCF_OAAT_in_all_out.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl_signals
+-- Loading package tree_funcs
+-- Compiling entity RCF_OAAT_in_all_out
+-- Compiling architecture arch_RCF_OAAT_in_all_out of RCF_OAAT_in_all_out
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/flashAccessGRNN.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/flashAccessGRNN.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity flashAccessGRNN
+-- Compiling architecture arch_flashAccessGRNN of flashAccessGRNN
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/NCL_functions.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/NCL_functions.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl_signals
+-- Compiling package functions
+-- Compiling package body functions
+-- Loading package functions
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/one_elem_mult.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/one_elem_mult.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity one_elem_mult
+-- Compiling architecture behavioral of one_elem_mult
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/MUX21_A.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/MUX21_A.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity MUX21_A
+-- Compiling architecture arch of MUX21_A
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/multiply_of_accumulate_8.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/multiply_of_accumulate_8.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity multiply_of_accumulate_8
+-- Compiling architecture behavioral of multiply_of_accumulate_8
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/MUX21_gen.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/MUX21_gen.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl_signals
+-- Compiling entity MUX21_gen
+-- Compiling architecture arch of MUX21_gen
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/RCF_OAAT_out_all_in_128_forever.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/RCF_OAAT_out_all_in_128_forever.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl_signals
+-- Loading package tree_funcs
+-- Loading package MATH_REAL
+-- Compiling entity RCF_OAAT_out_all_in_128_forever
+-- Compiling architecture arch_RCF_OAAT_out_all_in_128_forever of RCF_OAAT_out_all_in_128_forever
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/TimesZeroCheck.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/TimesZeroCheck.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity TimesZeroCheck
+-- Compiling architecture arch_TimesZeroCheck of TimesZeroCheck
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/MTNCL_package.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/MTNCL_package.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Compiling package MTNCL_gates
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl_signals
+-- Compiling package tree_funcs
+-- Compiling package body tree_funcs
+-- Loading package tree_funcs
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_LUT_sigmoid.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_LUT_sigmoid.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity wrap_LUT_sigmoid
+-- Compiling architecture behavioral of wrap_LUT_sigmoid
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/subtractor_gen.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/subtractor_gen.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl_signals
+-- Compiling entity subtractor_gen
+-- Compiling architecture arch1 of subtractor_gen
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/OAAT_out_all_in_forever.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/OAAT_out_all_in_forever.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl_signals
+-- Loading package tree_funcs
+-- Loading package MATH_REAL
+-- Compiling entity OAAT_out_all_in_forever
+-- Compiling architecture arch_OAAT_out_all_in_forever of OAAT_out_all_in_forever
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/GRNN_w_IO.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/GRNN_w_IO.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Loading package MATH_REAL
+-- Compiling entity GRNN_w_IO
+-- Compiling architecture arch_GRNN_w_IO of GRNN_w_IO
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/mult_of_check_8.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/mult_of_check_8.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Loading package MATH_REAL
+-- Compiling entity mult_of_check_8
+-- Compiling architecture arch_mult_of_check_8 of mult_of_check_8
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/RCF_OAAT_out_all_in_128_RPT.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/RCF_OAAT_out_all_in_128_RPT.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl_signals
+-- Loading package tree_funcs
+-- Loading package MATH_REAL
+-- Compiling entity RCF_OAAT_out_all_in_128_RPT
+-- Compiling architecture arch_RCF_OAAT_out_all_in_128_RPT of RCF_OAAT_out_all_in_128_RPT
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_one_elem_mult.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_one_elem_mult.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity wrap_one_elem_mult
+-- Compiling architecture behavioral of wrap_one_elem_mult
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/one_adder_8_16.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/one_adder_8_16.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity one_adder_8_16
+-- Compiling architecture behavioral of one_adder_8_16
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_LUT_tanh_8.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_LUT_tanh_8.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity wrap_LUT_tanh_8
+-- Compiling architecture behavioral of wrap_LUT_tanh_8
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/LUT_sigmoid_8.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/LUT_sigmoid_8.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity LUT_sigmoid_8
+-- Compiling architecture arch_LUT_sigmoid_8 of LUT_sigmoid_8
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_LUT_tanh.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_LUT_tanh.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity wrap_LUT_tanh
+-- Compiling architecture behavioral of wrap_LUT_tanh
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/LUT_sigmoid.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/LUT_sigmoid.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity LUT_sigmoid
+-- Compiling architecture arch_LUT_sigmoid of LUT_sigmoid
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/mult_acc_of_check_8.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/mult_acc_of_check_8.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Loading package MATH_REAL
+-- Compiling entity mult_acc_of_check_8
+-- Compiling architecture arch_mult_acc_of_check_8 of mult_acc_of_check_8
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_one_elem_adder_8.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_one_elem_adder_8.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity wrap_one_elem_adder_8
+-- Compiling architecture behavioral of wrap_one_elem_adder_8
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_elem_adder.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_elem_adder.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity wrap_elem_adder
+-- Compiling architecture behavioral of wrap_elem_adder
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/shiftRegister.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/shiftRegister.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity shiftRegister
+-- Compiling architecture arch_shiftRegister of shiftRegister
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/one_sub_8_16_reverse.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/one_sub_8_16_reverse.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity one_sub_8_16_reverse
+-- Compiling architecture behavioral of one_sub_8_16_reverse
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_one_elem_adder.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_one_elem_adder.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity wrap_one_elem_adder
+-- Compiling architecture behavioral of wrap_one_elem_adder
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/tb_GRNN_gru_8_16.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/tb_GRNN_gru_8_16.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_textio
+-- Loading package NUMERIC_STD
+-- Loading package std_logic_arith
+-- Loading package STD_LOGIC_UNSIGNED
+-- Loading package ncl_signals
+-- Loading package functions
+-- Loading package tree_funcs
+-- Compiling entity tb_GRNN_gru_8_16
+-- Compiling architecture arch_tb_GRNN_gru_8_16 of tb_GRNN_gru_8_16
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/one_elem_mult_8.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/one_elem_mult_8.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity one_elem_mult_8
+-- Compiling architecture behavioral of one_elem_mult_8
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_elem_mult.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_elem_mult.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity wrap_elem_mult
+-- Compiling architecture behavioral of wrap_elem_mult
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/sram2176x16.v {1 {vlog -work work -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/sram2176x16.v
+QuestaSim vlog 2021.4 Compiler 2021.10 Oct 13 2021
+-- Compiling module sram2176x16
+
+Top level modules:
+	sram2176x16
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/rom256x16.v {1 {vlog -work work -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/rom256x16.v
+QuestaSim vlog 2021.4 Compiler 2021.10 Oct 13 2021
+-- Compiling module rom256x16
+
+Top level modules:
+	rom256x16
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/MTNCL_treecomps.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/MTNCL_treecomps.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package tree_funcs
+-- Compiling entity andtreem
+-- Compiling architecture arch of andtreem
+-- Compiling entity ortreem
+-- Compiling architecture arch of ortreem
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/mult_8_16.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/mult_8_16.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity mult_8_16
+-- Compiling architecture behavioral of mult_8_16
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/multiply_of_accumulate.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/multiply_of_accumulate.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity multiply_of_accumulate
+-- Compiling architecture behavioral of multiply_of_accumulate
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_LUT_sigmoid_8.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_LUT_sigmoid_8.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity wrap_LUT_sigmoid_8
+-- Compiling architecture behavioral of wrap_LUT_sigmoid_8
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/th22m_en_gen.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/th22m_en_gen.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity th22m_en_gen
+-- Compiling architecture arch_th22m_en_gen of th22m_en_gen
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/one_elem_sub_reverse.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/one_elem_sub_reverse.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity one_elem_sub_reverse
+-- Compiling architecture behavioral of one_elem_sub_reverse
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_one_elem_sub_reverse.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_one_elem_sub_reverse.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity wrap_one_elem_sub_reverse
+-- Compiling architecture behavioral of wrap_one_elem_sub_reverse
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/tanh_rom.v {1 {vlog -work work -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/tanh_rom.v
+QuestaSim vlog 2021.4 Compiler 2021.10 Oct 13 2021
+-- Compiling module tanh_rom
+
+Top level modules:
+	tanh_rom
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/Baugh_Wooley_gen.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/Baugh_Wooley_gen.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl_signals
+-- Compiling entity baugh_wooley_gen
+-- Compiling architecture arch1 of baugh_wooley_gen
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/LUT_tanh_8.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/LUT_tanh_8.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity LUT_tanh_8
+-- Compiling architecture arch_LUT_tanh_8 of LUT_tanh_8
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/reg_gen_zero_res.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/reg_gen_zero_res.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl_signals
+-- Compiling entity regs_gen_zero_res
+-- Compiling architecture arch1 of regs_gen_zero_res
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/decoder_gen.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/decoder_gen.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity decoder_gen
+-- Compiling architecture behavioral of decoder_gen
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/LUT_sigmoid_8_wrapper.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/LUT_sigmoid_8_wrapper.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity LUT_sigmoid_8_wrapper
+-- Compiling architecture arch_LUT_sigmoid_8_wrapper of LUT_sigmoid_8_wrapper
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/LUT_sigmoid_wrapper.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/LUT_sigmoid_wrapper.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity LUT_sigmoid_wrapper
+-- Compiling architecture arch_LUT_sigmoid_wrapper of LUT_sigmoid_wrapper
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/accumulator_outputOnReset.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/accumulator_outputOnReset.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl_signals
+-- Loading package tree_funcs
+-- Compiling entity accumulator_outputOnReset
+-- Compiling architecture arch_accumulator_outputOnReset of accumulator_outputOnReset
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/memWriteCounter.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/memWriteCounter.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl_signals
+-- Loading package tree_funcs
+-- Compiling entity memWriteCounter
+-- Compiling architecture arch_memWriteCounter of memWriteCounter
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/elem_adder.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/elem_adder.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity elem_adder
+-- Compiling architecture behavioral of elem_adder
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/LUT_tanh_8_16.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/LUT_tanh_8_16.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity LUT_tanh_8_16
+-- Compiling architecture behavioral of LUT_tanh_8_16
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/counter_selfReset.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/counter_selfReset.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl_signals
+-- Loading package tree_funcs
+-- Compiling entity counter_selfReset
+-- Compiling architecture arch_counter_selfReset of counter_selfReset
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/mux_nto1_gen.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/mux_nto1_gen.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package MATH_REAL
+-- Loading package ncl_signals
+-- Loading package tree_funcs
+-- Compiling entity mux_nto1_gen
+-- Compiling architecture behavioral of mux_nto1_gen
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/weightMemory_4Layers.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/weightMemory_4Layers.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity weightMemory_4Layers
+-- Compiling architecture arch_weightMemory_4Layers of weightMemory_4Layers
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_elem_mult_8.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_elem_mult_8.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity wrap_elem_mult_8
+-- Compiling architecture behavioral of wrap_elem_mult_8
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/flashToMemGRNN.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/flashToMemGRNN.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity flashToMemGRNN
+-- Compiling architecture arch_flashToMemGRNN of flashToMemGRNN
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/NCL_random.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/NCL_random.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package MATH_REAL
+-- Compiling package random
+-- Compiling package body random
+-- Loading package random
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/mult_of_accumulate_8_16.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/mult_of_accumulate_8_16.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity mult_of_accumulate_8_16
+-- Compiling architecture behavioral of mult_of_accumulate_8_16
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/MTNCL_completion.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/MTNCL_completion.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl_signals
+-- Compiling entity compm
+-- Compiling architecture arch of compm
+-- Compiling entity compdm
+-- Compiling architecture arch of compdm
+-- Compiling entity comp1m
+-- Compiling architecture arch of comp1m
+-- Compiling entity comp1dm
+-- Compiling architecture arch of comp1dm
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_multiply_of_accumulate_8.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_multiply_of_accumulate_8.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity wrap_multiply_of_accumulate_8
+-- Compiling architecture behavioral of wrap_multiply_of_accumulate_8
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_multiply_of_accumulate.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_multiply_of_accumulate.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity wrap_multiply_of_accumulate
+-- Compiling architecture behavioral of wrap_multiply_of_accumulate
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/adding_units.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/adding_units.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity half_adder
+-- Compiling entity full_adder
+-- Compiling entity adder_w_and
+-- Compiling entity adder_w_nand
+-- Compiling architecture behavioral of half_adder
+-- Compiling architecture arch1 of full_adder
+-- Compiling architecture arch1 of adder_w_and
+-- Compiling architecture arch1 of adder_w_nand
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/adder_gen.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/adder_gen.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl_signals
+-- Compiling entity adder_gen
+-- Compiling architecture behavioral of adder_gen
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/RCF_OAAT_out_all_in_RPT.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/RCF_OAAT_out_all_in_RPT.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl_signals
+-- Loading package tree_funcs
+-- Loading package MATH_REAL
+-- Compiling entity RCF_OAAT_out_all_in_RPT
+-- Compiling architecture arch_RCF_OAAT_out_all_in_RPT of RCF_OAAT_out_all_in_RPT
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/reg_null_res.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/reg_null_res.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl_signals
+-- Compiling entity reg_null_res
+-- Compiling architecture behavioral of reg_null_res
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/OAAT_in_all_out.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/OAAT_in_all_out.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl_signals
+-- Loading package tree_funcs
+-- Compiling entity OAAT_in_all_out
+-- Compiling architecture arch_OAAT_in_all_out of OAAT_in_all_out
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/GRNN_top_w_mem.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/GRNN_top_w_mem.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Loading package MATH_REAL
+-- Compiling entity GRNN_layer_w_mem
+-- Compiling architecture arch_GRNN_layer_w_mem of GRNN_layer_w_mem
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/elem_mult_8.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/elem_mult_8.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity elem_mult_8
+-- Compiling architecture behavioral of elem_mult_8
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/sub_of_check.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/sub_of_check.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity sub_of_check
+-- Compiling architecture arch_sub_of_check of sub_of_check
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/elem_mult.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/elem_mult.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity elem_mult
+-- Compiling architecture behavioral of elem_mult
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/register.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/register.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity DFFRX1MTR_No_QN
+-- Compiling architecture arch of DFFRX1MTR_No_QN
+-- Compiling entity regD
+-- Compiling architecture arch of regD
+-- Compiling entity reg_sleep
+-- Compiling architecture arch of reg_sleep
+-- Compiling entity reg_gen
+-- Compiling architecture arch of reg_gen
+-- Compiling entity reg_gen_sleep
+-- Compiling architecture arch of reg_gen_sleep
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/LUT_sigmoid_8_16.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/LUT_sigmoid_8_16.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity LUT_sigmoid_8_16
+-- Compiling architecture behavioral of LUT_sigmoid_8_16
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/adder_8_16.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/adder_8_16.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity adder_8_16
+-- Compiling architecture behavioral of adder_8_16
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/mux_21_gen.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/mux_21_gen.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl_signals
+-- Compiling entity mux_21_gen
+-- Compiling architecture behavioral of mux_21_gen
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/regs_gen_null_res.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/regs_gen_null_res.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl_signals
+-- Compiling entity regs_gen_null_res
+-- Compiling architecture behavioral of regs_gen_null_res
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/sigmoid_rom.v {1 {vlog -work work -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/sigmoid_rom.v
+QuestaSim vlog 2021.4 Compiler 2021.10 Oct 13 2021
+-- Compiling module sigmoid_rom
+
+Top level modules:
+	sigmoid_rom
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_one_elem_mult_8.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_one_elem_mult_8.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity wrap_one_elem_mult_8
+-- Compiling architecture behavioral of wrap_one_elem_mult_8
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/LUT_tanh_8_wrapper.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/LUT_tanh_8_wrapper.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity LUT_tanh_8_wrapper
+-- Compiling architecture arch_LUT_tanh_8_wrapper of LUT_tanh_8_wrapper
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/convert_16_8.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/convert_16_8.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Loading package MATH_REAL
+-- Compiling entity convert_16_8
+-- Compiling architecture arch_convert_16_8 of convert_16_8
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/RCF_OAAT_out_all_in_128.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/RCF_OAAT_out_all_in_128.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl_signals
+-- Loading package tree_funcs
+-- Loading package MATH_REAL
+-- Compiling entity RCF_OAAT_out_all_in_128
+-- Compiling architecture arch_RCF_OAAT_out_all_in_128 of RCF_OAAT_out_all_in_128
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/LUT_tanh.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/LUT_tanh.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity LUT_tanh
+-- Compiling architecture arch_LUT_tanh of LUT_tanh
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/one_mult_8_16.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/one_mult_8_16.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity one_mult_8_16
+-- Compiling architecture behavioral of one_mult_8_16
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/compm_half_sel.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/compm_half_sel.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl_signals
+-- Compiling entity compm_half_sel
+-- Compiling architecture arch of compm_half_sel
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/NCL_components.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/NCL_components.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package tree_funcs
+-- Compiling entity comp
+-- Compiling architecture arch of comp
+-- Loading package ncl_signals
+-- Compiling entity ncl_register_D1
+-- Compiling architecture arch of ncl_register_d1
+-- Compiling entity ncl_register_D
+-- Compiling architecture gen of ncl_register_D
+-- Compiling entity ncl_register_Q1
+-- Compiling architecture arch of ncl_register_Q1
+-- Compiling entity ncl_register_Q
+-- Compiling architecture gen of ncl_register_Q
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/Mult_of_checkV2.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/Mult_of_checkV2.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity mult_of_checkV2
+-- Compiling architecture arch_mult_of_checkV2 of mult_of_checkV2
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/sigmoid_8Bit_rom.v {1 {vlog -work work -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/sigmoid_8Bit_rom.v
+QuestaSim vlog 2021.4 Compiler 2021.10 Oct 13 2021
+-- Compiling module sigmoid_8Bit_rom
+
+Top level modules:
+	sigmoid_8Bit_rom
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/weightMemory_4Layers_wrapper.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/weightMemory_4Layers_wrapper.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity weightMemory_4Layers_wrapper
+-- Compiling architecture arch_weightMemory_4Layers_wrapper of weightMemory_4Layers_wrapper
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/convert_8_16.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/convert_8_16.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Loading package MATH_REAL
+-- Compiling entity convert_8_16
+-- Compiling architecture arch_convert_8_16 of convert_8_16
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/mux_21_gen_nic.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/mux_21_gen_nic.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl_signals
+-- Compiling entity mux_21_gen_nic
+-- Compiling architecture behavioral of mux_21_gen_nic
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/Extra_Gates.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/Extra_Gates.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity BUFFER_A
+-- Compiling architecture arch of BUFFER_A
+-- Compiling entity BUFFER_C
+-- Compiling architecture arch of BUFFER_C
+-- Compiling entity and2_a
+-- Compiling architecture arch of and2_a
+-- Compiling entity or2_a
+-- Compiling architecture arch of or2_a
+-- Compiling entity xor2_a
+-- Compiling architecture arch of xor2_a
+-- Compiling entity or3_a
+-- Compiling architecture arch of or3_a
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/NCL_gates.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/NCL_gates.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity inv_a
+-- Compiling architecture archinv_a of inv_a
+-- Compiling entity th12b_a
+-- Compiling architecture archth12b_a of th12b_a
+-- Compiling entity th12_a
+-- Compiling architecture archth12_a of th12_a
+-- Compiling entity th13_a
+-- Compiling architecture archth13_a of th13_a
+-- Compiling entity th14_a
+-- Compiling architecture archth14_a of th14_a
+-- Compiling entity th22d_a
+-- Compiling architecture archth22d_a of th22d_a
+-- Compiling entity th22n_a
+-- Compiling architecture archth22n_a of th22n_a
+-- Compiling entity th22_a
+-- Compiling architecture archth22_a of th22_a
+-- Compiling entity th23_a
+-- Compiling architecture archth23_a of th23_a
+-- Compiling entity th23w2_a
+-- Compiling architecture archth23w2_a of th23w2_a
+-- Compiling entity th24_a
+-- Compiling architecture archth24_a of th24_a
+-- Compiling entity th24w2_a
+-- Compiling architecture archth24w2_a of th24w2_a
+-- Compiling entity th24w22_a
+-- Compiling architecture archth24w22_a of th24w22_a
+-- Compiling entity th24comp_a
+-- Compiling architecture archth24comp_a of th24comp_a
+-- Compiling entity th33d_a
+-- Compiling architecture archth33d_a of th33d_a
+-- Compiling entity th33n_a
+-- Compiling architecture archth33n_a of th33n_a
+-- Compiling entity th33_a
+-- Compiling architecture archth33_a of th33_a
+-- Compiling entity th33w2_a
+-- Compiling architecture archth33w2_a of th33w2_a
+-- Compiling entity th34_a
+-- Compiling architecture archth34_a of th34_a
+-- Compiling entity th34w2_a
+-- Compiling architecture archth34w2_a of th34w2_a
+-- Compiling entity th34w22_a
+-- Compiling architecture archth34w22_a of th34w22_a
+-- Compiling entity th34w3_a
+-- Compiling architecture archth34w3_a of th34w3_a
+-- Compiling entity th34w32_a
+-- Compiling architecture archth34w32_a of th34w32_a
+-- Compiling entity th44_a
+-- Compiling architecture archth44_a of th44_a
+-- Compiling entity th44w2_a
+-- Compiling architecture archth44w2_a of th44w2_a
+-- Compiling entity th44w22_a
+-- Compiling architecture archth44w22_a of th44w22_a
+-- Compiling entity th44w3_a
+-- Compiling architecture archth44w3_a of th44w3_a
+-- Compiling entity th44w322_a
+-- Compiling architecture archth44w322_a of th44w322_a
+-- Compiling entity th54w22_a
+-- Compiling architecture archth54w22_a of th54w22_a
+-- Compiling entity th54w32_a
+-- Compiling architecture archth54w32_a of th54w32_a
+-- Compiling entity th54w322_a
+-- Compiling architecture archth54w322_a of th54w322_a
+-- Compiling entity thand0_a
+-- Compiling architecture archthand0_a of thand0_a
+-- Compiling entity thxor0_a
+-- Compiling architecture archthxor0_a of thxor0_a
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_one_elem_sub_8_reverse.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_one_elem_sub_8_reverse.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity wrap_one_elem_sub_8_reverse
+-- Compiling architecture behavioral of wrap_one_elem_sub_8_reverse
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/MTNCL_gates.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/MTNCL_gates.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling entity bufferm_a
+-- Compiling architecture arch of bufferm_a
+-- Compiling entity th12m_a
+-- Compiling architecture archth12m_a of th12m_a
+-- Compiling entity th12dm_a
+-- Compiling architecture archth12dm_a of th12dm_a
+-- Compiling entity th12nm_a
+-- Compiling architecture archth12nm_a of th12nm_a
+-- Compiling entity th13m_a
+-- Compiling architecture archth13m_a of th13m_a
+-- Compiling entity th14m_a
+-- Compiling architecture archth14m_a of th14m_a
+-- Compiling entity th22m_a
+-- Compiling architecture archth22m_a of th22m_a
+-- Compiling entity th23m_a
+-- Compiling architecture archth23m_a of th23m_a
+-- Compiling entity th23w2m_a
+-- Compiling architecture arch of th23w2m_a
+-- Compiling entity th24m_a
+-- Compiling architecture archth24m_a of th24m_a
+-- Compiling entity th24w2m_a
+-- Compiling architecture archth24w2m_a of th24w2m_a
+-- Compiling entity th24w22m_a
+-- Compiling architecture archth24w22m_a of th24w22m_a
+-- Compiling entity th24compm_a
+-- Compiling architecture archth24compm_a of th24compm_a
+-- Compiling entity th33m_a
+-- Compiling architecture archth33m_a of th33m_a
+-- Compiling entity th33w2m_a
+-- Compiling architecture archth33w2m_a of th33w2m_a
+-- Compiling entity th34m_a
+-- Compiling architecture archth34m_a of th34m_a
+-- Compiling entity th34w2m_a
+-- Compiling architecture archth34w2m_a of th34w2m_a
+-- Compiling entity th34w22m_a
+-- Compiling architecture archth34w22m_a of th34w22m_a
+-- Compiling entity th34w3m_a
+-- Compiling architecture archth34w3m_a of th34w3m_a
+-- Compiling entity th34w32m_a
+-- Compiling architecture archth34w32m_a of th34w32m_a
+-- Compiling entity th44m_a
+-- Compiling architecture archth44m_a of th44m_a
+-- Compiling entity th44w2m_a
+-- Compiling architecture archth44w2m_a of th44w2m_a
+-- Compiling entity th44w22m_a
+-- Compiling architecture archth44w22m_a of th44w22m_a
+-- Compiling entity th44w3m_a
+-- Compiling architecture archth44w3m_a of th44w3m_a
+-- Compiling entity th44w322m_a
+-- Compiling architecture archth44w322m_a of th44w322m_a
+-- Compiling entity th54w22m_a
+-- Compiling architecture archth54w22m_a of th54w22m_a
+-- Compiling entity th54w32m_a
+-- Compiling architecture archth54w32m_a of th54w32m_a
+-- Compiling entity th54w322m_a
+-- Compiling architecture archth54w322m_a of th54w322m_a
+-- Compiling entity thand0m_a
+-- Compiling architecture archthand0m_a of thand0m_a
+-- Compiling entity thxor0m_a
+-- Compiling architecture archthxor0m_a of thxor0m_a
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/tanh_8Bit_rom.v {1 {vlog -work work -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/tanh_8Bit_rom.v
+QuestaSim vlog 2021.4 Compiler 2021.10 Oct 13 2021
+-- Compiling module tanh_8Bit_rom
+
+Top level modules:
+	tanh_8Bit_rom
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/MUX21_dr_gen.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/MUX21_dr_gen.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl_signals
+-- Compiling entity MUX21_dr_gen
+-- Compiling architecture arch of MUX21_dr_gen
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/TwoPhaseCounter.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/TwoPhaseCounter.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl_signals
+-- Loading package tree_funcs
+-- Compiling entity TwoPhaseCounter
+-- Compiling architecture arch_TwoPhaseCounter of TwoPhaseCounter
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/NCL_signals.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/NCL_signals.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Compiling package ncl_signals
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/mux_21_nic.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/mux_21_nic.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl_signals
+-- Compiling entity mux_21_nic
+-- Compiling architecture behavioral of mux_21_nic
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/reg_zero_res.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/reg_zero_res.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl_signals
+-- Compiling entity reg_zero_res
+-- Compiling architecture arch1 of reg_zero_res
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/LUT_tanh_wrapper.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/LUT_tanh_wrapper.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity LUT_tanh_wrapper
+-- Compiling architecture arch_LUT_tanh_wrapper of LUT_tanh_wrapper
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/addressGen.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/addressGen.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity addressGen
+-- Compiling architecture behavioral of addressGen
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/GRNN_control_w_mem.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/GRNN_control_w_mem.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Loading package MATH_REAL
+-- Compiling entity GRNN_control_w_mem
+-- Compiling architecture arch_GRNN_control_w_mem of GRNN_control_w_mem
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/sram4096x16.v {1 {vlog -work work -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/sram4096x16.v
+QuestaSim vlog 2021.4 Compiler 2021.10 Oct 13 2021
+-- Compiling module sram4096x16
+
+Top level modules:
+	sram4096x16
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/Add_of_checkV2.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/Add_of_checkV2.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity Add_of_checkV2
+-- Compiling architecture arch_Add_of_checkV2 of Add_of_checkV2
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/SDC_w_EN.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/SDC_w_EN.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity SDC_w_EN
+-- Compiling architecture arch_SDC_w_EN of SDC_w_EN
+
+} {} {}} /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_elem_adder_8.vhd {1 {vcom -work work -2002 -explicit -vopt -stats=none /home/mtennant/Projects/GRNN_w_IO_WrapperTest/wrap_elem_adder_8.vhd
+QuestaSim vcom 2021.4 Compiler 2021.10 Oct 13 2021
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package std_logic_arith
+-- Loading package ncl_signals
+-- Compiling entity wrap_elem_adder_8
+-- Compiling architecture behavioral of wrap_elem_adder_8
+
+} {} {}}

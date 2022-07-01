@@ -55,24 +55,24 @@ end component;
   signal ki_sig: std_logic;
   signal sleep_in: std_logic;
   signal sleep_out: std_logic;
-  signal z: dual_rail_logic_vector((numberOfPixels/2)*bitwidth-1 downto 0);
+  signal z: dual_rail_logic_vector((numberOfPixels)*bitwidth-1 downto 0);
 	signal reset_count : dual_rail_logic_vector(addresswidth-2 downto 0);
 	signal data0, data1 : dual_rail_logic;
 
   signal  temp : std_logic_vector(bitwidth-1 downto 0);	
   signal CORRECT: std_logic;
 
-  signal checker : std_logic_vector((numberOfPixels/2)*bitwidth-1 downto 0):= (others => 'U');		
-  signal Icheck, slowIcheck : std_logic_vector((numberOfPixels/2)*bitwidth-1 downto 0);
+  signal checker : std_logic_vector((numberOfPixels)*bitwidth-1 downto 0):= (others => 'U');		
+  signal Icheck, slowIcheck : std_logic_vector((numberOfPixels)*bitwidth-1 downto 0);
 
   begin
     
   uut: OAAT_in_all_out_2047
  generic map(
  							bitwidth => bitwidth,
-							numInputs => numberOfPixels/2,
-							counterWidth => addresswidth-1, --Log2 of numInputs
-							delay_amount => 0)
+							numInputs => numberOfPixels,
+							counterWidth => addresswidth, --Log2 of numInputs
+							delay_amount => 15)
   port map(
 					    a => pixel,
 					    reset => reset,
@@ -123,8 +123,8 @@ variable v_inval : std_logic_vector(bitwidth-1 downto 0);
         reset <= '1';
 				sleep_in <= '1';
 
-	for i in 0 to (size/2-1) loop
-		for j in 0 to (size/2-1) loop
+	for i in 0 to (size-1) loop
+		for j in 0 to (size-1) loop
 
 			temp(bitwidth-1 downto 0) <= memData((i*(size))+j);
 
@@ -153,7 +153,7 @@ variable v_inval : std_logic_vector(bitwidth-1 downto 0);
             end if;
 
 						if is_data(z) then
-							for i in 0 to (numberOfPixels/2)*bitwidth-1 loop			
+							for i in 0 to (numberOfPixels)*bitwidth-1 loop			
 								checker(i) <= z(i).rail1;
 							end loop;
 						end if;
@@ -173,7 +173,7 @@ variable v_inval : std_logic_vector(bitwidth-1 downto 0);
 process(ki_sig)
 	variable row          : line;
 	variable row_check          : line;
-	variable row_check_inval : std_logic_vector((numberOfPixels/2)*bitwidth-1 downto 0);
+	variable row_check_inval : std_logic_vector((numberOfPixels)*bitwidth-1 downto 0);
 
 	begin
 

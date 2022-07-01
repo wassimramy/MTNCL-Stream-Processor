@@ -13,8 +13,8 @@ use ieee.math_real.all;
 
 
 entity OAAT_out_all_in is
-	generic(bitwidth: integer := 16;
-		numInputs : integer := 64);
+	generic(bitwidth: integer := 12;
+		numInputs : integer := 256);
 	port(	 
 		a : in dual_rail_logic_vector(numInputs*bitwidth-1 downto 0);
 		reset_count : in dual_rail_logic_vector(integer(ceil(log2(real(numInputs))))-1 downto 0); --CHANGE COUNTER WIDTH

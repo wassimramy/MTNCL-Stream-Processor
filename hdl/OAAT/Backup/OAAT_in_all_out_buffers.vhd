@@ -5,17 +5,20 @@ use work.tree_funcs.all;
 
 entity OAAT_in_all_out is
 	generic( bitwidth : integer := 16;
-		 numInputs : integer := 8;
-		 counterWidth : integer := 3; --Log2 of numInputs
+		 numInputs : integer := 64;
+		 counterWidth : integer := 6; --Log2 of numInputs
 		 delay_amount : integer := 6);
-	port(	 a : in dual_rail_logic_vector(bitwidth-1 downto 0);
+	port(	 
+
+		a : in dual_rail_logic_vector(bitwidth-1 downto 0);
 		reset_count : in dual_rail_logic_vector(counterWidth-1 downto 0);
 		sleep_in: in std_logic;
-		 reset: in std_logic;
-		 ki: in std_logic;
-		 ko: out std_logic;
-		 sleep_out: out std_logic;
-		 z: out dual_rail_logic_vector(numInputs*bitwidth-1 downto 0));
+		reset: in std_logic;
+		ki: in std_logic;
+		ko: out std_logic;
+		sleep_out: out std_logic;
+		z: out dual_rail_logic_vector(numInputs*bitwidth-1 downto 0)
+	);
 end OAAT_in_all_out;
 
 architecture arch_OAAT_in_all_out of OAAT_in_all_out is
@@ -79,20 +82,6 @@ architecture arch_OAAT_in_all_out of OAAT_in_all_out is
 			q: out dual_rail_logic);
 	end component;
 
-	component andtreem is
-		generic(width: in integer := 4);
-		port(a: in std_logic_vector(width-1 downto 0);
-			 sleep: in std_logic;
-			 ko: out std_logic);
-	end component;
-
-	component ortreem is
-		generic(width: in integer := 4);
-		port(a: in std_logic_vector(width-1 downto 0);
-			 sleep: in std_logic;
-			 ko: out std_logic);
-	end component;
-
 	component inv_a is
 		port(a : in  std_logic;
 			 z : out std_logic);
@@ -115,7 +104,10 @@ architecture arch_OAAT_in_all_out of OAAT_in_all_out is
 			 z: out std_logic); 
 	end component; 
 
-
+component BUFFER_E is 
+	port(A: in std_logic; 
+		 Z: out std_logic); 
+end component; 
 
 component BUFFER_C is 
 	port(A: in std_logic; 
@@ -133,21 +125,31 @@ signal reg_i_in : dual_rail_logic_vector(numInputs*bitwidth-1 downto 0);
 signal regsleeps, regsleeps_not : std_logic_vector(numInputs-1 downto 0);
 signal comp_z_out_delay_ko, comp_z_out_a, comp_z_out_b : std_logic;
 signal comp_z_out_delay : std_logic_vector(delay_amount downto 0);
-
+signal ko_out_delay : std_logic_vector(delay_amount+numInputs downto 0);
 
 begin
 
 ko <= comp_a_out;
-sleep_out <= comp_z_out;
+--ko_out_delay(0) <= comp_a_out;
+gen_ko_out_delay : for i in 0 to delay_amount+numInputs-1 generate
+	delay_ko_i : BUFFER_E
+		port map(A => ko_out_delay(i),
+			Z => ko_out_delay(i+1));
+end generate;
+
+	delay_ko_final : BUFFER_E
+		port map(A => ko_out_delay(delay_amount+numInputs),
+			Z => comp_a_out);
 
 	comp_a: compm
 		generic map(width => bitwidth)
 		port map(
 			a => a,
-			ki => comp_z_out_delay_ko,
+			ki => comp_z_out_delay_ko, --comp_z_out,
 			rst => reset,
 			sleep => sleep_in,
-			ko => comp_a_out);
+			ko => ko_out_delay(0));
+			--ko => comp_a_out);
 
 
 	reg_a: regs_gen_null_res
@@ -156,14 +158,15 @@ sleep_out <= comp_z_out;
 			d => a,
 			q => reg_a_out,
 			reset => reset,
-			sleep => comp_a_out);
+			sleep => ko_out_delay(0));
+			--sleep => comp_a_out);
 
 	count_unit : counter_selfReset
 		generic map(width => counterWidth)
 		port map(reset_count => reset_count,
 			sleep_in => '0',
 			 reset => reset,
-			 ki => comp_z_out_delay_ko,
+			 ki => comp_z_out_delay_ko, --comp_z_out,
 			 ko => counter_ko,
 			 sleep_out => counter_sleep_out,
 			 accumulate_reset => accumulate_reset,
@@ -181,7 +184,8 @@ register_gen : for i in 0 to numInputs-1 generate
 		generic map(bitwidth => bitwidth)
 		port map(a  => reg_a_out,
 			en => count_1hot(i).rail1,
-			sleep => comp_a_out,
+			--sleep => comp_a_out,
+			sleep => ko_out_delay(numInputs+delay_amount-numInputs+i),
 			z => reg_i_in(bitwidth*(i+1)-1 downto bitwidth*(i)));
 
 	th23w2_i : th23w2m_a
@@ -209,12 +213,39 @@ end generate;
 reg_max : reg_null_res
    port map(d => accumulate_reset,
 		reset => reset,
-		sleep => comp_z_out_delay_ko,
+		sleep => comp_z_out,
 		q => reg_max_out);
 
 comp_z_in(bitwidth-1 downto 0) <= reg_a_out;
 comp_z_in(bitwidth) <= accumulate_reset;
 comp_z_in(bitwidth+counterWidth downto bitwidth+1) <= count;
+
+	comp_z_a: compm
+		generic map(width => bitwidth)
+		port map(
+			a => comp_z_in(bitwidth-1 downto 0),
+			ki => comp_z_ki,
+			rst => reset,
+			sleep => ko_out_delay(numInputs+delay_amount-numInputs-2),
+			--sleep => comp_a_out,
+			ko => comp_z_out_a);
+
+	comp_z_b: compm
+		generic map(width => counterWidth+1)
+		port map(
+			a => comp_z_in(bitwidth+counterWidth downto bitwidth),
+			ki => comp_z_ki,
+			rst => reset,
+			sleep => ko_out_delay(numInputs+delay_amount-numInputs-1),
+			--sleep => comp_a_out,
+			ko => comp_z_out_b);
+
+	compz_out_gate: th22n_a
+		port map(
+			a => comp_z_out_a,
+			b => comp_z_out_b,
+			rst => reset,
+			z => comp_z_out);
 
 comp_z_out_delay(0) <= comp_z_out;
 gen_comp_z_out_delay : for i in 0 to delay_amount-1 generate
@@ -226,31 +257,6 @@ end generate;
 	delay_comp_z_final : BUFFER_C
 		port map(A => comp_z_out_delay(delay_amount),
 			Z => comp_z_out_delay_ko);
-
-	comp_z_a: compm
-		generic map(width => bitwidth)
-		port map(
-			a => comp_z_in(bitwidth-1 downto 0),
-			ki => comp_z_ki,
-			rst => reset,
-			sleep => comp_a_out,
-			ko => comp_z_out_a);
-
-	comp_z_b: compm
-		generic map(width => counterWidth+1)
-		port map(
-			a => comp_z_in(bitwidth+counterWidth downto bitwidth),
-			ki => comp_z_ki,
-			rst => reset,
-			sleep => comp_a_out,
-			ko => comp_z_out_b);
-
-	compz_out_gate: th22n_a
-		port map(
-			a => comp_z_out_a,
-			b => comp_z_out_b,
-			rst => reset,
-			z => comp_z_out);
 
 	inv_not_max : inv_a
 		port map(a => reg_max_out.rail0,
@@ -279,5 +285,8 @@ end generate;
 		port map(a => comp_z_out,
 			z => not_ko);
 
+	sleepOut_gen : inv_a
+		port map(a => accumulate_reset.rail1,
+			z => sleep_out);
 
 end arch_OAAT_in_all_out;

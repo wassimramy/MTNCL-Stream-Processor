@@ -37,9 +37,9 @@ begin
 	BUFFER_B: process(A)
 	begin
 		if A = '1' then
-			Z <= '1' after 160 ps;
+			Z <= '1' after 2*160 ps;
 		elsif A = '0' then
-			Z <= '0' after 160 ps;
+			Z <= '0' after 2*160 ps;
 		end if ;
 	end process;
 end arch; 
@@ -60,9 +60,9 @@ begin
 	BUFFER_C: process(A)
 	begin
 		if A = '1' then
-			Z <= '1' after 160 ps;
+			Z <= '1' after 4*160 ps;
 		elsif A = '0' then
-			Z <= '0' after 160 ps;
+			Z <= '0' after 4*160 ps;
 		end if ;
 	end process;
 end arch; 
@@ -83,9 +83,9 @@ begin
 	BUFFER_D: process(A)
 	begin
 		if A = '1' then
-			Z <= '1' after 160 ps;
+			Z <= '1' after 8*160 ps;
 		elsif A = '0' then
-			Z <= '0' after 160 ps;
+			Z <= '0' after 8*160 ps;
 		end if ;
 	end process;
 end arch; 
@@ -106,9 +106,9 @@ begin
 	BUFFER_E: process(A)
 	begin
 		if A = '1' then
-			Z <= '1' after 160 ps;
+			Z <= '1' after 16*160 ps;
 		elsif A = '0' then
-			Z <= '0' after 160 ps;
+			Z <= '0' after 16*160 ps;
 		end if ;
 	end process;
 end arch; 

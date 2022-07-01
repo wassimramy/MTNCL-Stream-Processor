@@ -5,9 +5,9 @@ use work.tree_funcs.all;
 
 entity OAAT_in_all_out_2047 is
 	generic( bitwidth : integer := 8;
-		 numInputs : integer := 4096/2;
-		 counterWidth : integer := 12-1; --Log2 of numInputs
-		 delay_amount : integer := 0);
+		 numInputs : integer := 32;
+		 counterWidth : integer := 6; --Log2 of numInputs
+		 delay_amount : integer := 15);
 	port(	 
 
 		a : in dual_rail_logic_vector(bitwidth-1 downto 0);
@@ -50,9 +50,13 @@ begin
 	data0.rail0 <= '1';
 	data0.rail1 <= '0';
 
-	reset_count <= data1 & data1 & data1 & data1 & data1 & data1 & data1 & data1 & data1 & data1 & data1;	
+gen_ko_out_delay : for i in 0 to counterWidth-1 generate
+	reset_count(i) <= data1;	
+end generate;
 
-  uut: OAAT_in_all_out
+	
+
+  sf_data_loader_instance : OAAT_in_all_out
  generic map(
  							bitwidth => bitwidth,
 							numInputs => numInputs,

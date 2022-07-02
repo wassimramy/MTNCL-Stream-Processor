@@ -38,7 +38,6 @@ architecture arch of MTNCL_Histogram_Equalization_wo_sram is
 	generic(bitwidth: in integer := 4;  shadeBitwidth: in integer := 12);
 	port(
 		input    	: in  dual_rail_logic_vector(shadeBitwidth-1 downto 0);
-		--count    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
 		ki	 	: in std_logic;
 		sleep 		: in  std_logic;
 		rst  		: in std_logic;
@@ -64,11 +63,11 @@ architecture arch of MTNCL_Histogram_Equalization_wo_sram is
 	generic(bitwidth: in integer := 4; numberOfShades: in integer := 256; shadeBitwidth: in integer := 12);
 	port(
 		input    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
-		ki	 	: in std_logic;
 		sleep 		: in  std_logic;
 		rst  		: in std_logic;
 		sleepOut 	: out std_logic;
 		ko 	     	: out std_logic;
+		image_stored: out std_logic;
 		output   	: out dual_rail_logic_vector((numberOfShades*shadeBitwidth)-1 downto 0));
 	end component;
 
@@ -87,7 +86,7 @@ architecture arch of MTNCL_Histogram_Equalization_wo_sram is
 	      );
 	  end component;
 
-	component OAAT_out_all_in is
+	component OAAT_out_all_in_forever is
 		generic(bitwidth: integer := 8; numInputs : integer := 256);
 		port(a : in dual_rail_logic_vector(numInputs*bitwidth-1 downto 0);
 		reset_count : in dual_rail_logic_vector(integer(ceil(log2(real(numInputs))))-1 downto 0); --CHANGE COUNTER WIDTH
@@ -100,58 +99,6 @@ architecture arch of MTNCL_Histogram_Equalization_wo_sram is
 		count: out dual_rail_logic_vector(integer(ceil(log2(real(numInputs))))-1 downto 0);
 		z: out dual_rail_logic_vector(bitwidth-1 downto 0));
 	end component;	
-
-  component MTNCL_Rounding_Checker is
-    generic(bitwidth: in integer := 4);
-    port(
-		input    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
-		sel		: in  dual_rail_logic_vector(0 downto 0);
-		ki	 	: in std_logic;
-		sleep 		: in  std_logic;
-		rst  		: in std_logic;
-		sleepOut 	: out std_logic;
-		ko 	     	: out std_logic;
-		output   	: out dual_rail_logic_vector(bitwidth-1 downto 0)      );
-  end component;
-	
-		component image_store_load is
-		generic(
-			bitwidth : integer := bitwidth;
-			addresswidth : integer := addresswidth;
-			clock_delay : integer := clock_delay;		--ADD DELAY FOR INCREASED SETUP TIMES
-			mem_delay : integer := mem_delay);		--ADD DELAY FOR INCREASED MEMORY DELAY
-		port(
-
-			mem_data : in dual_rail_logic_vector(bitwidth-1 downto 0);
-			read_address : in dual_rail_logic_vector(addresswidth-1 downto 0);
-			write_en : in dual_rail_logic;
-			standard_read_en : in dual_rail_logic;
-			parallelism_en : in dual_rail_logic;
-			reset : in std_logic;
-			ki : in std_logic;
-			ko : out std_logic;
-			sleep_in : in std_logic;
-			sleep_out : out std_logic;
-			image_loaded : out std_logic;
-			accReset_loaded : out dual_rail_logic;
-			image_stored : out std_logic;
-			accReset_stored : out dual_rail_logic;
-			z : out dual_rail_logic_vector(bitwidth-1 downto 0)
-			);
-	end component;
-
-	component th22d_tree_gen is
-		generic(numInputs : integer := 4);
-	    port(
-			a: in std_logic_vector((numInputs)-1 downto 0);
-			rst: in std_logic;
-			z: out std_logic);
-	end component;
-
-	component inv_a is
-		port(a : in  std_logic;
-			 z : out std_logic);
-	end component;
 
 	component mux_nto1_gen is
 	generic(bitwidth: integer := 4;
@@ -215,51 +162,28 @@ begin
 	end generate;
 	reset_count(shadeBitwidth) <= data_1 ;
 
-	ko_image_load_inv_generate : inv_a 
-		port map(a => kos(1),
-			 z => kos(2));
-
-
-	th22d_global_ko : th22d_tree_gen
-	generic map(numInputs => 2 )
+	global_ko : MUX21_A 
 		port map(
-			a => kos(1 downto 0),
-			rst => rst,
-			z => ko_trial);
+			A => ko_trial, 
+			B =>  kos(6),
+			S => image_stored,
+			Z => ko);		
 
-counter_0 : counter_selfReset
-	generic map(width => addresswidth+1)
-		port map(
-			reset_count => reset_count (addresswidth downto 0),
-			sleep_in => sleep,
-		 	reset => rst,
-		 	ki => kos(2),
-		 	ko => kos(0),
-		 	sleep_out => sleeps(0),
-		 	accumulate_reset => accReset_stored,
-		 	z => count (addresswidth downto 0));
-
-	--image_stored <= accReset_stored.rail1 and '1';
-	generate_image_stored : th12nm_a
-		port map(a => accReset_stored.rail1,
-			b => image_stored,
-			rst => rst,
-			s => '0',
-			z => image_stored);
+ko_trial <= kos(1);
 
 	--Shade counter to count the occurence of each shade in the input image 
 	shade_counter_instance : MTNCL_Shade_Counter
 	generic map(bitwidth => bitwidth, numberOfShades => numberOfShades, shadeBitwidth => shadeBitwidth)
 	port map( input => input, 
-		ki => kos(0), 
 		sleep => sleep,
 		rst => rst, 
 		sleepOut => sleeps(1), 
 		ko => kos(1),
+		image_stored => image_stored,
 		output => shade_counter_output);
 
 	--Hold the shade counts and will output them one by one to the Image Reconstructor
-	shade_counter_register : OAAT_out_all_in
+	shade_counter_register : OAAT_out_all_in_forever
 	generic map(bitwidth => shadeBitwidth, numInputs => numberOfShades)
 	port map( a => shade_counter_output,
  	reset_count => reset_count(bitwidth-1 downto 0),
@@ -277,7 +201,6 @@ counter_0 : counter_selfReset
 	generic map(bitwidth => bitwidth, shadeBitwidth => shadeBitwidth)
 	port map( 
 		input => hold, 
-		--count => non_repeatable_register_count_0(bitwidth-1 downto 0), 
 		ki => kos(5), 
 		sleep => sleeps(3), 
 		rst => rst, 
@@ -285,7 +208,7 @@ counter_0 : counter_selfReset
 		ko => kos(4), 
 		output => accReg ((shadeBitwidth-1) downto (shadeBitwidth-bitwidth)));
 
---	--Take each new shade and output all at once
+	--Take each new shade and output all at once
 	new_shade_values_register : OAAT_in_all_out
 	generic map(bitwidth => bitwidth, numInputs => numberOfShades, counterWidth => bitwidth, delay_amount => 0)
 	port map( 
@@ -303,28 +226,11 @@ counter_0 : counter_selfReset
 	generic map(bitwidth => bitwidth, numberOfShades => numberOfShades)
 	port map( input => newShadeValues(numberOfShades*bitwidth-1 downto 0), 
 	pixel => input, 
-	--ki => ki_image_reconstructor, 
 	ki => ki,
-	--sleep => sleeps(5),
 	sleep => sleep, 
 	rst => rst, 
 	sleepOut => sleepOut, 
 	ko => kos(6), 
 	output => output);
-
-
-	global_ko : MUX21_A 
-		port map(
-			B =>  kos(6),
-			A => ko_trial, 
-			S => image_stored,
-			Z => ko);		
-
-	--global_ki : MUX21_A 
-	--	port map(
-	--		A => ki,
-	--		B => '1', 
-	--		S => image_loaded,
-	--		Z => ki_image_reconstructor);
 
 end arch;

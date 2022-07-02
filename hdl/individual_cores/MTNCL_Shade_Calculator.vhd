@@ -15,7 +15,6 @@ entity MTNCL_Shade_Calculator is
 generic(bitwidth: in integer := 8; shadeBitwidth: in integer := 12);
 	port(
 		input    	: in  dual_rail_logic_vector(shadeBitwidth-1 downto 0);
-		--count    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
 		ki	 	: in std_logic;
 		sleep 		: in  std_logic;
 		rst  		: in std_logic;
@@ -27,29 +26,6 @@ end;
 
 architecture arch of MTNCL_Shade_Calculator is
 
-  component MTNCL_Rounding_Checker is
-    generic(bitwidth: in integer := 4);
-    port(
-		input    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
-		sel		: in  dual_rail_logic_vector(0 downto 0);
-		ki	 	: in std_logic;
-		sleep 		: in  std_logic;
-		rst  		: in std_logic;
-		sleepOut 	: out std_logic;
-		ko 	     	: out std_logic;
-		output   	: out dual_rail_logic_vector(bitwidth-1 downto 0)      );
-  end component;
-
-component MTNCL_Count_Equal is 
-	generic(bitwidth: in integer := 4);
-	port(
-		a    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
-		b    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
-		sleep 		: in  std_logic;
-		z   	: out dual_rail_logic_vector(0 downto 0)
-	); 
-end component; 
-
 	component mux_nto1_gen is
 	generic(bitwidth: integer := 4;
 		numInputs : integer := 4);
@@ -57,18 +33,6 @@ end component;
 		sel: in dual_rail_logic_vector(integer(ceil(log2(real(numInputs))))-1 downto 0);
 		 sleep: in std_logic;
 		 z: out dual_rail_logic_vector(bitwidth-1 downto 0));
-	end component;
-
-	component MTNCL_RCA_GEN is
-	generic(bitwidth : in integer := 4);
-	port(
-		input    	: in  dual_rail_logic_vector((2*bitwidth)-1 downto 0);
-		ki	 	: in std_logic;
-		sleep 		: in  std_logic;
-		rst  		: in std_logic;
-		sleepOut 	: out std_logic;
-		ko 	     	: out std_logic;
-		S   		: out dual_rail_logic_vector(bitwidth downto 0));
 	end component;
 
 	component counter_selfReset_mod_inc is

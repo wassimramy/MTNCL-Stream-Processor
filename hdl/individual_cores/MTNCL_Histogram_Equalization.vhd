@@ -38,7 +38,6 @@ architecture arch of MTNCL_Histogram_Equalization is
 	generic(bitwidth: in integer := 4;  shadeBitwidth: in integer := 12);
 	port(
 		input    	: in  dual_rail_logic_vector(shadeBitwidth-1 downto 0);
-		--count    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
 		ki	 	: in std_logic;
 		sleep 		: in  std_logic;
 		rst  		: in std_logic;
@@ -64,11 +63,11 @@ architecture arch of MTNCL_Histogram_Equalization is
 	generic(bitwidth: in integer := 4; numberOfShades: in integer := 256; shadeBitwidth: in integer := 12);
 	port(
 		input    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
-		ki	 	: in std_logic;
 		sleep 		: in  std_logic;
 		rst  		: in std_logic;
 		sleepOut 	: out std_logic;
 		ko 	     	: out std_logic;
+		image_stored: out std_logic;
 		output   	: out dual_rail_logic_vector((numberOfShades*shadeBitwidth)-1 downto 0));
 	end component;
 
@@ -100,19 +99,6 @@ architecture arch of MTNCL_Histogram_Equalization is
 		count: out dual_rail_logic_vector(integer(ceil(log2(real(numInputs))))-1 downto 0);
 		z: out dual_rail_logic_vector(bitwidth-1 downto 0));
 	end component;	
-
-  component MTNCL_Rounding_Checker is
-    generic(bitwidth: in integer := 4);
-    port(
-		input    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
-		sel		: in  dual_rail_logic_vector(0 downto 0);
-		ki	 	: in std_logic;
-		sleep 		: in  std_logic;
-		rst  		: in std_logic;
-		sleepOut 	: out std_logic;
-		ko 	     	: out std_logic;
-		output   	: out dual_rail_logic_vector(bitwidth-1 downto 0)      );
-  end component;
 	
 		component image_store_load is
 		generic(
@@ -186,7 +172,7 @@ architecture arch of MTNCL_Histogram_Equalization is
 	
 	signal write_en_inputs: dual_rail_logic_vector(1 downto 0);
 	signal write_en, write_en_sel: dual_rail_logic_vector(0 downto 0);
-	signal image_loaded, image_stored, ki_image_reconstructor : std_logic;
+	signal image_loaded, image_stored, ki_image_reconstructor, image_stored_dummy : std_logic;
 
 
 begin
@@ -254,7 +240,7 @@ begin
 	shade_counter_instance : MTNCL_Shade_Counter
 	generic map(bitwidth => bitwidth, numberOfShades => numberOfShades, shadeBitwidth => shadeBitwidth)
 	port map( input => input, 
-		ki => kos(0), 
+		image_stored => image_stored_dummy,
 		sleep => sleep,
 		rst => rst, 
 		sleepOut => sleeps(1), 

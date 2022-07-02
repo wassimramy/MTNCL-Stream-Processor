@@ -16,16 +16,22 @@ entity MTNCL_Shade_Counter is
 generic(bitwidth: in integer := 8; numberOfShades: in integer := 256; shadeBitwidth: in integer := 12);
 	port(
 		input    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
-		ki	 		: in std_logic;
+		--ki	 		: in std_logic;
 		sleep 		: in  std_logic;
 		rst  		: in std_logic;
 		sleepOut 	: out std_logic;
 		ko 	     	: out std_logic;
+		image_stored: out std_logic;
 		output   	: out dual_rail_logic_vector((numberOfShades*shadeBitwidth)-1 downto 0)
 	);
 end;
 
 architecture arch of MTNCL_Shade_Counter is
+
+	component inv_a is
+		port(a : in  std_logic;
+			 z : out std_logic);
+	end component;
 
 	component counter_selfReset_mod_inc is
 		generic(width: integer);
@@ -108,7 +114,7 @@ architecture arch of MTNCL_Shade_Counter is
 	signal outputReg	: dual_rail_logic_vector((numberOfShades*shadeBitwidth)-1 downto 0);
 	signal inputReg	: dual_rail_logic_vector(bitwidth-1 downto 0);
 	signal data_0,data_1		: dual_rail_logic;
-	signal sleep_1, ko_1, ko_2, ko_3: std_logic;
+	signal sleep_1, ko_1, ko_2, ko_3, ki_global: std_logic;
 	signal decoder_output	: dual_rail_logic_vector(2**bitwidth-1 downto 0);
 	signal counters_sleep_out, counters_ko: std_logic_vector (numberOfShades-1 downto 0);
 
@@ -132,6 +138,10 @@ begin
 
 	--Set the block's global ko
 	ko <= ko_1;
+
+	ko_image_load_inv_generate : inv_a 
+		port map(a => ko_1,
+			 z => ki_global);
 
 		generate_global_sleep_in : MUX21_A 
 		port map(
@@ -226,7 +236,7 @@ begin
 			z => accRes_temp);
 
 	accRes_perm <= accRes_temp;
-
+	image_stored <= accRes_temp;
 		generate_global_sleep_out : MUX21_A 
 		port map(
 			A => '1',
@@ -236,7 +246,7 @@ begin
 
 		generate_global_ki : MUX21_A 
 		port map(
-			A => ki,
+			A => ki_global,
 			B => '1',
 			S => accRes_perm,
 			Z => ki_1);

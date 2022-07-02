@@ -22,10 +22,10 @@ echo "======> Running SingleLinesOnly.py"
 python /home/chsherri/bin/From_Brent/SingleLinesOnly/SingleLinesOnly.py $DESIGN_NAME.v
 
 echo "======> Running Clean.jar"
-java -jar /home/chsherri/bin/Clean/Clean.jar ${DESIGN_NAME}_lines.v
+java -jar /home/chsherri/bin/Clean/V1.0.0/Clean.jar ${DESIGN_NAME}_lines.v
 
 echo "======> Running Buffering using $BUFFERING_CSV"
-java -jar /home/chsherri/bin/Buffering/V1.1.1/Buffering.jar $BUFFERING_CSV ${DESIGN_NAME}_lines_BE.v
+java -jar /home/chsherri/bin/Buffering/V1.1.2/Buffering.jar $BUFFERING_CSV ${DESIGN_NAME}_lines_BE.v
 mv Buffered.v ${DESIGN_NAME}_lines_BE_buffered.v   
 
 echo "======> Preparing Netlist for Cadence"

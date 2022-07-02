@@ -132,8 +132,8 @@ ko <= comp_a_out;
 		generic map(width => bitwidth)
 		port map(
 			a => a,
-			--ki => comp_z_out_delay_ko, --comp_z_out,
-			ki => counter_ko, --comp_z_out,
+			ki => comp_z_out_delay_ko, --comp_z_out,
+			--ki => counter_ko, --comp_z_out,
 			rst => reset,
 			sleep => sleep_in,
 			ko => comp_a_out);
@@ -206,29 +206,13 @@ comp_z_in(bitwidth) <= accumulate_reset;
 comp_z_in(bitwidth+counterWidth downto bitwidth+1) <= count;
 
 	comp_z_a: compm
-		generic map(width => bitwidth)
+		generic map(width => counterWidth+1+bitwidth)
 		port map(
-			a => comp_z_in(bitwidth-1 downto 0),
+			a => comp_z_in(counterWidth+bitwidth downto 0),
 			ki => comp_z_ki,
 			rst => reset,
 			sleep => comp_a_out,
-			ko => comp_z_out_a);
-
-	comp_z_b: compm
-		generic map(width => counterWidth+1)
-		port map(
-			a => comp_z_in(bitwidth+counterWidth downto bitwidth),
-			ki => comp_z_ki,
-			rst => reset,
-			sleep => comp_a_out,
-			ko => comp_z_out_b);
-
-	compz_out_gate: th22n_a
-		port map(
-			a => comp_z_out_a,
-			b => comp_z_out_b,
-			rst => reset,
-			z => comp_z_out);
+			ko => comp_z_out);
 
 comp_z_out_delay(0) <= comp_z_out;
 gen_comp_z_out_delay : for i in 0 to delay_amount-1 generate

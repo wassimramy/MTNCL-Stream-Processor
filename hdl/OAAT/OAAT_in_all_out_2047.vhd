@@ -4,9 +4,9 @@ use work.ncl_signals.all;
 use work.tree_funcs.all;
 
 entity OAAT_in_all_out_2047 is
-	generic( bitwidth : integer := 8;
-		 numInputs : integer := 32;
-		 counterWidth : integer := 6; --Log2 of numInputs
+	generic( bitwidth : integer := 12;
+		 numInputs : integer := 256;
+		 counterWidth : integer := 8; --Log2 of numInputs
 		 delay_amount : integer := 15);
 	port(	 
 
@@ -22,7 +22,7 @@ end OAAT_in_all_out_2047;
 
 architecture arch_OAAT_in_all_out_2047 of OAAT_in_all_out_2047 is
 
-		component OAAT_in_all_out is
+		component OAAT_in_all_out_lite is
 	generic( bitwidth : integer := 8;
 		 numInputs : integer := 9;
 		 counterWidth : integer := 4; --Log2 of numInputs
@@ -53,10 +53,10 @@ begin
 gen_ko_out_delay : for i in 0 to counterWidth-1 generate
 	reset_count(i) <= data1;	
 end generate;
-
+--reset_count(counterWidth-1) <= data1;
 	
 
-  sf_data_loader_instance : OAAT_in_all_out
+  sf_data_loader_instance : OAAT_in_all_out_lite
  generic map(
  							bitwidth => bitwidth,
 							numInputs => numInputs,
@@ -66,7 +66,7 @@ end generate;
 					    a => a,
 					    reset_count => reset_count,
 					    reset => reset,
-					    ki => ki,
+					    ki => '1',
 					    ko => ko,
 					    sleep_in => sleep_in,
 					    sleep_out => sleep_out,

@@ -13,8 +13,8 @@ use ieee.numeric_std.all;
 entity OAAT_in_all_out_TB is
 generic(
 			bitwidth : integer := 8;
-			addresswidth : integer := 12;
-			numberOfPixels : integer := 4096;
+			addresswidth : integer := 4;
+			numberOfPixels : integer := 9;
 			size: in integer := 64;
 			clock_delay : integer := 16;
 			mem_delay : integer := 48);
@@ -25,8 +25,8 @@ architecture tb_arch of OAAT_in_all_out_TB is
   --COMPONENT UNDER TEST
 	component OAAT_in_all_out_2047 is
 	generic( bitwidth : integer := 8;
-		 numInputs : integer := 9;
-		 counterWidth : integer := 4; --Log2 of numInputs
+		 numInputs : integer := 8;
+		 counterWidth : integer := 3; --Log2 of numInputs
 		 delay_amount : integer := 6);
 	port(	 
 		a : in dual_rail_logic_vector(bitwidth-1 downto 0);
@@ -180,10 +180,10 @@ process(ki_sig)
 		if checker(0) <= 'U' then
 
 		elsif (ki_sig = '0') then
-			write(row, conv_integer(checker), right, 0);
-			writeline(output_smoothed_image_64_by_64,row);
-			write(row, checker, right, 0);
-			writeline(output_smoothed_image_64_by_64_binary,row);
+			--write(row, conv_integer(checker), right, 0);
+			--writeline(output_smoothed_image_64_by_64,row);
+			--write(row, checker, right, 0);
+			--writeline(output_smoothed_image_64_by_64_binary,row);
 			--readline(image_64_by_64_check, row_check);
 			--read(row_check, row_check_inval);
 		end if;

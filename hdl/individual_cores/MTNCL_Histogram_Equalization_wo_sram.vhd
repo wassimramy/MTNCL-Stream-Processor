@@ -13,7 +13,7 @@ use ieee.math_real.all;
 
 entity MTNCL_Histogram_Equalization_wo_sram is
 generic(
-					bitwidth: in integer := 4; 
+					bitwidth: in integer := 8; 
 					addresswidth: in integer := 12; 
 					clock_delay: in integer := 12; 
 					mem_delay: in integer := 12; 
@@ -72,7 +72,7 @@ architecture arch of MTNCL_Histogram_Equalization_wo_sram is
 	end component;
 
 
-	  component OAAT_in_all_out is
+	  component OAAT_in_all_out_lite is
 		generic( bitwidth : integer := 16; numInputs : integer := 64; counterWidth : integer := 6; delay_amount : integer := 6);
 	    port(
 			a : in dual_rail_logic_vector(bitwidth-1 downto 0);
@@ -209,8 +209,8 @@ ko_trial <= kos(1);
 		output => accReg ((shadeBitwidth-1) downto (shadeBitwidth-bitwidth)));
 
 	--Take each new shade and output all at once
-	new_shade_values_register : OAAT_in_all_out
-	generic map(bitwidth => bitwidth, numInputs => numberOfShades, counterWidth => bitwidth, delay_amount => 0)
+	new_shade_values_register : OAAT_in_all_out_lite
+	generic map(bitwidth => bitwidth, numInputs => numberOfShades, counterWidth => bitwidth, delay_amount => 15)
 	port map( 
 	a => accReg ((shadeBitwidth-1) downto (shadeBitwidth-bitwidth)), 
 	reset_count => reset_count(bitwidth-1 downto 0), 

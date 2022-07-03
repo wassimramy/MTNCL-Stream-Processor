@@ -72,7 +72,7 @@ architecture arch of MTNCL_Histogram_Equalization is
 	end component;
 
 
-	  component OAAT_in_all_out is
+	  component OAAT_in_all_out_lite is
 		generic( bitwidth : integer := 16; numInputs : integer := 64; counterWidth : integer := 6; delay_amount : integer := 6);
 	    port(
 			a : in dual_rail_logic_vector(bitwidth-1 downto 0);
@@ -86,7 +86,7 @@ architecture arch of MTNCL_Histogram_Equalization is
 	      );
 	  end component;
 
-	component OAAT_out_all_in is
+	component OAAT_out_all_in_forever is
 		generic(bitwidth: integer := 8; numInputs : integer := 256);
 		port(a : in dual_rail_logic_vector(numInputs*bitwidth-1 downto 0);
 		reset_count : in dual_rail_logic_vector(integer(ceil(log2(real(numInputs))))-1 downto 0); --CHANGE COUNTER WIDTH
@@ -248,7 +248,7 @@ begin
 		output => shade_counter_output);
 
 	--Hold the shade counts and will output them one by one to the Image Reconstructor
-	shade_counter_register : OAAT_out_all_in
+	shade_counter_register : OAAT_out_all_in_forever
 	generic map(bitwidth => shadeBitwidth, numInputs => numberOfShades)
 	port map( a => shade_counter_output,
  	reset_count => reset_count(bitwidth-1 downto 0),
@@ -275,7 +275,7 @@ begin
 		output => accReg ((shadeBitwidth-1) downto (shadeBitwidth-bitwidth)));
 
 --	--Take each new shade and output all at once
-	new_shade_values_register : OAAT_in_all_out
+	new_shade_values_register : OAAT_in_all_out_lite
 	generic map(bitwidth => bitwidth, numInputs => numberOfShades, counterWidth => bitwidth, delay_amount => 0)
 	port map( 
 	a => accReg ((shadeBitwidth-1) downto (shadeBitwidth-bitwidth)), 

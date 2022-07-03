@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SUB_DIR=""
-BUFFERING_CSV="../../buffering_sram.csv"
+BUFFERING_CSV="../../buffering_sram_backup.csv"
 DESIGN_NAME=""
 
 export SUB_DIR
@@ -21,18 +21,30 @@ export DESIGN_NAME
 
 #HEQ Core Synthesis
 SUB_DIR="individual_cores/"
-DESIGN_NAME="MTNCL_Shade_Counter"
-./run_synthesis.bash
+#DESIGN_NAME="MTNCL_Shade_Counter"
+#./run_synthesis.bash
 #DESIGN_NAME="MTNCL_Shade_Calculator"
 #./run_synthesis.bash
 #DESIGN_NAME="MTNCL_Image_Reconstructor"
 #./run_synthesis.bash
-DESIGN_NAME="MTNCL_Histogram_Equalization"
+#DESIGN_NAME="MTNCL_Histogram_Equalization"
+#./run_synthesis.bash
+#DESIGN_NAME="MTNCL_Histogram_Equalization_wo_sram"
+#./run_synthesis.bash
+
+
+#SF Core Synthesis
+SUB_DIR="OAAT/"
+DESIGN_NAME="OAAT_in_all_out_2047"
 ./run_synthesis.bash
+#DESIGN_NAME="OAAT_out_all_in_255"
+#./run_synthesis.bash
 
 #SF Core Synthesis
 SUB_DIR="individual_cores/"
 #DESIGN_NAME="MTNCL_SF_Core_Data_Loader"
+#./run_synthesis.bash
+#DESIGN_NAME="MTNCL_SF_Core_Logic"
 #./run_synthesis.bash
 #DESIGN_NAME="MTNCL_SF_Core_Address_Gen_w_MUX"
 #./run_synthesis.bash
@@ -41,6 +53,8 @@ SUB_DIR="individual_cores/"
 #DESIGN_NAME="MTNCL_SF_Node_W_Registers"
 #./run_synthesis.bash
 #DESIGN_NAME="MTNCL_SF_Core_Top_Level"
+#./run_synthesis.bash
+#DESIGN_NAME="MTNCL_SF_Core_Top_Level_wo_sram"
 #./run_synthesis.bash
 
 #SF Core Synthesis

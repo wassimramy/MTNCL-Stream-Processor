@@ -37,20 +37,19 @@ architecture arch of MTNCL_Image_Reconstructor is
 			z: out dual_rail_logic_vector(bitwidth-1 downto 0));
 	end component;
 
-  component MTNCL_Rounding_Checker is
-    generic(bitwidth: in integer := 4);
-    port(
-		input    	: in  dual_rail_logic_vector(bitwidth-1 downto 0);
-		sel		: in  dual_rail_logic_vector(0 downto 0);
+  component MTNCL_RCA_GEN is
+	generic(bitwidth : in integer := 4);
+	port(
+		input    	: in  dual_rail_logic_vector((2*bitwidth)-1 downto 0);
 		ki	 	: in std_logic;
 		sleep 		: in  std_logic;
 		rst  		: in std_logic;
 		sleepOut 	: out std_logic;
 		ko 	     	: out std_logic;
-		output   	: out dual_rail_logic_vector(bitwidth-1 downto 0)      );
-  end component;
+		S   		: out dual_rail_logic_vector(bitwidth downto 0));
+	end component;
 
-	component genregm is
+component genregm is
 	generic(width : in integer := 4);
 	port(a     : IN  dual_rail_logic_vector(width-1 downto 0);
 		 s : in  std_logic;
@@ -63,11 +62,24 @@ architecture arch of MTNCL_Image_Reconstructor is
 			 ki, rst, sleep : in  std_logic;
 			 ko             : OUT std_logic);
 	end component;
-	
-	signal kos, sleeps: std_logic_vector (2 downto 0);
-	signal pixelRegister, outputReg	: dual_rail_logic_vector(bitwidth-1 downto 0);
-	signal newShadeValues, newShadeValuesReg: dual_rail_logic_vector(257*8-1 downto 0);
+
+component regs_gen_null_res_w_compm is
+		generic(width: in integer := bitwidth);
+		port(
+				d: in dual_rail_logic_vector(width-1 downto 0);
+				reset: in std_logic;
+				sleep_in: in std_logic;
+				ki: in std_logic;
+				sleep_out: out std_logic;
+				ko: out std_logic;
+				q: out dual_rail_logic_vector(width-1 downto 0)
+			);
+	end component;
+
+	signal pixelRegister	: dual_rail_logic_vector(bitwidth-1 downto 0);
+	signal inputRegister: dual_rail_logic_vector((numberOfShades)*bitwidth-1 downto 0);
 	signal data_0,data_1		: dual_rail_logic_vector (0 downto 0);
+	signal ko_OutReg	 	: std_logic;
 begin
 
 	--set data_0 & data_1 for padding
@@ -77,51 +89,24 @@ begin
 	data_1(0).RAIL0 <= '0';
 	data_1(0).RAIL1 <= '1';
 
-	--Set the block's global ko
-	ko <= kos(0);
-
-	--Add one to the old pixel value to map to the right value
-	add_one : MTNCL_Rounding_Checker
-	generic map(bitwidth)
-	port map(input => pixel,
-		sel => data_1(0 downto 0), 
-		ki => kos(1), 
-		sleep => sleep, 
-		rst => rst, 
-		sleepOut => sleeps(0),
-		ko => kos(0), 
-		output => pixelRegister);
-
-	--Concat the new shades with the pixel to control the ko
-	newShadeValues((numberOfShades+1)*bitwidth-1 downto 0) <= pixelRegister & input;
-
-	-- Input Registers
-	inReg : genregm 
-		generic map((numberOfShades+1)*bitwidth)
-		port map(newShadeValues,  kos(1), newShadeValuesReg);
-	inComp : compm
-		generic map((numberOfShades+1)*bitwidth)
-		port map(newShadeValues, kos(2), rst,  sleeps(0),  kos(1));
-
+inputRegister <= input (bitwidth-1 downto 0) & input ((numberOfShades)*bitwidth-1 downto bitwidth);
 	--The mux in charge of mapping the old shade to the new shade
   	choose_the_new_value: mux_nto1_gen
 	generic map(bitwidth => bitwidth,
 		numInputs => numberOfShades)
  	port map(
-    		a => newShadeValuesReg(numberOfShades*bitwidth-1 downto 0),
-    		sel => newShadeValuesReg((numberOfShades+1)*bitwidth-1 downto numberOfShades*bitwidth),
-    		sleep => kos(1),
-    		z => outputReg);
+    		a => inputRegister ((numberOfShades)*bitwidth-1 downto 0*bitwidth),
+    		sel => pixel(bitwidth-1 downto 0),
+    		sleep => sleep,
+    		z => pixelRegister);
 
-	-- Output Registers
-	outReg : genregm 
+outReg : genregm 
 		generic map(bitwidth)
-		port map(outputReg,  kos(2), output);
+		port map(pixelRegister, ko_OutReg, output);
 	outComp : compm
 		generic map(bitwidth)
-		port map(outputReg, ki, rst, kos(1),  kos(2));
+		port map(pixelRegister, ki, rst, sleep, ko_OutReg);
 
-	--Set the block's global sleepOut
-	sleepOut <= kos(2);
-
+ko <= ko_OutReg;
+sleepOut <= ko_OutReg;
 end arch;

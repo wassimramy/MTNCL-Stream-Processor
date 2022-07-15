@@ -132,9 +132,9 @@ begin
 	data_1.RAIL1 <= '1';
 
 	generate_4096 : for i in 0 to shadeBitwidth-1 generate
-		reset_count(i) <= data_0;
+		reset_count(i) <= data_1;
 	end generate;
-	reset_count(shadeBitwidth) <= data_1;
+	reset_count(shadeBitwidth) <= data_0;
 
 	--Set the block's global ko
 	ko <= ko_1;

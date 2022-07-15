@@ -2,6 +2,7 @@ set storage_units_testbench "../test/storage_units"
 set individual_cores_testbench "../test/individual_cores"
 set control_unit_testbench "../test/control_unit"
 set oaat_testbench "../test/oaat"
+set sync_testbench "../test/sync"
 
 vcom -reportprogress 300 -work work ../hdl/async/NCL_signals.vhd
 vcom -reportprogress 300 -work work ../hdl/async/NCL_random.vhd
@@ -70,3 +71,6 @@ vcom -reportprogress 300 -work work ../hdl/individual_cores/MTNCL_Histogram_Equa
 vcom -reportprogress 300 -work work ../hdl/control_unit/MTNCL_Control_Unit.vhd
 vcom -reportprogress 300 -work work ../hdl/control_unit/MTNCL_CU_Data_Output.vhd
 vcom -reportprogress 300 -work work ../hdl/control_unit/MTNCL_Control_Unit_Top_Level.vhd
+
+vcom -reportprogress 300 -work work ../hdl/sync/SYNC_adders.vhd
+vcom -reportprogress 300 -work work ../hdl/sync/SYNC_RCA_gen.vhd

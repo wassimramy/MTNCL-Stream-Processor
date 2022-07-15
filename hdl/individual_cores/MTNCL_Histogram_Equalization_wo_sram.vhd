@@ -130,6 +130,20 @@ architecture arch of MTNCL_Histogram_Equalization_wo_sram is
 		 	z: out dual_rail_logic_vector(width-1 downto 0));
 	end component;
 
+	component inv_a is
+		port(a : in  std_logic;
+			 z : out std_logic);
+	end component;
+
+	component th12nm_a is
+		port(
+			a : in std_logic;
+			b : in std_logic;
+			rst : in std_logic;
+			s : in std_logic;
+			z : out std_logic);
+	end component;
+
 	signal data_0,data_1		: dual_rail_logic;
 	signal accReset_loaded, accReset_stored, accReset_1: dual_rail_logic;
 	signal roundedPixelRegister	: dual_rail_logic_vector(bitwidth-1 downto 0);
@@ -145,7 +159,7 @@ architecture arch of MTNCL_Histogram_Equalization_wo_sram is
 	
 	signal count: dual_rail_logic_vector((shadeBitwidth) downto 0);
 	signal write_en, write_en_sel: dual_rail_logic_vector(0 downto 0);
-	signal image_loaded, image_stored, ki_image_reconstructor : std_logic;
+	signal image_loaded, image_loaded_temp, image_loaded_temp_0,  image_stored, ki_image_reconstructor : std_logic;
 
 
 begin
@@ -164,12 +178,10 @@ begin
 
 	global_ko : MUX21_A 
 		port map(
-			A => ko_trial, 
-			B =>  kos(6),
+			A => kos(1), 
+			B => kos(6),
 			S => image_stored,
-			Z => ko);		
-
-ko_trial <= kos(1);
+			Z => ko);	
 
 	--Shade counter to count the occurence of each shade in the input image 
 	shade_counter_instance : MTNCL_Shade_Counter

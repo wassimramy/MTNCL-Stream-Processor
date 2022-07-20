@@ -15,9 +15,9 @@ begin
 	inv_a: process(a) 
 	begin 
 		if a = '0' then 
-			z <= '1' after 1 ns; 
+			z <= '1' after 8.2 ps; 
 		elsif a = '1' then 
-			z <= '0' after 1 ns; 
+			z <= '0' after 8.2 ps; 
 		else 
 			z <= not a; 
 		end if; 

@@ -14,12 +14,12 @@ use ieee.math_real.all;
 entity SYNC_SF_Core is
 generic(bitwidth: in integer := 8);
 	port(
-		input    			: in  std_logic_vector((bitwidth)-1 downto 0);
+		pixel_in    			: in  std_logic_vector((bitwidth)-1 downto 0);
 		clk  				: in std_logic;
 		reset  				: in std_logic;
 		parallelism_en  	: in std_logic;
 		id  				: in std_logic;
-		output   			: out std_logic_vector(2*bitwidth-1 downto 0)
+		pixel_out   			: out std_logic_vector(2*bitwidth-1 downto 0)
 	);
 end;
 
@@ -57,7 +57,7 @@ sf_data_loader_instance : SYNC_SF_Data_Loader
  generic map(bitwidth => bitwidth)
   port map(
   					clk => clk,
-				    input => input,
+				    input => pixel_in,
 				    reset => reset,
 				    parallelism_en => parallelism_en,
 				    id => id,
@@ -71,7 +71,7 @@ box_filter_instance_a: SYNC_Weighted_Box_Filter_W_reg
   					clk => clk_out,
 				    input => pixels(bitwidth-1 downto 0),
 				    reset => reset,
-				    output => output (bitwidth-1 downto 0)
+				    output => pixel_out (bitwidth-1 downto 0)
     );   
 
 box_filter_instance_b: SYNC_Weighted_Box_Filter_W_reg
@@ -80,7 +80,7 @@ box_filter_instance_b: SYNC_Weighted_Box_Filter_W_reg
   					clk => clk_out,
 				    input => pixels(2*bitwidth-1 downto bitwidth),
 				    reset => reset,
-				    output => output (2*bitwidth-1 downto bitwidth)
+				    output => pixel_out (2*bitwidth-1 downto bitwidth)
     );  
 
 end arch;

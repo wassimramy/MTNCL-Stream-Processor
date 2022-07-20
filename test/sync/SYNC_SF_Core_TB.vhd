@@ -20,11 +20,11 @@ architecture tb_arch of SYNC_SF_Core_TB is
     generic(bitwidth: in integer := 8);
     port(
     	clk : in std_logic;
-			input    	: in  std_logic_vector(bitwidth-1 downto 0);
+			pixel_in    	: in  std_logic_vector(bitwidth-1 downto 0);
 			reset  		: in std_logic;
 			parallelism_en : in std_logic;
 			id: in std_logic;
-			output   	: out std_logic_vector((2*bitwidth-1) downto 0)
+			pixel_out   	: out std_logic_vector((2*bitwidth-1) downto 0)
       );
   end component;
 
@@ -54,11 +54,11 @@ signal temp: std_logic_vector(9*bitwidth-1 downto 0);
  generic map(bitwidth => bitwidth)
   port map(
   					clk => clk,
-				    input => input_signal,
+				    pixel_in => input_signal,
 				    reset => reset_signal,
 				    parallelism_en => parallelism_en,
 				    id => id,
-				    output => S_signal
+				    pixel_out => S_signal
     );
     
  
@@ -131,7 +131,7 @@ variable v_inval : std_logic_vector(bitwidth-1 downto 0);
 clk_process :process
    begin
         clk <= not clk;
-        wait for 100ns;
+        wait for 50ns;
    end process;
 
 end;

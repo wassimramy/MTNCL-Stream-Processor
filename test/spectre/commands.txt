@@ -1,0 +1,5 @@
+artistResMgrCalcExprSetup("true" "plot" "E2" " delay(?wf1 v("/pixel<15>" ?result "tran"), ?value1 .5, ?edge1 "rising", ?nth1 1, ?td1 0.0, ?wf2 v("/z<15>" ?result "tran"), ?value2 .5, ?edge2 "rising", ?nth2 1, ?td2 nil , ?stop nil, ?multiple nil)")
+artistResMgrCalcExprSetup("true" "plot" "E3" "cross(v("/pixel<15>" ?result "tran") .05 1 "rising" t "time" )")
+artistResMgrCalcExprSetup("true" "plot" "E4" "cross(v("/pixel<15>" ?result "tran") .95 1 "falling" t "time" )")
+artistResMgrCalcExprSetup("true" "plot" "E5" "cross(v("/z<15>" ?result "tran") .95 1 "rising" t "time" )")
+artistResMgrCalcExprSetup("true" "plot" "E6" "cross(v("/z<15>" ?result "tran") .05 1 "falling" t "time" )")

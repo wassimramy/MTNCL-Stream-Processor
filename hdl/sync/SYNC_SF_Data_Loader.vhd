@@ -43,11 +43,11 @@ architecture arch of SYNC_SF_Data_Loader is
     port(
     	clk : in std_logic;
     	hold : in std_logic;
-		input    	: in  std_logic_vector(bitwidth-1 downto 0);
+		limit    	: in  std_logic_vector(bitwidth-1 downto 0);
 		reset  		: in std_logic;
 		clk_0  		: out std_logic;
 		clk_1  		: out std_logic;
-		output   	: out std_logic_vector((bitwidth-1) downto 0)
+		count   	: out std_logic_vector((bitwidth-1) downto 0)
       );
   end component;
 
@@ -133,11 +133,11 @@ sync_counter_instance : SYNC_Counter
   port map(
   					clk => clk,
 				    hold => hold,
-				    input => const_4096,
+				    limit => const_4096,
 				    reset => reset,
 				    clk_0 => clk_0_0,
 				    clk_1 => clk_0_1,
-				    output => count_0
+				    count => count_0
     );
 
 first_stage_gen: for i in 0 to bitwidth-1 generate
@@ -239,15 +239,15 @@ choose_reset_count_gen : mux_nto1_sr_gen
 
 hold_1 <= '1';
 sync_counter_instance_1 : SYNC_Counter
- generic map(bitwidth => 13, delay => 50)
+ generic map(bitwidth => 13, delay => 0)
   port map(
   					clk => clk_2_0,
 				    hold => hold_1,
-				    input => reset_count,
+				    limit => reset_count,
 				    reset => reset,
 				    clk_0 => clk_1_0,
 				    clk_1 => clk_1_1,
-				    output => count_1
+				    count => count_1
    );
 
 
@@ -298,15 +298,15 @@ choose_address : mux_nto1_sr_gen
 const_9 <= "0000000001001";
 hold_2 <= '0';
 sync_counter_instance_2 : SYNC_Counter
- generic map(bitwidth => 13, delay => 50)
+ generic map(bitwidth => 13, delay => 0)
   port map(
   					clk => clk_0_0,
 				    hold => hold_2,
-				    input => const_9,
+				    limit => const_9,
 				    reset => reset,
 				    clk_0 => clk_2_0,
 				    clk_1 => clk_2_1,
-				    output => count_2
+				    count => count_2
    );
 
 const_65 <= "0000001000001";
@@ -314,15 +314,15 @@ const_64 <= "0000001000000";
 not_const_64 <= "1111110111111";
 
 sync_counter_instance_3 : SYNC_Counter
- generic map(bitwidth => 13, delay => 5)
+ generic map(bitwidth => 13, delay => 0)
   port map(
   					clk => clk_sync_counter_3,
 				    hold => hold_2,
-				    input => const_65,
+				    limit => const_65,
 				    reset => reset,
 				    clk_0 => clk_3_0,
 				    clk_1 => clk_3_1,
-				    output => count_3
+				    count => count_3
    );
 
 clk_sync_counter_3_gen : or2_a 
@@ -350,15 +350,15 @@ const_66 <= "0000001000010";
 not_const_65 <= "1111110111110";
 
 sync_counter_instance_4 : SYNC_Counter
- generic map(bitwidth => 13, delay => 5)
+ generic map(bitwidth => 13, delay => 0)
   port map(
   					clk => clk_2_0,
 				    hold => hold_2,
-				    input => const_66,
+				    limit => const_66,
 				    reset => reset,
 				    clk_0 => clk_4_0,
 				    clk_1 => clk_4_1,
-				    output => count_4
+				    count => count_4
    );
 
 const65_xnor_output: for i in 0 to 12 generate

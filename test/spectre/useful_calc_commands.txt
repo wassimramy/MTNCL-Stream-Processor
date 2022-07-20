@@ -1,0 +1,47 @@
+Data for the first assertion
+
+HEQ
+delay(?wf1 v("/pixel<15>" ?result "tran"), ?value1 .5, ?edge1 "rising", ?nth1 1, ?td1 0.0, ?wf2 v("/z<15>" ?result "tran"), ?value2 .5, ?edge2 "rising", ?nth2 1, ?td2 nil , ?stop nil, ?multiple nil)
+ECO0: 8.3770779E-6
+ECO1: 8.5068341E-6
+
+cross(v("/pixel<15>" ?result "tran") .05 1 "rising" t "time" )
+cross(v("/z<15>" ?result "tran") .95 1 "rising" t "time" )
+cross(v("/pixel<15>" ?result "tran") .95 1 "falling" t "time" )
+cross(v("/z<15>" ?result "tran") .05 1 "falling" t "time" )
+
+integ(IT("_vVDD:p") 10.502750n 8.3876255u " ")
+ECO0: 767.38436E-9
+ECO1: 777.48515E-9
+
+integ(IT("_vVDD:p") 11.276924E-9 8.3878727E-6 " ")
+ECO0: 767.32610E-9
+ECO1: 777.42601E-9
+
+SFP0
+delay(?wf1 v("/pixel<15>" ?result "tran"), ?value1 .5, ?edge1 "rising", ?nth1 1, ?td1 0.0, ?wf2 v("/z<14>" ?result "tran"), ?value2 .5, ?edge2 "rising", ?nth2 1, ?td2 nil , ?stop nil, ?multiple nil)
+ECO0: 1.5625063E-6
+
+cross(v("/pixel<15>" ?result "tran") .05 1 "rising" t "time" )
+cross(v("/z<14>" ?result "tran") .95 1 "rising" t "time" )
+cross(v("/pixel<15>" ?result "tran") .95 1 "falling" t "time" )
+cross(v("/z<14>" ?result "tran") .05 1 "falling" t "time" )
+
+integ(IT("_vVDD:p") 10.502750E-9 1.5730540E-6 " ")
+ECO0: 143.62407E-9
+integ(IT("_vVDD:p") 11.184072E-9 1.5732741E-6 " ")
+ECO0: 143.55737E-9
+
+SF
+delay(?wf1 v("/pixel<15>" ?result "tran"), ?value1 .5, ?edge1 "rising", ?nth1 1, ?td1 0.0, ?wf2 v("/z<14>" ?result "tran"), ?value2 .5, ?edge2 "rising", ?nth2 1, ?td2 nil , ?stop nil, ?multiple nil)
+ECO0: 3.0353971E-6
+
+cross(v("/pixel<15>" ?result "tran") .05 1 "rising" t "time" )
+cross(v("/z<14>" ?result "tran") .95 1 "rising" t "time" )
+cross(v("/pixel<15>" ?result "tran") .95 1 "falling" t "time" )
+cross(v("/z<14>" ?result "tran") .05 1 "falling" t "time" )
+
+integ(IT("_vVDD:p") 10.502750E-9 3.0459445E-6 " ")
+ECO0: 276.02580E-9
+integ(IT("_vVDD:p") 11.184072E-9 3.0461626E-6 " ")
+ECO0: 275.94836E-9

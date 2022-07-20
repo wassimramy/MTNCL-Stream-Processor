@@ -26,7 +26,7 @@ architecture arch of SYNC_Weighted_Box_Filter_W_reg is
     generic(bitwidth: in integer := 8);
     port(
 						input    	: in  std_logic_vector(9*bitwidth-1 downto 0);
-						output   			: out std_logic_vector(bitwidth+3 downto 0)
+						output   			: out std_logic_vector(bitwidth-1 downto 0)
       );
   	end component;
 
@@ -45,11 +45,11 @@ component  SYNC_Counter is
     port(
     	clk : in std_logic;
     	hold : in std_logic;
-		input    	: in  std_logic_vector(bitwidth-1 downto 0);
+		limit    	: in  std_logic_vector(bitwidth-1 downto 0);
 		reset  		: in std_logic;
 		clk_0  		: out std_logic;
 		clk_1  		: out std_logic;
-		output   	: out std_logic_vector((bitwidth-1) downto 0)
+		count   	: out std_logic_vector((bitwidth-1) downto 0)
       );
   end component;
 
@@ -72,15 +72,15 @@ begin
 const_9 <= "00001001";
 hold <= '0';
 sync_counter_instance : SYNC_Counter
- generic map(bitwidth => bitwidth, delay => 90)
+ generic map(bitwidth => bitwidth, delay => 40)
   port map(
   					clk => clk,
 				    hold => hold,
-				    input => const_9,
+				    limit => const_9,
 				    reset => reset,
 				    clk_0 => clk_out,
 				    clk_1 => clk_1,
-				    output => count
+				    count => count
     );
 
 first_stage_gen: for i in 0 to bitwidth-1 generate

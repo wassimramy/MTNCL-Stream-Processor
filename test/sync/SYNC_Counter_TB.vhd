@@ -21,11 +21,11 @@ architecture tb_arch of SYNC_Counter_TB is
     port(
     	clk : in std_logic;
     	hold : in std_logic;
-			input    	: in  std_logic_vector(bitwidth-1 downto 0);
+			limit    	: in  std_logic_vector(bitwidth-1 downto 0);
 			reset  		: in std_logic;
 			clk_0  		: out std_logic;
 			clk_1  		: out std_logic;
-			output   	: out std_logic_vector((bitwidth-1) downto 0)
+			count   	: out std_logic_vector((bitwidth-1) downto 0)
       );
   end component;
 
@@ -47,11 +47,11 @@ signal temp: std_logic_vector(9*bitwidth-1 downto 0);
   port map(
   					clk => clk,
 				    hold => hold,
-				    input => input_signal,
+				    limit => input_signal,
 				    reset => reset_signal,
 				    clk_0 => clk_0,
 				    clk_1 => clk_1,
-				    output => S_signal
+				    count => S_signal
     );
     
  
@@ -66,8 +66,9 @@ signal temp: std_logic_vector(9*bitwidth-1 downto 0);
   reset_signal <= '0';
 	wait for 10 ns;
 
-	hold <= '0';
-	input_signal <= "00001001";
+	hold <= '1';
+	input_signal <= "00001000";
+	--input_signal <= "1";
 	--input_signal <= "1000000000000";
 	wait;
       end process;
